@@ -1,0 +1,5 @@
+# disable default InteractiveShellApplicationRunner.
+spring:
+  shell:
+    interactive:
+      enabled: false
