@@ -28,6 +28,7 @@ public class LineReaderWrapper implements LineReader {
 
     private LineReader delegate;
     private GroupCommandRegistrar groupCommandRegistrar;
+    private KaViewerCommandHistory kaViewerCommandHistory;
 
     private LineReaderWrapper() {
     }
@@ -38,6 +39,10 @@ public class LineReaderWrapper implements LineReader {
 
     public void setGroupCommandRegistrar(GroupCommandRegistrar groupCommandRegistrar) {
         this.groupCommandRegistrar = groupCommandRegistrar;
+    }
+
+    public void setKaViewerCommandHistory(KaViewerCommandHistory kaViewerCommandHistory) {
+        this.kaViewerCommandHistory = kaViewerCommandHistory;
     }
 
     public LineReader getDelegate() {
@@ -188,6 +193,8 @@ public class LineReaderWrapper implements LineReader {
 
     @Override
     public ParsedLine getParsedLine() {
+        String line = delegate.getParsedLine().line();
+        this.kaViewerCommandHistory.addCommandHis(line, System.currentTimeMillis());
         // should do some tricks on words
         return this.groupCommandRegistrar.trimGroupCommand(delegate.getParsedLine());
     }

@@ -9,7 +9,8 @@ import java.util.Set;
 
 public class DefaultValues {
 
-    public static final String DEFAULT_ALL = "__ALL__";
+    public static final String DEFAULT_ALL = "__ALL";
+    public static final String DEFAULT_NONE = "__NONE";
     private static final Set<String> values = new LinkedHashSet<>();
 
     static {

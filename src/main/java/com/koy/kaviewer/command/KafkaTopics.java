@@ -44,7 +44,7 @@ public class KafkaTopics {
         ListTopicsResult listTopicsResult = kafkaAdminClient.listTopics();
         KafkaFuture<Set<String>> names = listTopicsResult.names();
         List<Topic> topics = names.get().stream().map(Topic::new).collect(Collectors.toList());
-        if (!DefaultValues.DEFAULT_ALL.equals(n)) {
+        if (!DefaultValues.DEFAULT_ALL.equals(n) && topics.size() > Integer.parseInt(n)) {
             topics = topics.subList(0, Integer.parseInt(n));
         }
         LinkedHashMap<String, Object> headers = new LinkedHashMap<>();
@@ -56,7 +56,7 @@ public class KafkaTopics {
         return tableBuilder.build();
     }
 
-    @ShellMethod(value = "topic describe <-t topic1 topic2 ...>, list describe topics by name, default all.", key = {"describe"}, prefix = "-t")
+    @ShellMethod(value = "topic describe/desc <-t topic1 topic2 ...>, list describe topics by name, default all.", key = {"describe", "D", "desc"}, prefix = "-t")
     public Table describe(@ShellOption(optOut = true) List<String> topics) throws ExecutionException, InterruptedException {
         ListTopicsResult listTopicsResult = kafkaAdminClient.listTopics();
         KafkaFuture<Set<String>> names = listTopicsResult.names();

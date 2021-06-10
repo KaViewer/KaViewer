@@ -28,6 +28,9 @@ public class KaViewerInteractiveShellApplicationRunner extends InteractiveShellA
     @Autowired
     private GroupCommandRegistrar groupCommandRegistrar;
 
+    @Autowired
+    private KaViewerCommandHistory kaViewerCommandHistory;
+
 
     public KaViewerInteractiveShellApplicationRunner(LineReader lineReader, PromptProvider promptProvider, Parser parser, Shell shell, Environment environment) {
         super(lineReader, promptProvider, parser, shell, environment);
@@ -42,6 +45,7 @@ public class KaViewerInteractiveShellApplicationRunner extends InteractiveShellA
         LineReaderWrapper lineReader = LineReaderWrapper.getInstance();
         lineReader.setDelegate(this.lineReader);
         lineReader.setGroupCommandRegistrar(this.groupCommandRegistrar);
+        lineReader.setKaViewerCommandHistory(this.kaViewerCommandHistory);
 
         InputProvider inputProvider = new InteractiveShellApplicationRunner.JLineInputProvider(lineReader, promptProvider);
         shell.run(inputProvider);
