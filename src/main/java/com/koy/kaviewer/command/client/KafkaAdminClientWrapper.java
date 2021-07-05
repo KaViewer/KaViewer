@@ -139,7 +139,7 @@ public class KafkaAdminClientWrapper extends AdminClient {
     // TODO
     @Override
     public DeleteTopicsResult deleteTopics(Collection<String> collection, DeleteTopicsOptions deleteTopicsOptions) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
 
@@ -160,52 +160,52 @@ public class KafkaAdminClientWrapper extends AdminClient {
 
     @Override
     public DescribeClusterResult describeCluster(DescribeClusterOptions describeClusterOptions) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public DescribeAclsResult describeAcls(AclBindingFilter aclBindingFilter, DescribeAclsOptions describeAclsOptions) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public CreateAclsResult createAcls(Collection<AclBinding> collection, CreateAclsOptions createAclsOptions) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public DeleteAclsResult deleteAcls(Collection<AclBindingFilter> collection, DeleteAclsOptions deleteAclsOptions) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public DescribeConfigsResult describeConfigs(Collection<ConfigResource> collection, DescribeConfigsOptions describeConfigsOptions) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public AlterConfigsResult alterConfigs(Map<ConfigResource, Config> map, AlterConfigsOptions alterConfigsOptions) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public AlterConfigsResult incrementalAlterConfigs(Map<ConfigResource, Collection<AlterConfigOp>> map, AlterConfigsOptions alterConfigsOptions) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public AlterReplicaLogDirsResult alterReplicaLogDirs(Map<TopicPartitionReplica, String> map, AlterReplicaLogDirsOptions alterReplicaLogDirsOptions) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public DescribeLogDirsResult describeLogDirs(Collection<Integer> collection, DescribeLogDirsOptions describeLogDirsOptions) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public DescribeReplicaLogDirsResult describeReplicaLogDirs(Collection<TopicPartitionReplica> collection, DescribeReplicaLogDirsOptions describeReplicaLogDirsOptions) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -220,27 +220,27 @@ public class KafkaAdminClientWrapper extends AdminClient {
 
     @Override
     public DeleteRecordsResult deleteRecords(Map<TopicPartition, RecordsToDelete> map, DeleteRecordsOptions deleteRecordsOptions) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public CreateDelegationTokenResult createDelegationToken(CreateDelegationTokenOptions createDelegationTokenOptions) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public RenewDelegationTokenResult renewDelegationToken(byte[] bytes, RenewDelegationTokenOptions renewDelegationTokenOptions) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public ExpireDelegationTokenResult expireDelegationToken(byte[] bytes, ExpireDelegationTokenOptions expireDelegationTokenOptions) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public DescribeDelegationTokenResult describeDelegationToken(DescribeDelegationTokenOptions describeDelegationTokenOptions) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -260,87 +260,87 @@ public class KafkaAdminClientWrapper extends AdminClient {
 
     @Override
     public ListConsumerGroupOffsetsResult listConsumerGroupOffsets(String s, ListConsumerGroupOffsetsOptions listConsumerGroupOffsetsOptions) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public DeleteConsumerGroupsResult deleteConsumerGroups(Collection<String> collection, DeleteConsumerGroupsOptions deleteConsumerGroupsOptions) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public DeleteConsumerGroupOffsetsResult deleteConsumerGroupOffsets(String s, Set<TopicPartition> set, DeleteConsumerGroupOffsetsOptions deleteConsumerGroupOffsetsOptions) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public ElectLeadersResult electLeaders(ElectionType electionType, Set<TopicPartition> set, ElectLeadersOptions electLeadersOptions) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public AlterPartitionReassignmentsResult alterPartitionReassignments(Map<TopicPartition, Optional<NewPartitionReassignment>> map, AlterPartitionReassignmentsOptions alterPartitionReassignmentsOptions) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public ListPartitionReassignmentsResult listPartitionReassignments(Optional<Set<TopicPartition>> optional, ListPartitionReassignmentsOptions listPartitionReassignmentsOptions) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public RemoveMembersFromConsumerGroupResult removeMembersFromConsumerGroup(String s, RemoveMembersFromConsumerGroupOptions removeMembersFromConsumerGroupOptions) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public AlterConsumerGroupOffsetsResult alterConsumerGroupOffsets(String s, Map<TopicPartition, OffsetAndMetadata> map, AlterConsumerGroupOffsetsOptions alterConsumerGroupOffsetsOptions) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public ListOffsetsResult listOffsets(Map<TopicPartition, OffsetSpec> map, ListOffsetsOptions listOffsetsOptions) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public DescribeClientQuotasResult describeClientQuotas(ClientQuotaFilter clientQuotaFilter, DescribeClientQuotasOptions describeClientQuotasOptions) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public AlterClientQuotasResult alterClientQuotas(Collection<ClientQuotaAlteration> collection, AlterClientQuotasOptions alterClientQuotasOptions) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public DescribeUserScramCredentialsResult describeUserScramCredentials(List<String> list, DescribeUserScramCredentialsOptions describeUserScramCredentialsOptions) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public AlterUserScramCredentialsResult alterUserScramCredentials(List<UserScramCredentialAlteration> list, AlterUserScramCredentialsOptions alterUserScramCredentialsOptions) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public DescribeFeaturesResult describeFeatures(DescribeFeaturesOptions describeFeaturesOptions) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public UpdateFeaturesResult updateFeatures(Map<String, FeatureUpdate> map, UpdateFeaturesOptions updateFeaturesOptions) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public UnregisterBrokerResult unregisterBroker(int i, UnregisterBrokerOptions unregisterBrokerOptions) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public Map<MetricName, ? extends Metric> metrics() {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
 
