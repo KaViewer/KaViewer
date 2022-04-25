@@ -1,10 +1,10 @@
 package com.koy.kaviewer.command;
 
 import com.koy.kaviewer.command.client.KafkaAdminClientWrapper;
+import com.koy.kaviewer.command.entity.Topic;
 import com.koy.kaviewer.common.DefaultValues;
 import com.koy.kaviewer.core.annotation.KaViewerShellComponent;
 import com.koy.kaviewer.core.annotation.KaViewerShellGroupCommand;
-import com.koy.kaviewer.command.entity.Topic;
 import org.apache.kafka.clients.admin.DescribeTopicsResult;
 import org.apache.kafka.clients.admin.ListTopicsResult;
 import org.apache.kafka.clients.admin.TopicDescription;

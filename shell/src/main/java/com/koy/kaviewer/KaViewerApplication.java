@@ -2,9 +2,8 @@ package com.koy.kaviewer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.shell.jline.JLineShellAutoConfiguration;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.koy.kaviewer"})
 public class KaViewerApplication {
 
     public static void main(String[] args) {

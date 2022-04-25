@@ -111,7 +111,7 @@ public class KafkaAdminClientWrapper extends AdminClient {
     private AdminClient delegate;
 
     public void create() {
-        delegate = AdminClient.create(config);
+        delegate = create(config);
     }
 
     public void config(AdminClientCfg config) {

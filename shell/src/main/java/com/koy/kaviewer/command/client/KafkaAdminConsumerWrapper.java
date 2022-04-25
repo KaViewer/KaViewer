@@ -5,7 +5,6 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.TopicPartition;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
 import java.util.Properties;
 
 @Component
