@@ -13,6 +13,7 @@
         <module>rest</module>
         <module>shell</module>
         <module>kafka</module>
+        <module>app</module>
     </modules>
     <groupId>com.koy</groupId>
     <artifactId>kaviewer</artifactId>
