@@ -21,6 +21,7 @@
     <name>KaViewer</name>
     <description>A Shell Viewer for Kafka.</description>
     <properties>
+        <spring-boot.repackage.skip>true</spring-boot.repackage.skip>
         <java.version>1.8</java.version>
         <guava.version>30.1-jre</guava.version>
         <shell.version>2.0.0.RELEASE</shell.version>
