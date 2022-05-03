@@ -1,2 +1,6 @@
 server:
   port: 9394
+
+spring:
+  application:
+    name: KaViewer-Rest
