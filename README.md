@@ -1,2 +1,2 @@
 # KaViewer
-A Kafka Shell Viewer.
+A Kafka Viewer on UI to view and operate Kafka.
