@@ -26,11 +26,6 @@
             <artifactId>kafka</artifactId>
             <version>0.0.1</version>
         </dependency>
-        <dependency>
-            <groupId>com.koy</groupId>
-            <artifactId>app</artifactId>
-            <version>0.0.1</version>
-        </dependency>
     </dependencies>
 
 
