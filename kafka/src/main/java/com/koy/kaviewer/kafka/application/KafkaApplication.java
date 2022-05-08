@@ -25,6 +25,10 @@ public class KafkaApplication implements ApplicationContextAware {
         return clusterHolder.get(key);
     }
 
+    public static <T> T getKafkaApplicationBean(String key, Class<T> clz) {
+        return getKafkaApplication(key).getParentKafkaApplicationContext().getBean(clz);
+    }
+
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         KafkaApplication.parentKafka = applicationContext;
