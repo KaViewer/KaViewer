@@ -1,10 +1,9 @@
-package com.koy.kaviewer.kafka.config;
+package com.koy.kaviewer.kafka.core;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.kafka.clients.admin.AdminClientConfig;
+import org.springframework.core.convert.converter.Converter;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Properties;
 
 public class KafkaProperties extends Properties {
@@ -23,15 +22,8 @@ public class KafkaProperties extends Properties {
 
     public KafkaProperties buildProperties() {
         setProperty(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, this.bootstrapServers);
-        setProperty(AdminClientConfig.CLIENT_ID_CONFIG, "KaViewer");
+        setProperty(AdminClientConfig.CLIENT_ID_CONFIG, "KaViewer::" + clusterName);
         return this;
-    }
-
-    public KafkaProperties buildProperties(Map<String, Object> configs) {
-        final KafkaProperties kafkaProperties = new KafkaProperties();
-        final Map<String, Object> bootstrap = (LinkedHashMap<String, Object>) configs.get("bootstrap");
-        kafkaProperties.setBootstrapServers(String.valueOf(bootstrap.getOrDefault("servers", "localhost:9092")));
-        return kafkaProperties.buildProperties();
     }
 
     public String getClusterName() {
@@ -85,5 +77,10 @@ public class KafkaProperties extends Properties {
 
     public String getKey() {
         return clusterName + "-" + kafkaClusterVersion;
+    }
+
+    interface KafkaPropertiesConverter<S> extends Converter<S, KafkaProperties> {
+
+
     }
 }

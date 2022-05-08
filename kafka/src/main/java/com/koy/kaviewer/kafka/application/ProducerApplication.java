@@ -1,4 +1,4 @@
-package com.koy.kaviewer.app;
+package com.koy.kaviewer.kafka.application;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
