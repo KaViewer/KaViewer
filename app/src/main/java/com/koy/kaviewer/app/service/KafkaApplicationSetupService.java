@@ -1,8 +1,8 @@
-package com.koy.kaviewer.service;
+package com.koy.kaviewer.app.service;
 
-import com.koy.kaviewer.KaViewerApplication;
+import com.koy.kaviewer.app.KaViewerApplication;
 import com.koy.kaviewer.kafka.application.KafkaApplication;
-import com.koy.kaviewer.kafka.core.KafkaSetUpHandler;
+import com.koy.kaviewer.kafka.ipc.KafkaSetupService;
 import com.koy.kaviewer.kafka.core.PropertiesResources;
 import com.koy.kaviewer.kafka.service.KafkaService;
 import org.springframework.boot.WebApplicationType;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
-public class KafkaSetUpService implements KafkaSetUpHandler {
+public class KafkaApplicationSetupService implements KafkaSetupService {
 
     public static final AtomicInteger idx = new AtomicInteger(0);
 
@@ -34,7 +34,8 @@ public class KafkaSetUpService implements KafkaSetUpHandler {
     @Override
     public void setUp(PropertiesResources propertiesResources) {
         try {
-            setUp((ConfigurableApplicationContext) KaViewerApplication.getRoot(), KaViewerApplication.getArgs(), propertiesResources);
+            setUp((ConfigurableApplicationContext) KaViewerApplication.getRoot(),
+                    KaViewerApplication.getArgs(), propertiesResources);
         } catch (Exception e) {
             e.printStackTrace();
         }

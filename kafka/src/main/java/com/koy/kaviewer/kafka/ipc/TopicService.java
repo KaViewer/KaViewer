@@ -1,4 +1,4 @@
-package com.koy.kaviewer.kafka.core.remote;
+package com.koy.kaviewer.kafka.ipc;
 
 import java.util.Set;
 

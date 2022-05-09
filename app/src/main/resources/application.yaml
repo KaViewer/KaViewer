@@ -1,6 +1,3 @@
 spring:
   application:
     name: KaViewer
-
-server:
-  port: 9394

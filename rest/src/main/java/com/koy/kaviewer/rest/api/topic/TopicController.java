@@ -1,8 +1,7 @@
 package com.koy.kaviewer.rest.api.topic;
 
-import com.koy.kaviewer.kafka.core.remote.TopicService;
+import com.koy.kaviewer.kafka.ipc.TopicService;
 import com.koy.kaviewer.rest.KaViewerRestApplication;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;

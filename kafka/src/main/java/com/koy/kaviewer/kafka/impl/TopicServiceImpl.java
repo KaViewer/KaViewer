@@ -1,7 +1,7 @@
 package com.koy.kaviewer.kafka.impl;
 
 import com.koy.kaviewer.kafka.client.KafkaClientWrapper;
-import com.koy.kaviewer.kafka.core.remote.TopicService;
+import com.koy.kaviewer.kafka.ipc.TopicService;
 import org.apache.kafka.clients.admin.ListTopicsResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
