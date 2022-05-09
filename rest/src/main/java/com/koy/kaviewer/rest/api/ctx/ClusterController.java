@@ -22,7 +22,6 @@ public class ClusterController {
     public ResponseEntity<Void> create(@RequestBody KafkaPropertiesVO kafkaPropertiesVO) {
         clusterService.create(kafkaPropertiesVO);
         return new ResponseEntity<Void>(HttpStatus.OK);
-
     }
 
 }

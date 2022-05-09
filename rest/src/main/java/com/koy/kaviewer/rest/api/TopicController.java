@@ -1,4 +1,4 @@
-package com.koy.kaviewer.rest.api.topic;
+package com.koy.kaviewer.rest.api;
 
 import com.koy.kaviewer.kafka.ipc.TopicService;
 import com.koy.kaviewer.rest.KaViewerRestApplication;
