@@ -23,12 +23,15 @@ public class KafkaService {
     @Autowired
     KafkaClientWrapper kafkaAdminClient;
 
+    private KafkaProperties kafkaProperties;
+
     public void buildApplication(PropertiesResources resources) throws Exception {
-        final KafkaProperties properties = configResolver.load(resources);
-        initKafkaAdminClient(properties);
+        this.kafkaProperties = configResolver.load(resources);
+
+        initKafkaAdminClient(kafkaProperties);
 
         final KafkaApplicationCacheEntity kafkaApplicationCacheEntity = new KafkaApplicationCacheEntity();
-        kafkaApplicationCacheEntity.setClusterName(properties.getClusterName());
+        kafkaApplicationCacheEntity.setClusterName(kafkaProperties.getClusterName());
         kafkaApplicationCacheEntity.setRoot((ConfigurableApplicationContext) applicationContext.getParent());
         kafkaApplicationCacheEntity.setParentKafkaApplicationContext(applicationContext);
         KafkaApplication.putIfAbsent(kafkaApplicationCacheEntity);

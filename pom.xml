@@ -25,7 +25,7 @@
         <java.version>11</java.version>
         <guava.version>30.1-jre</guava.version>
         <shell.version>2.0.0.RELEASE</shell.version>
-        <kafka.version>2.8.0</kafka.version>
+<!--        <kafka.version>2.7.1</kafka.version>-->
         <lang3.version>3.12.0</lang3.version>
     </properties>
 
@@ -44,9 +44,9 @@
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.kafka</groupId>
-            <artifactId>kafka-clients</artifactId>
-            <version>${kafka.version}</version>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+<!--            <version>${kafka.version}</version>-->
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

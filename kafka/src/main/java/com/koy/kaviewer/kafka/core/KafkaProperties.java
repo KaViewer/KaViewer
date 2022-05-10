@@ -14,6 +14,12 @@ public class KafkaProperties extends Properties {
     private String zookeeperPort = "2181";
     private String bootstrapServers;
     private Security security;
+    private Consumer consumer;
+
+    static class Consumer {
+
+
+    }
 
 
     static class Security {
