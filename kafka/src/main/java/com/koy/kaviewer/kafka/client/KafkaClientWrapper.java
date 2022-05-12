@@ -1,5 +1,6 @@
 package com.koy.kaviewer.kafka.client;
 
+import com.koy.kaviewer.kafka.core.KafkaProperties;
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.DescribeClusterResult;
 import org.apache.kafka.clients.admin.ListTopicsResult;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Component;
 public class KafkaClientWrapper {
 
     private AdminClient delegate;
+    private KafkaProperties kafkaProperties;
 
     public KafkaClientWrapper() {
     }
@@ -23,5 +25,13 @@ public class KafkaClientWrapper {
 
     public void setDelegate(AdminClient delegate) {
         this.delegate = delegate;
+    }
+
+    public KafkaProperties getKafkaProperties() {
+        return kafkaProperties;
+    }
+
+    public void setKafkaProperties(KafkaProperties kafkaProperties) {
+        this.kafkaProperties = kafkaProperties;
     }
 }

@@ -40,6 +40,8 @@ public class KafkaService {
 
     private void initKafkaAdminClient(KafkaProperties kafkaProperties) {
         final AdminClient adminClient = AdminClient.create(kafkaProperties);
+
         kafkaAdminClient.setDelegate(adminClient);
+        kafkaAdminClient.setKafkaProperties(kafkaProperties);
     }
 }
