@@ -1,6 +1,8 @@
 package com.koy.kaviewer.app.core;
 
 
-public interface KaViewerSubscription<S, R> {
+import org.reactivestreams.Subscriber;
+
+public interface KaViewerSubscription<S, R> extends Subscriber<S> {
 
 }
