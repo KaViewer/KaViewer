@@ -13,9 +13,9 @@ import java.util.stream.Collectors;
 @Service
 public class BrokerBizService {
 
-    public List<BrokerVO> brokers(String cluster) {
+    public List<BrokerVO> brokers() {
         final BrokerService brokerService = KaViewerRestApplication.getBean(BrokerService.class);
-        final DescribeClusterResult brokers = brokerService.describeClusters(cluster);
+        final DescribeClusterResult brokers = brokerService.describeClusters();
         List<BrokerVO> brokerVOs = List.of();
         try {
             brokerVOs = brokers.nodes().get().stream().map(node -> new BrokerVO(node.id(), node.host(), node.port(), node.rack()))

@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class BrokerService implements com.koy.kaviewer.kafka.ipc.BrokerService {
     @Override
-    public DescribeClusterResult describeClusters(String clusterName) {
+    public DescribeClusterResult describeClusters() {
         final com.koy.kaviewer.kafka.ipc.BrokerService brokerService
-                = KafkaApplication.getKafkaApplicationBean(clusterName, com.koy.kaviewer.kafka.ipc.BrokerService.class);
-        return brokerService.describeClusters(clusterName);
+                = KafkaApplication.getKafkaApplicationBean(com.koy.kaviewer.kafka.ipc.BrokerService.class);
+        return brokerService.describeClusters();
     }
 }

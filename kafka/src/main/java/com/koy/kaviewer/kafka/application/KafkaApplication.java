@@ -1,6 +1,8 @@
 package com.koy.kaviewer.kafka.application;
 
 import com.koy.kaviewer.kafka.entity.KafkaApplicationCacheEntity;
+import com.koy.kaviewer.kafka.share.RequestContextManagement;
+import org.apache.kafka.common.requests.RequestContext;
 import org.springframework.beans.BeansException;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -23,6 +25,11 @@ public class KafkaApplication implements ApplicationContextAware {
 
     public static KafkaApplicationCacheEntity getKafkaApplication(String key) {
         return clusterHolder.get(key);
+    }
+
+    public static <T> T getKafkaApplicationBean(Class<T> clz) {
+        final String cluster = RequestContextManagement.getCluster();
+        return getKafkaApplicationBean(cluster, clz);
     }
 
     public static <T> T getKafkaApplicationBean(String key, Class<T> clz) {

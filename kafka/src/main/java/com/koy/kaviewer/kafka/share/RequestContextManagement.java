@@ -1,4 +1,4 @@
-package com.koy.kaviewer.rest.core;
+package com.koy.kaviewer.kafka.share;
 
 public class RequestContextManagement {
     private static final ThreadLocal<RequestContext> requestContext = new InheritableThreadLocal<>();

@@ -19,8 +19,8 @@ public class BrokerController {
     BrokerBizService brokerBizService;
 
     @GetMapping
-    public ResponseEntity<List<BrokerVO>> list(@RequestHeader(name = "k-cluster") String cluster) {
-        final List<BrokerVO> brokers = brokerBizService.brokers(cluster);
+    public ResponseEntity<List<BrokerVO>> list() {
+        final List<BrokerVO> brokers = brokerBizService.brokers();
         return ResponseEntity.ok(brokers);
 
     }

@@ -12,7 +12,7 @@ public class BrokerServiceImpl implements BrokerService {
     KafkaClientWrapper kafkaClientWrapper;
 
     @Override
-    public DescribeClusterResult describeClusters(String clusterName) {
+    public DescribeClusterResult describeClusters() {
         return kafkaClientWrapper.describeClusterResult();
     }
 
