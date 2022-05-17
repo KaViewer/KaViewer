@@ -27,7 +27,7 @@ public class KafkaApplicationSetupService implements KafkaSetupService {
 
         final ConfigurableApplicationContext kafka = applicationBuilder.run(args);
         final KafkaService kafkaService = kafka.getBean(KafkaService.class);
-        kafkaService.buildApplication(resources);
+        kafkaService.buildApplication(kafka, resources);
     }
 
 

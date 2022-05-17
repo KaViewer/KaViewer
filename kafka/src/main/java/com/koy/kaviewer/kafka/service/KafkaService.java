@@ -25,8 +25,12 @@ public class KafkaService {
 
     private KafkaProperties kafkaProperties;
 
-    public void buildApplication(PropertiesResources resources) throws Exception {
+    public void buildApplication(ConfigurableApplicationContext self, PropertiesResources resources) throws Exception {
         this.kafkaProperties = configResolver.load(resources);
+        if (KafkaApplication.contains(this.kafkaProperties.getClusterName())) {
+            self.close();
+            return;
+        }
 
         initKafkaAdminClient(kafkaProperties);
 

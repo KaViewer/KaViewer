@@ -1,11 +1,14 @@
 package com.koy.kaviewer.kafka.impl;
 
 import com.koy.kaviewer.kafka.client.KafkaClientWrapper;
+import com.koy.kaviewer.kafka.entity.TopicMetaVO;
 import com.koy.kaviewer.kafka.ipc.TopicService;
+import com.koy.kaviewer.kafka.service.KafkaConsumerFactory;
 import org.apache.kafka.clients.admin.ListTopicsResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
@@ -13,6 +16,9 @@ import java.util.concurrent.ExecutionException;
 public class TopicServiceImpl implements TopicService {
     @Autowired
     KafkaClientWrapper kafkaClientWrapper;
+
+    @Autowired
+    KafkaConsumerFactory kafkaConsumerFactory;
 
     @Override
     public Set<String> list(String clusterName) {
@@ -25,6 +31,11 @@ public class TopicServiceImpl implements TopicService {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public List<TopicMetaVO> listMeta(String clusterName) {
+        return kafkaConsumerFactory.buildTopicsMeta();
     }
 
 }

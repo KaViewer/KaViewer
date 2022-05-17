@@ -15,6 +15,10 @@ public class KafkaApplication implements ApplicationContextAware {
     private static ApplicationContext parentKafka;
     private static final ConcurrentHashMap<String, KafkaApplicationCacheEntity> clusterHolder = new ConcurrentHashMap<>();
 
+    public static boolean contains(String clusterName) {
+        return clusterHolder.containsKey(clusterName);
+    }
+
     public static void putIfAbsent(KafkaApplicationCacheEntity kafkaApplicationCacheEntity) {
         final String key = kafkaApplicationCacheEntity.getClusterName();
         if (clusterHolder.containsKey(key)) {

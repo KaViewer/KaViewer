@@ -8,12 +8,9 @@ import org.apache.kafka.common.serialization.Deserializer;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.core.convert.converter.Converter;
 
-import javax.lang.model.type.UnknownTypeException;
 import java.util.Locale;
 import java.util.Properties;
-import java.util.Set;
 import java.util.function.Function;
-import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 public class KafkaProperties extends Properties {
@@ -24,7 +21,8 @@ public class KafkaProperties extends Properties {
     private String zookeeperPort = "2181";
     private String bootstrapServers;
     private Security security;
-    private ConsumerProperties consumer = new ConsumerProperties();
+    private String clientId;
+    private ConsumerProperties consumer = new ConsumerProperties(this);
 
     public static class ConsumerProperties extends Properties {
         public static final Function<String, Class<? extends Deserializer>> deserializerFrom = ds ->
@@ -39,9 +37,16 @@ public class KafkaProperties extends Properties {
         private Integer maxPollRecords = 100;
         private String autoOffsetReset = "earliest";
         private String clientId;
+        public KafkaProperties kafkaProperties;
+
+        public ConsumerProperties(KafkaProperties kafkaProperties) {
+            this.kafkaProperties = kafkaProperties;
+        }
 
         public ConsumerProperties buildConsumerProperties(String clusterName) {
             this.clusterName = clusterName;
+            this.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, this.kafkaProperties.getBootstrapServers());
+            this.put(ConsumerConfig.GROUP_ID_CONFIG, getClientId());
             this.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, deserializerFrom.apply(this.KeyDeserializer));
             this.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, deserializerFrom.apply(this.ValDeserializer));
             this.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, this.maxPollRecords);
@@ -87,7 +92,6 @@ public class KafkaProperties extends Properties {
             this.clientId = CLIENT_ID_PREFIX + this.clusterName;
             return clientId;
         }
-
     }
 
 
@@ -96,8 +100,9 @@ public class KafkaProperties extends Properties {
     }
 
     public KafkaProperties buildProperties() {
+        this.clientId = "KaViewer::" + clusterName;
         setProperty(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, this.bootstrapServers);
-        setProperty(AdminClientConfig.CLIENT_ID_CONFIG, "KaViewer::" + clusterName);
+        setProperty(AdminClientConfig.CLIENT_ID_CONFIG, this.clientId);
         return this;
     }
 
