@@ -2,7 +2,7 @@ package com.koy.kaviewer.rest.service;
 
 import com.koy.kaviewer.kafka.ipc.BrokerService;
 import com.koy.kaviewer.rest.KaViewerRestApplication;
-import com.koy.kaviewer.rest.domain.dto.BrokerVO;
+import com.koy.kaviewer.rest.domain.BrokerVO;
 import org.apache.kafka.clients.admin.DescribeClusterResult;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.koy.kaviewer.app.ipc.topic;
+package com.koy.kaviewer.app.ipc;
 
 import com.koy.kaviewer.kafka.application.KafkaApplication;
 import com.koy.kaviewer.kafka.entity.TopicMetaVO;

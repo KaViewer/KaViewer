@@ -1,4 +1,4 @@
-package com.koy.kaviewer.rest.domain.dto;
+package com.koy.kaviewer.rest.domain;
 
 public class BrokerVO {
     private final Integer id;

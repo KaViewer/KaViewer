@@ -10,6 +10,7 @@ import org.springframework.core.convert.converter.Converter;
 
 import java.util.Locale;
 import java.util.Properties;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
@@ -25,12 +26,12 @@ public class KafkaProperties extends Properties {
     private ConsumerProperties consumer = new ConsumerProperties(this);
 
     public static class ConsumerProperties extends Properties {
+        private static final AtomicInteger index = new AtomicInteger(0);
         public static final Function<String, Class<? extends Deserializer>> deserializerFrom = ds ->
                 Stream.of(StringDeserializer.class, ByteArrayDeserializer.class)
                         .filter(clz -> clz.getSimpleName().toLowerCase(Locale.ROOT).startsWith(ds.toLowerCase(Locale.ROOT)))
                         .findFirst().orElseThrow(UnsupportedOperationException::new);
         private final String CLIENT_ID_PREFIX = "KaViewer::Consumer";
-        private String clusterName;
         // string / byte
         private String KeyDeserializer = "string";
         private String ValDeserializer = "string";
@@ -43,15 +44,17 @@ public class KafkaProperties extends Properties {
             this.kafkaProperties = kafkaProperties;
         }
 
-        public ConsumerProperties buildConsumerProperties(String clusterName) {
-            this.clusterName = clusterName;
+        public ConsumerProperties buildConsumerProperties() {
+            final int idx = index.getAndIncrement();
             this.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, this.kafkaProperties.getBootstrapServers());
-            this.put(ConsumerConfig.GROUP_ID_CONFIG, getClientId());
+            this.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
+            this.put(ConsumerConfig.GROUP_ID_CONFIG, getClientId("Group", idx));
             this.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, deserializerFrom.apply(this.KeyDeserializer));
             this.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, deserializerFrom.apply(this.ValDeserializer));
             this.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, this.maxPollRecords);
             this.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, this.autoOffsetReset);
-            this.put(ConsumerConfig.CLIENT_ID_CONFIG, getClientId());
+            this.put(ConsumerConfig.ISOLATION_LEVEL_CONFIG, "read_committed");
+            this.put(ConsumerConfig.CLIENT_ID_CONFIG, getClientId("Client", idx));
             return this;
 
         }
@@ -88,8 +91,8 @@ public class KafkaProperties extends Properties {
             this.autoOffsetReset = autoOffsetReset;
         }
 
-        public String getClientId() {
-            this.clientId = CLIENT_ID_PREFIX + this.clusterName;
+        public String getClientId(String dot, int idx) {
+            this.clientId = dot + "::" + CLIENT_ID_PREFIX + this.kafkaProperties.getClusterName() + "-" + idx;
             return clientId;
         }
     }
@@ -160,7 +163,7 @@ public class KafkaProperties extends Properties {
     }
 
     public ConsumerProperties getConsumer() {
-        return this.consumer.buildConsumerProperties(clusterName);
+        return this.consumer.buildConsumerProperties();
     }
 
     public void setConsumer(ConsumerProperties consumer) {
