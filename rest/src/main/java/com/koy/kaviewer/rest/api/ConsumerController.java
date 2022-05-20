@@ -18,13 +18,24 @@ public class ConsumerController {
     @Autowired
     ConsumerBizService consumerBizService;
 
-    @GetMapping("/{topic}/p/{partition}/s/{sorted}/{limit}")
+    @GetMapping("/string/{topic}/p/{partition}/s/{sorted}/{limit}")
     public ResponseEntity<List<MessageRecord<String, String>>> fetch(
             @PathVariable(name = "topic") String topic,
             @PathVariable(name = "partition") Integer partition,
             @PathVariable(name = "sorted") String sorted,
             @PathVariable(name = "limit") Integer limit) {
-        final List<MessageRecord<String, String>> records = consumerBizService.fetch(topic, partition, limit, sorted);
+        final List<MessageRecord<String, String>> records = consumerBizService.fetchInString(topic, partition, limit, sorted);
+        return ResponseEntity.ok(records);
+
+    }
+
+    @GetMapping("/byte/{topic}/p/{partition}/s/{sorted}/{limit}")
+    public ResponseEntity<List<MessageRecord<byte[], byte[]>>> fetchByte(
+            @PathVariable(name = "topic") String topic,
+            @PathVariable(name = "partition") Integer partition,
+            @PathVariable(name = "sorted") String sorted,
+            @PathVariable(name = "limit") Integer limit) {
+        final List<MessageRecord<byte[], byte[]>> records = consumerBizService.fetchInByte(topic, partition, limit, sorted);
         return ResponseEntity.ok(records);
 
     }

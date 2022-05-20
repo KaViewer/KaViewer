@@ -11,9 +11,16 @@ import java.util.List;
 public class ConsumerService implements com.koy.kaviewer.kafka.ipc.ConsumerService {
 
     @Override
-    public List<ConsumerRecord<String, String>> fetchMessage(String topic, int partition, int size, String sorted) {
+    public List<ConsumerRecord<String, String>> fetchMessageInString(String topic, int partition, int size, String sorted) {
         final com.koy.kaviewer.kafka.ipc.ConsumerService consumerService
                 = KafkaApplication.getKafkaApplicationBean(com.koy.kaviewer.kafka.ipc.ConsumerService.class);
-        return consumerService.fetchMessage(topic, partition, size, sorted);
+        return consumerService.fetchMessageInString(topic, partition, size, sorted);
+    }
+
+    @Override
+    public List<ConsumerRecord<byte[], byte[]>> fetchMessageInByte(String topic, int partition, int size, String sorted) {
+        final com.koy.kaviewer.kafka.ipc.ConsumerService consumerService
+                = KafkaApplication.getKafkaApplicationBean(com.koy.kaviewer.kafka.ipc.ConsumerService.class);
+        return consumerService.fetchMessageInByte(topic, partition, size, sorted);
     }
 }

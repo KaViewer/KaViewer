@@ -70,20 +70,39 @@ public class KafkaConsumerFactory {
         return topicMetaVOS;
     }
 
+    public List<ConsumerRecord<byte[], byte[]>> fetchMessage4Byte(String topic, int partition, int size, String sorted) {
+        createConsumer();
+        final TopicPartition topicPartition = new TopicPartition(topic, partition);
+        this.kafkaConsumer4Byte.assign(Set.of(topicPartition));
+        seek(size, topicPartition);
+        List<ConsumerRecord<byte[], byte[]>> records;
+
+        records = kafkaConsumer4Byte.poll(Duration.ofSeconds(30)).records(topicPartition);
+        return records
+                .stream()
+                .map(rec -> new ConsumerRecord<byte[], byte[]>(
+                        rec.topic(),
+                        rec.partition(),
+                        rec.offset(),
+                        rec.timestamp(),
+                        rec.timestampType(),
+                        rec.checksum(),
+                        rec.serializedKeySize(),
+                        rec.serializedValueSize(),
+                        rec.key(),
+                        rec.value(),
+                        rec.headers(),
+                        rec.leaderEpoch())
+                )
+                .collect(Collectors.toList());
+    }
+
     public List<ConsumerRecord<String, String>> fetchMessage4String(String topic, int partition, int size, String sorted) {
         createConsumer();
         final TopicPartition topicPartition = new TopicPartition(topic, partition);
         this.kafkaConsumer4String.assign(Set.of(topicPartition));
-        final Long earliestOffset = kafkaConsumer4String.beginningOffsets(Set.of(topicPartition)).get(topicPartition);
-        final long latestOffset = kafkaConsumer4String.endOffsets(Set.of(topicPartition)).get(topicPartition);
-        // poll all
         List<ConsumerRecord<String, String>> records = List.of();
-        if (size > latestOffset) {
-            kafkaConsumer4String.seek(topicPartition, earliestOffset);
-        } else {
-            kafkaConsumer4String.seek(topicPartition, latestOffset - size);
-        }
-
+        seek(size, topicPartition);
         records = kafkaConsumer4String.poll(Duration.ofSeconds(30)).records(topicPartition);
         return records
                 .stream()
@@ -103,5 +122,16 @@ public class KafkaConsumerFactory {
                 )
                 .collect(Collectors.toList());
     }
-};
+
+    private void seek(int size, TopicPartition topicPartition) {
+        final Long earliestOffset = kafkaConsumer4Byte.beginningOffsets(Set.of(topicPartition)).get(topicPartition);
+        final long latestOffset = kafkaConsumer4Byte.endOffsets(Set.of(topicPartition)).get(topicPartition);
+        // poll all
+        if (size > latestOffset) {
+            kafkaConsumer4Byte.seek(topicPartition, earliestOffset);
+        } else {
+            kafkaConsumer4Byte.seek(topicPartition, latestOffset - size);
+        }
+    }
+}
 
