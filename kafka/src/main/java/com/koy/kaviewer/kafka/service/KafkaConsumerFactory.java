@@ -74,7 +74,7 @@ public class KafkaConsumerFactory {
         createConsumer();
         final TopicPartition topicPartition = new TopicPartition(topic, partition);
         this.kafkaConsumer4Byte.assign(Set.of(topicPartition));
-        seek(size, topicPartition);
+        seek(this.kafkaConsumer4Byte, size, topicPartition);
         List<ConsumerRecord<byte[], byte[]>> records;
 
         records = kafkaConsumer4Byte.poll(Duration.ofSeconds(30)).records(topicPartition);
@@ -102,7 +102,7 @@ public class KafkaConsumerFactory {
         final TopicPartition topicPartition = new TopicPartition(topic, partition);
         this.kafkaConsumer4String.assign(Set.of(topicPartition));
         List<ConsumerRecord<String, String>> records = List.of();
-        seek(size, topicPartition);
+        seek(this.kafkaConsumer4String, size, topicPartition);
         records = kafkaConsumer4String.poll(Duration.ofSeconds(30)).records(topicPartition);
         return records
                 .stream()
@@ -123,14 +123,14 @@ public class KafkaConsumerFactory {
                 .collect(Collectors.toList());
     }
 
-    private void seek(int size, TopicPartition topicPartition) {
-        final Long earliestOffset = kafkaConsumer4Byte.beginningOffsets(Set.of(topicPartition)).get(topicPartition);
-        final long latestOffset = kafkaConsumer4Byte.endOffsets(Set.of(topicPartition)).get(topicPartition);
+    private void seek(KafkaConsumer kafkaConsumer, int size, TopicPartition topicPartition) {
+        final Long earliestOffset = (Long) kafkaConsumer.beginningOffsets(Set.of(topicPartition)).get(topicPartition);
+        final long latestOffset = (long) kafkaConsumer.endOffsets(Set.of(topicPartition)).get(topicPartition);
         // poll all
         if (size > latestOffset) {
-            kafkaConsumer4Byte.seek(topicPartition, earliestOffset);
+            kafkaConsumer.seek(topicPartition, earliestOffset);
         } else {
-            kafkaConsumer4Byte.seek(topicPartition, latestOffset - size);
+            kafkaConsumer.seek(topicPartition, latestOffset - size);
         }
     }
 }

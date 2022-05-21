@@ -18,7 +18,7 @@ public class ConsumerController {
     @Autowired
     ConsumerBizService consumerBizService;
 
-    @GetMapping("/string/{topic}/p/{partition}/s/{sorted}/{limit}")
+    @GetMapping("/{topic}/p/{partition}/s/{sorted}/{limit}/s")
     public ResponseEntity<List<MessageRecord<String, String>>> fetch(
             @PathVariable(name = "topic") String topic,
             @PathVariable(name = "partition") Integer partition,
@@ -29,7 +29,7 @@ public class ConsumerController {
 
     }
 
-    @GetMapping("/byte/{topic}/p/{partition}/s/{sorted}/{limit}")
+    @GetMapping("/{topic}/p/{partition}/s/{sorted}/{limit}/b")
     public ResponseEntity<List<MessageRecord<byte[], byte[]>>> fetchByte(
             @PathVariable(name = "topic") String topic,
             @PathVariable(name = "partition") Integer partition,

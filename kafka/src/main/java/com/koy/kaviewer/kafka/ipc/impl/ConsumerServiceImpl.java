@@ -20,11 +20,11 @@ public class ConsumerServiceImpl implements ConsumerService {
 
     @Override
     public List<ConsumerRecord<String, String>> fetchMessageInString(String topic, int partition, int size, String sorted) {
-        return null;
+        return kafkaConsumerFactory.fetchMessage4String(topic, partition, size, sorted);
     }
 
     @Override
     public List<ConsumerRecord<byte[], byte[]>> fetchMessageInByte(String topic, int partition, int size, String sorted) {
-        return null;
+        return kafkaConsumerFactory.fetchMessage4Byte(topic, partition, size, sorted);
     }
 }
