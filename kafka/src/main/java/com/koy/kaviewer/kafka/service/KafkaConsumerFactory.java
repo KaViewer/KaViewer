@@ -71,30 +71,31 @@ public class KafkaConsumerFactory {
     }
 
     public List<ConsumerRecord<byte[], byte[]>> fetchMessage4Byte(String topic, int partition, int size, String sorted) {
-        createConsumer();
-        final TopicPartition topicPartition = new TopicPartition(topic, partition);
-        this.kafkaConsumer4Byte.assign(Set.of(topicPartition));
-        seek(this.kafkaConsumer4Byte, size, topicPartition);
-        List<ConsumerRecord<byte[], byte[]>> records;
-
-        records = kafkaConsumer4Byte.poll(Duration.ofSeconds(30)).records(topicPartition);
-        return records
-                .stream()
-                .map(rec -> new ConsumerRecord<byte[], byte[]>(
-                        rec.topic(),
-                        rec.partition(),
-                        rec.offset(),
-                        rec.timestamp(),
-                        rec.timestampType(),
-                        rec.checksum(),
-                        rec.serializedKeySize(),
-                        rec.serializedValueSize(),
-                        rec.key(),
-                        rec.value(),
-                        rec.headers(),
-                        rec.leaderEpoch())
-                )
-                .collect(Collectors.toList());
+        return List.of();
+//        createConsumer();
+//        final TopicPartition topicPartition = new TopicPartition(topic, partition);
+//        this.kafkaConsumer4Byte.assign(Set.of(topicPartition));
+//        seek(this.kafkaConsumer4Byte, size, topicPartition);
+//        List<ConsumerRecord<byte[], byte[]>> records;
+//
+//        records = kafkaConsumer4Byte.poll(Duration.ofSeconds(30)).records(topicPartition);
+//        return records
+//                .stream()
+//                .map(rec -> new ConsumerRecord<byte[], byte[]>(
+//                        rec.topic(),
+//                        rec.partition(),
+//                        rec.offset(),
+//                        rec.timestamp(),
+//                        rec.timestampType(),
+//                        rec.checksum(),
+//                        rec.serializedKeySize(),
+//                        rec.serializedValueSize(),
+//                        rec.key(),
+//                        rec.value(),
+//                        rec.headers(),
+//                        rec.leaderEpoch())
+//                )
+//                .collect(Collectors.toList());
     }
 
     public List<ConsumerRecord<String, String>> fetchMessage4String(String topic, int partition, int size, String sorted) {
