@@ -1,10 +1,8 @@
 package com.koy.kaviewer.rest.service;
 
-import com.koy.kaviewer.kafka.core.KafkaProperties;
 import com.koy.kaviewer.kafka.ipc.ConsumerService;
 import com.koy.kaviewer.rest.KaViewerRestApplication;
 import com.koy.kaviewer.rest.domain.MessageRecord;
-import org.apache.commons.lang3.tuple.Pair;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.common.errors.SerializationException;
 import org.springframework.stereotype.Service;
