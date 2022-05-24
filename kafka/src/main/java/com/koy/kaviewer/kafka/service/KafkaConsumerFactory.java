@@ -55,6 +55,9 @@ public class KafkaConsumerFactory {
     public List<ConsumerRecord<String, String>> fetchMessage(String topic, int partition, int size, String sorted,
                                                              BiFunction<byte[], String, String> keyDeserializer,
                                                              BiFunction<byte[], String, String> valDeserializer) {
+        // max size is 200
+        if (size > 200) size = 200;
+
         createConsumer();
         final TopicPartition topicPartition = new TopicPartition(topic, partition);
         this.kafkaConsumer4Byte.assign(Set.of(topicPartition));

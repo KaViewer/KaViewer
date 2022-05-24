@@ -27,6 +27,10 @@ public class ConsumerController {
             @RequestParam(name = "limit", required = false, defaultValue = "100") Integer limit,
             @RequestParam(name = "keyDeserializer", required = false, defaultValue = "string") String keyDeserializer,
             @RequestParam(name = "valDeserializer", required = false, defaultValue = "string") String valDeserializer) {
+
+        if (partition < 0 || limit < 0) {
+            return ResponseEntity.badRequest().build();
+        }
         final List<MessageRecord<String, String>> records = consumerBizService.fetch(topic, partition, limit, sorted, keyDeserializer, valDeserializer);
         return ResponseEntity.ok(records);
     }

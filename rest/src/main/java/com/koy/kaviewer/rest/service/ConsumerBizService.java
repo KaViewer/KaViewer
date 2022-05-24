@@ -1,6 +1,8 @@
 package com.koy.kaviewer.rest.service;
 
 import com.koy.kaviewer.kafka.ipc.ConsumerService;
+import com.koy.kaviewer.kafka.ipc.TopicService;
+import com.koy.kaviewer.kafka.share.RequestContextManagement;
 import com.koy.kaviewer.rest.KaViewerRestApplication;
 import com.koy.kaviewer.rest.domain.MessageRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -12,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
@@ -34,7 +37,13 @@ public class ConsumerBizService {
 
     public List<MessageRecord<String, String>> fetch(String topic, int partition, int size, String sorted, String key, String val) {
 
-        // check params
+        final TopicService topicService = KaViewerRestApplication.getBean(TopicService.class);
+        final Set<String> topics = topicService.list(RequestContextManagement.getCluster());
+
+        if (!topics.contains(topic)) {
+            return List.of();
+        }
+
         final ConsumerService consumerService = KaViewerRestApplication.getBean(ConsumerService.class);
         final BiFunction<byte[], String, String> keyDeserializer = deserializers.getOrDefault(key, stringDeserializer);
         final BiFunction<byte[], String, String> valDeserializer = deserializers.getOrDefault(val, stringDeserializer);
