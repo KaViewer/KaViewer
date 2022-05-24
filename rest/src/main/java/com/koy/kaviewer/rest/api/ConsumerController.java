@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -18,26 +19,15 @@ public class ConsumerController {
     @Autowired
     ConsumerBizService consumerBizService;
 
-    @GetMapping("/{topic}/p/{partition}/s/{sorted}/{limit}/s")
+    @GetMapping("/{topic}/p/{partition}")
     public ResponseEntity<List<MessageRecord<String, String>>> fetch(
             @PathVariable(name = "topic") String topic,
             @PathVariable(name = "partition") Integer partition,
-            @PathVariable(name = "sorted") String sorted,
-            @PathVariable(name = "limit") Integer limit) {
-        final List<MessageRecord<String, String>> records = consumerBizService.fetchInString(topic, partition, limit, sorted);
+            @RequestParam(name = "sorted", required = false, defaultValue = "desc") String sorted,
+            @RequestParam(name = "limit", required = false, defaultValue = "100") Integer limit,
+            @RequestParam(name = "keyDeserializer", required = false, defaultValue = "string") String keyDeserializer,
+            @RequestParam(name = "valDeserializer", required = false, defaultValue = "string") String valDeserializer) {
+        final List<MessageRecord<String, String>> records = consumerBizService.fetch(topic, partition, limit, sorted, keyDeserializer, valDeserializer);
         return ResponseEntity.ok(records);
-
     }
-
-    @GetMapping("/{topic}/p/{partition}/s/{sorted}/{limit}/b")
-    public ResponseEntity<List<MessageRecord<byte[], byte[]>>> fetchByte(
-            @PathVariable(name = "topic") String topic,
-            @PathVariable(name = "partition") Integer partition,
-            @PathVariable(name = "sorted") String sorted,
-            @PathVariable(name = "limit") Integer limit) {
-        final List<MessageRecord<byte[], byte[]>> records = consumerBizService.fetchInByte(topic, partition, limit, sorted);
-        return ResponseEntity.ok(records);
-
-    }
-
 }

@@ -3,8 +3,8 @@ package com.koy.kaviewer.kafka.ipc;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
 import java.util.List;
+import java.util.function.BiFunction;
 
 public interface ConsumerService {
-    List<ConsumerRecord<String, String >> fetchMessageInString(String topic, int partition, int size, String sorted);
-    List<ConsumerRecord<byte[], byte[] >> fetchMessageInByte(String topic, int partition, int size, String sorted);
+    List<ConsumerRecord<String, String>> fetchMessage(String topic, int partition, int size, String sorted, BiFunction<byte[], String, String> keyDeserializer, BiFunction<byte[], String, String> valDeserializer);
 }

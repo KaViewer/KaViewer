@@ -1,6 +1,7 @@
 package com.koy.kaviewer.kafka.core;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 import org.apache.kafka.clients.admin.AdminClientConfig;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.ByteArrayDeserializer;
@@ -11,10 +12,9 @@ import org.springframework.core.convert.converter.Converter;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Function;
-import java.util.stream.Stream;
 
 public class KafkaProperties extends Properties {
+    private String encoding = "UTF8";
     private String key;
     private String clusterName;
     private String kafkaClusterVersion;
@@ -27,10 +27,6 @@ public class KafkaProperties extends Properties {
 
     public static class ConsumerProperties extends Properties {
         private static final AtomicInteger index = new AtomicInteger(0);
-        public static final Function<String, Class<? extends Deserializer>> deserializerFrom = ds ->
-                Stream.of(StringDeserializer.class, ByteArrayDeserializer.class)
-                        .filter(clz -> clz.getSimpleName().toLowerCase(Locale.ROOT).startsWith(ds.toLowerCase(Locale.ROOT)))
-                        .findFirst().orElseThrow(UnsupportedOperationException::new);
         private final String CLIENT_ID_PREFIX = "KaViewer::Consumer";
         // string / byte
         private String KeyDeserializer = "string";
@@ -49,8 +45,8 @@ public class KafkaProperties extends Properties {
             this.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, this.kafkaProperties.getBootstrapServers());
             this.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
             this.put(ConsumerConfig.GROUP_ID_CONFIG, getClientId("Group", idx));
-            this.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, deserializerFrom.apply(this.KeyDeserializer));
-            this.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, deserializerFrom.apply(this.ValDeserializer));
+            this.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, ByteArrayDeserializer.class);
+            this.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, ByteArrayDeserializer.class);
             this.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, this.maxPollRecords);
             this.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, this.autoOffsetReset);
             this.put(ConsumerConfig.ISOLATION_LEVEL_CONFIG, "read_committed");
@@ -168,6 +164,10 @@ public class KafkaProperties extends Properties {
 
     public void setConsumer(ConsumerProperties consumer) {
         this.consumer = consumer;
+    }
+
+    public String getEncoding() {
+        return encoding;
     }
 
     interface KafkaPropertiesConverter<S> extends Converter<S, KafkaProperties> {
