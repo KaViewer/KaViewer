@@ -166,6 +166,9 @@ public class KafkaProperties extends Properties {
         return encoding;
     }
 
+    public static class ProducerProperties extends Properties {
+    }
+
     interface KafkaPropertiesConverter<S> extends Converter<S, KafkaProperties> {
 
 
