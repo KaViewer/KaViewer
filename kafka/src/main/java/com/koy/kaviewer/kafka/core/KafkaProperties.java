@@ -1,9 +1,12 @@
 package com.koy.kaviewer.kafka.core;
 
+import com.koy.kaviewer.kafka.ipc.ProducerService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.kafka.clients.admin.AdminClientConfig;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
+import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.ByteArrayDeserializer;
+import org.apache.kafka.common.serialization.ByteArraySerializer;
 import org.springframework.core.convert.converter.Converter;
 
 import java.util.Properties;
@@ -11,7 +14,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class KafkaProperties extends Properties {
     private String encoding = "UTF8";
-    private String key;
     private String clusterName;
     private String kafkaClusterVersion;
     private String ZookeeperHost;
@@ -20,6 +22,7 @@ public class KafkaProperties extends Properties {
     private Security security;
     private String clientId;
     private ConsumerProperties consumer = new ConsumerProperties(this);
+    private ProducerProperties producer = new ProducerProperties(this);
 
     public static class ConsumerProperties extends Properties {
         private static final AtomicInteger index = new AtomicInteger(0);
@@ -158,6 +161,10 @@ public class KafkaProperties extends Properties {
         return this.consumer.buildConsumerProperties();
     }
 
+    public ProducerProperties getProducer() {
+        return this.producer.buildProducerProperties();
+    }
+
     public void setConsumer(ConsumerProperties consumer) {
         this.consumer = consumer;
     }
@@ -167,6 +174,29 @@ public class KafkaProperties extends Properties {
     }
 
     public static class ProducerProperties extends Properties {
+        private static final AtomicInteger index = new AtomicInteger(0);
+        private final String CLIENT_ID_PREFIX = "KaViewer::Consumer";
+        private String clientId;
+        public KafkaProperties kafkaProperties;
+
+        public ProducerProperties(KafkaProperties kafkaProperties) {
+            this.kafkaProperties = kafkaProperties;
+        }
+
+        public ProducerProperties buildProducerProperties() {
+            this.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, this.kafkaProperties.getBootstrapServers());
+            this.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, ByteArraySerializer.class);
+            this.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, ByteArraySerializer.class);
+            this.put(ProducerConfig.CLIENT_ID_CONFIG, getClientId("Client", index.getAndIncrement()));
+            return this;
+
+        }
+
+        public String getClientId(String dot, int idx) {
+            this.clientId = dot + "::" + CLIENT_ID_PREFIX + this.kafkaProperties.getClusterName() + "-" + idx;
+            return clientId;
+        }
+
     }
 
     interface KafkaPropertiesConverter<S> extends Converter<S, KafkaProperties> {

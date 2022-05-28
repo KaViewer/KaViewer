@@ -26,7 +26,7 @@ public class ClusterController {
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping("/attachment")
     public ResponseEntity<Void> create(@RequestParam("attachment") MultipartFile kafkaPropertiesVO) {
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
