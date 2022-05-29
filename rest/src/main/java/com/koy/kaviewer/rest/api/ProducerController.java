@@ -3,6 +3,7 @@ package com.koy.kaviewer.rest.api;
 import com.koy.kaviewer.rest.domain.MessageVO;
 import com.koy.kaviewer.rest.service.ProducerBizService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,13 +27,13 @@ public class ProducerController {
         return ResponseEntity.ok(null);
     }
 
-    @PostMapping("/attachment")
+    @PostMapping(name="/attachment",consumes= MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Void> publish(
             @RequestParam(name = "key") MultipartFile key,
-            @RequestParam(name = "key") MultipartFile val,
+            @RequestParam(name = "value") MultipartFile val,
             @RequestParam(name = "topic") String topic,
             @RequestParam(name = "partition") int partition,
-            @RequestParam(name = "headers") Map<String, Object> headers
+            @RequestParam(name = "headers", required = false) Map<String, Object> headers
     ) {
         producerBizService.publish(key, val, topic, partition, headers);
         return ResponseEntity.ok(null);

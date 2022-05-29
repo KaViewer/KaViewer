@@ -15,6 +15,7 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 // https://kafka.apache.org/090/javadoc/index.html?org/apache/kafka/clients/producer/KafkaProducer.html
@@ -42,7 +43,7 @@ public class KafkaProducerFactory {
 
     public void publish(String topic, int partition, Map<String, Object> headers, byte[] key, byte[] val) {
         createProducer();
-        final List<Header> recordHeaders = headers.entrySet().stream().filter(entry -> {
+        final List<Header> recordHeaders = Optional.ofNullable(headers).orElseGet(Map::of).entrySet().stream().filter(entry -> {
             final String k = entry.getKey();
             final Object v = entry.getValue();
             return Objects.nonNull(k) && Objects.nonNull(v);

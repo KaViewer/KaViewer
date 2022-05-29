@@ -4,3 +4,7 @@ server:
 spring:
   application:
     name: KaViewer-Rest
+  http:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 10MB
