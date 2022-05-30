@@ -1,14 +1,12 @@
 package com.koy.kaviewer.rest.domain;
 
-import com.google.common.collect.Maps;
-
-import java.util.Map;
+import java.util.List;
 
 public class MessageVO {
 
     private String topic;
     private int partition;
-    private Map<String, Object> headers = Maps.newHashMap();
+    private List<HeaderVO> headers = List.of();
     private String key;
     private String value;
 
@@ -39,11 +37,11 @@ public class MessageVO {
         this.partition = partition;
     }
 
-    public Map<String, Object> getHeaders() {
+    public List<HeaderVO> getHeaders() {
         return headers;
     }
 
-    public void setHeaders(Map<String, Object> headers) {
+    public void setHeaders(List<HeaderVO> headers) {
         this.headers = headers;
     }
 

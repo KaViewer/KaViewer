@@ -2,12 +2,15 @@ package com.koy.kaviewer.rest.service;
 
 import com.koy.kaviewer.kafka.ipc.ProducerService;
 import com.koy.kaviewer.rest.KaViewerRestApplication;
+import com.koy.kaviewer.rest.domain.HeaderVO;
 import com.koy.kaviewer.rest.domain.MessageVO;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class ProducerBizService {
@@ -20,10 +23,11 @@ public class ProducerBizService {
                 messageVO.getValue().getBytes(StandardCharsets.UTF_8));
     }
 
-    public void publish(MultipartFile key, MultipartFile val, String topic, int partition, Map<String, Object> headers) {
+    public void publish(MultipartFile key, MultipartFile val, String topic, int partition, List<HeaderVO> headers) {
         if (key.isEmpty() || val.isEmpty()) {
             return;
         }
+
 
         try {
             final byte[] keyContent = key.getBytes();
@@ -34,10 +38,11 @@ public class ProducerBizService {
         }
     }
 
-    public void publish(String topic, int partition, Map<String, Object> headers, byte[] key, byte[] val) {
+    public void publish(String topic, int partition, List<HeaderVO> headers, byte[] key, byte[] val) {
 
+        final Map<String, Object> headersMap = headers.stream().collect(Collectors.toMap(HeaderVO::getKey, HeaderVO::getValue));
         final ProducerService producer = KaViewerRestApplication.getBean(ProducerService.class);
-        producer.publish(topic, partition, headers, key, val);
+        producer.publish(topic, partition, headersMap, key, val);
     }
 
 }
