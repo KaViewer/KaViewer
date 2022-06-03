@@ -1,5 +1,7 @@
 package com.koy.kaviewer.rest.domain;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.List;
 
 public class MessageVO {
@@ -9,6 +11,10 @@ public class MessageVO {
     private List<HeaderVO> headers = List.of();
     private String key;
     private String value;
+
+    public boolean inValid() {
+        return StringUtils.isEmpty(topic) || StringUtils.isEmpty(key) || StringUtils.isEmpty(value);
+    }
 
     @Override
     public String toString() {
