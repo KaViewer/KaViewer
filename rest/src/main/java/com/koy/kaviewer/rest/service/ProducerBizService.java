@@ -23,11 +23,30 @@ public class ProducerBizService {
                 messageVO.getValue().getBytes(StandardCharsets.UTF_8));
     }
 
-    public void publish(MultipartFile key, MultipartFile val, String topic, int partition, List<HeaderVO> headers) {
-        if (key.isEmpty() || val.isEmpty()) {
-            return;
-        }
+    public void publish(String key, MultipartFile val, String topic, int partition, List<HeaderVO> headers) {
 
+        try {
+            final byte[] keyContent = key.getBytes();
+            final byte[] valContent = val.getBytes();
+            publish(topic, partition, headers, keyContent, valContent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void publish(MultipartFile key, String val, String topic, int partition, List<HeaderVO> headers) {
+
+        try {
+            final byte[] keyContent = key.getBytes();
+            final byte[] valContent = val.getBytes();
+            publish(topic, partition, headers, keyContent, valContent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void publish(MultipartFile key, MultipartFile val, String topic, int partition, List<HeaderVO> headers) {
 
         try {
             final byte[] keyContent = key.getBytes();
