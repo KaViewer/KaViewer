@@ -52,6 +52,23 @@ public class ProducerController {
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Void> publish(
             @RequestParam(name = "key") MultipartFile key,
+            @RequestParam(name = "value") String val,
+            @RequestParam(name = "topic") String topic,
+            @RequestParam(name = "partition") int partition,
+            @MessageHeaders(name = "headers") List<HeaderVO> headers
+
+    ) {
+        if (key.isEmpty() || StringUtils.isEmpty(val)) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        producerBizService.publish(key, val, topic, partition, headers);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Void> publish(
+            @RequestParam(name = "key") MultipartFile key,
             @RequestParam(name = "value") MultipartFile val,
             @RequestParam(name = "topic") String topic,
             @RequestParam(name = "partition") int partition,
