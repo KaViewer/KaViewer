@@ -33,7 +33,7 @@ public class ProducerController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(path = "/skmv", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Void> publish(
             @RequestParam(name = "key") String key,
             @RequestParam(name = "value") MultipartFile val,
@@ -49,7 +49,7 @@ public class ProducerController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(path = "/mksv", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Void> publish(
             @RequestParam(name = "key") MultipartFile key,
             @RequestParam(name = "value") String val,
@@ -66,7 +66,7 @@ public class ProducerController {
     }
 
 
-    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(path = "/mkmv", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Void> publish(
             @RequestParam(name = "key") MultipartFile key,
             @RequestParam(name = "value") MultipartFile val,

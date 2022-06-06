@@ -21,22 +21,13 @@
     <name>KaViewer</name>
     <description>An Viewer and Operator for Kafka.</description>
     <properties>
-        <spring-boot.repackage.skip>true</spring-boot.repackage.skip>
+<!--        <spring-boot.repackage.skip>true</spring-boot.repackage.skip>-->
         <java.version>11</java.version>
         <guava.version>30.1-jre</guava.version>
         <shell.version>2.0.0.RELEASE</shell.version>
         <!--        <kafka.version>2.7.1</kafka.version>-->
         <lang3.version>3.12.0</lang3.version>
     </properties>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 
     <dependencies>
         <dependency>
