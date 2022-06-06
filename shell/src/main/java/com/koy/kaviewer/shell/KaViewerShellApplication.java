@@ -3,10 +3,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.SpringApplication;
 
 @SpringBootApplication
-public class KaViewerApplication {
+public class KaViewerShellApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(KaViewerApplication.class, args);
+        SpringApplication.run(KaViewerShellApplication.class, args);
     }
 
 }
