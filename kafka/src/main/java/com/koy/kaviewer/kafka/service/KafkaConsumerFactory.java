@@ -39,7 +39,7 @@ public class KafkaConsumerFactory {
         return this.kafkaConsumer4Byte;
     }
 
-    public List<TopicMetaVO> buildTopicsMeta() {
+    public synchronized List<TopicMetaVO> buildTopicsMeta() {
         createConsumer();
         final Map<String, List<PartitionInfo>> topics = this.kafkaConsumer4Byte.listTopics();
         final List<TopicMetaVO> topicMetaVOS = new ArrayList<>(topics.size());
@@ -52,9 +52,9 @@ public class KafkaConsumerFactory {
         return topicMetaVOS;
     }
 
-    public List<ConsumerRecord<String, String>> fetchMessage(String topic, int partition, int size, String sorted,
-                                                             BiFunction<byte[], String, String> keyDeserializer,
-                                                             BiFunction<byte[], String, String> valDeserializer) {
+    public synchronized List<ConsumerRecord<String, String>> fetchMessage(String topic, int partition, int size, String sorted,
+                                                                          BiFunction<byte[], String, String> keyDeserializer,
+                                                                          BiFunction<byte[], String, String> valDeserializer) {
         // max size is 200
         if (size > 200) size = 200;
 
@@ -67,7 +67,7 @@ public class KafkaConsumerFactory {
         records = kafkaConsumer4Byte.poll(Duration.ofSeconds(30)).records(topicPartition);
         return records
                 .stream()
-                .map(rec -> new ConsumerRecord<String, String>(
+                .map(rec -> new ConsumerRecord<>(
                         rec.topic(),
                         rec.partition(),
                         rec.offset(),
