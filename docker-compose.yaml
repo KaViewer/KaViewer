@@ -13,15 +13,3 @@ services:
       - 8083:8083
       - 9092:9092
 
-#  kafka1:
-#    image: landoop/fast-data-dev
-#    restart: on-failure
-#    environment:
-#      - ADV_HOST=127.0.0.1
-#    ports:
-#      - 10181:2181
-#      - 10030:3030
-#      - 10081:8081
-#      - 10082:8082
-#      - 10083:8083
-#      - 10092:9092
