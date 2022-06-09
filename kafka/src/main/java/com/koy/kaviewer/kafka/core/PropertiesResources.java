@@ -26,8 +26,8 @@ public class PropertiesResources<T> {
 
     public enum ResourcesType {
         YAML(s -> s.endsWith(".yaml") || s.endsWith(".yml")),
-        ENTITY,
-        CONFIGMAP,
+        ENTITY(s -> s.equalsIgnoreCase("entity")),
+        CONFIGMAP(s -> s.equalsIgnoreCase("configMap")),
         CRD;
 
         private Predicate<String> from;
@@ -46,7 +46,7 @@ public class PropertiesResources<T> {
 
         public static final EnumSet<ResourcesType> types = EnumSet.allOf(ResourcesType.class);
 
-        ResourcesType from(String source) {
+        public static ResourcesType from(String source) {
             return types.stream().filter(it -> it.from.test(source)).findFirst().orElseGet(() -> null);
         }
     }
