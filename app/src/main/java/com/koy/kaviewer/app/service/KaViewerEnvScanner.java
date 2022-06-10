@@ -19,9 +19,11 @@ public class KaViewerEnvScanner {
     List<EnvResolver> envResolvers;
     @Autowired
     KafkaApplicationSetupService kafkaApplicationSetupService;
+    @Autowired
+    Environment environment;
 
     @PostConstruct
-    public void scanEnv(Environment environment) {
+    public void scanEnv() {
         final String type = environment.getProperty(EnvResolver.kaViewerConfigKey("type"));
         if (StringUtils.isEmpty(type)) {
             return;

@@ -5,6 +5,7 @@ import com.koy.kaviewer.kafka.entity.KafkaPropertiesVO;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
+// --kaviewer.type=entity   --kaviewer.cluster=Koy --kaviewer.bootstrap=127.0.0.1:9092
 @Component
 public class EntityEnvResolver implements EnvResolver<KafkaPropertiesVO> {
     @Override
