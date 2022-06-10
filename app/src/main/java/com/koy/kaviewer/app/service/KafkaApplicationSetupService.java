@@ -14,7 +14,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class KafkaApplicationSetupService implements KafkaSetupService {
-
     public static final AtomicInteger idx = new AtomicInteger(0);
 
     public void setUp(ConfigurableApplicationContext parent, String[] args, PropertiesResources resources) throws Exception {
