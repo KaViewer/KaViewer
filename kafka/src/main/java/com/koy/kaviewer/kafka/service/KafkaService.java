@@ -27,12 +27,6 @@ public class KafkaService {
 
     public void buildApplication(ConfigurableApplicationContext self, PropertiesResources resources) throws Exception {
         this.kafkaProperties = configResolver.load(resources);
-        if (KafkaApplication.contains(this.kafkaProperties.getClusterName())) {
-            // destroy created ctx, it already exists
-            self.close();
-            return;
-        }
-
         initKafkaAdminClient(kafkaProperties);
 
         final KafkaApplicationCacheEntity kafkaApplicationCacheEntity = new KafkaApplicationCacheEntity();
