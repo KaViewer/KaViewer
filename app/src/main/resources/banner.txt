@@ -1,0 +1,17 @@
+${AnsiStyle.BOLD}
+${AnsiColor.BRIGHT_YELLOW}
+-------------------------------------------------------------------
+${AnsiColor.BRIGHT_RED}
+  _  __   __     __
+ | |/ /__ \ \   / (🐶) _____      _____ _ __
+ | ' /| _` \ \ / /| |/ _ \ \ /| / / _ \ '__|
+ | . \ (🐱| |\ V / | |  __/\ V  V /  __/ |
+ |_|\_\__,_| \_/  |_|\___| \_/\_/ \___|_|
+
+${AnsiColor.GREEN}
+> A Kafka Viewer and Operator. -- @Koy(https://github.com/Koooooo-7).
+${AnsiColor.BRIGHT_YELLOW}
+--------------------------------------------------------------------
+${AnsiStyle.NORMAL}
+  on SpringBoot - ${spring-boot.formatted-version}
+
