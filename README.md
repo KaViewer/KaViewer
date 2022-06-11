@@ -1,5 +1,6 @@
 # KaViewer
-> :incoming_envelope: A Kafka Viewer on UI to view and operate Kafka.
+
+> :incoming_envelope: An Viewer and Operator for Kafka.
 
 ## Description
 Today, we have lots of Kafka tools to use, but we have barely neat web Kafka UI to use and bind to our business services.

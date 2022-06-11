@@ -9,7 +9,7 @@ ${AnsiColor.BRIGHT_RED}
  |_|\_\__,_| \_/  |_|\___| \_/\_/ \___|_|
 
 ${AnsiColor.GREEN}
-> A Kafka Viewer and Operator. -- @Koy(https://github.com/Koooooo-7).
+> An Viewer and Operator for Kafka. @Koy(https://github.com/Koooooo-7).
 ${AnsiColor.BRIGHT_YELLOW}
 --------------------------------------------------------------------
 ${AnsiStyle.NORMAL}
