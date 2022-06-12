@@ -24,6 +24,7 @@ public class KafkaConsumerFactory {
 
     @Autowired
     private KafkaClientWrapper kafkaClientWrapper;
+    // TODO: consumer queue
     private KafkaConsumer<byte[], byte[]> kafkaConsumer4Byte;
     private KafkaProperties.ConsumerProperties consumerProperties;
     private KafkaProperties kafkaProperties;

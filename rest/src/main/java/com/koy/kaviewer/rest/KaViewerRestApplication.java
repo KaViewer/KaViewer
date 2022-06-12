@@ -1,5 +1,8 @@
 package com.koy.kaviewer.rest;
 
+import com.koy.kaviewer.kafka.application.KafkaApplication;
+import com.koy.kaviewer.kafka.share.RequestContextManagement;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -20,7 +23,12 @@ public class KaViewerRestApplication implements ApplicationContextAware {
     public static <T> T getBean(Class<T> clz) {
         T target = null;
         try {
-            target = KaViewerRestApplication.parent.getBean(clz);
+            final String cluster = RequestContextManagement.getCluster();
+            if (StringUtils.isNotEmpty(cluster)){
+                target = KafkaApplication.getKafkaApplicationBean(cluster, clz);
+            } else {
+                target = KaViewerRestApplication.parent.getBean(clz);
+            }
         } catch (BeansException ignore) {
             target = KaViewerRestApplication.rest.getBean(clz);
         }
