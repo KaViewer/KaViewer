@@ -25,7 +25,6 @@ import java.util.stream.Collectors;
 public class KafkaConsumerFactory {
 
     private BlockingQueue<KafkaConsumer<byte[], byte[]>> kafkaConsumers;
-    private KafkaProperties.ConsumerProperties consumerProperties;
     private KafkaProperties kafkaProperties;
 
     final void createConsumer(KafkaProperties kafkaProperties) {
@@ -36,7 +35,7 @@ public class KafkaConsumerFactory {
         kafkaConsumers = new ArrayBlockingQueue<>(3);
 
         for (int i = 0; i < consumerSize; i++) {
-            this.consumerProperties = kafkaProperties.getConsumer();
+            final KafkaProperties.ConsumerProperties consumerProperties = kafkaProperties.getConsumer();
             final KafkaConsumer<byte[], byte[]> kafkaConsumer4Byte = new KafkaConsumer<>(consumerProperties);
             kafkaConsumers.add(kafkaConsumer4Byte);
         }
