@@ -21,6 +21,9 @@ public class KafkaService {
     ApplicationContext applicationContext;
 
     @Autowired
+    KafkaConsumerFactory kafkaConsumerFactory;
+
+    @Autowired
     KafkaClientWrapper kafkaAdminClient;
 
     private KafkaProperties kafkaProperties;
@@ -28,6 +31,7 @@ public class KafkaService {
     public void buildApplication(ConfigurableApplicationContext self, PropertiesResources resources) throws Exception {
         this.kafkaProperties = configResolver.load(resources);
         initKafkaAdminClient(kafkaProperties);
+        initKafkaConsumerFactory(kafkaProperties);
 
         final KafkaApplicationCacheEntity kafkaApplicationCacheEntity = new KafkaApplicationCacheEntity();
         kafkaApplicationCacheEntity.setClusterName(kafkaProperties.getClusterName());
@@ -42,5 +46,9 @@ public class KafkaService {
 
         kafkaAdminClient.setDelegate(adminClient);
         kafkaAdminClient.setKafkaProperties(kafkaProperties);
+    }
+
+    private void initKafkaConsumerFactory(KafkaProperties kafkaProperties){
+        kafkaConsumerFactory.createConsumer(kafkaProperties);
     }
 }
