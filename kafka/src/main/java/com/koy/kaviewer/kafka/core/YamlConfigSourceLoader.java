@@ -29,8 +29,10 @@ public class YamlConfigSourceLoader implements ConfigSourceLoader<Map<String, Ob
 
     private static final KafkaProperties.KafkaPropertiesConverter<Map<String, Object>> yamlConvertor = configs -> {
         final KafkaProperties kafkaProperties = new KafkaProperties();
+        final String cluster = String.valueOf(configs.get("cluster"));
         final Map<String, Object> bootstrap = (LinkedHashMap<String, Object>) configs.get("bootstrap");
         kafkaProperties.setBootstrapServers(String.valueOf(bootstrap.getOrDefault("servers", "localhost:9092")));
+        kafkaProperties.setClusterName(cluster);
         return kafkaProperties.buildProperties();
     };
 
