@@ -1,2 +1,3 @@
+cluster: QuniqueClusterName
 bootstrap:
   servers: localhost:9092
