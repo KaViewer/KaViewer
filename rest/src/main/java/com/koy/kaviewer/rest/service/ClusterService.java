@@ -5,11 +5,9 @@ import com.koy.kaviewer.kafka.ipc.KafkaSetupService;
 import com.koy.kaviewer.kafka.core.PropertiesResources;
 import com.koy.kaviewer.kafka.entity.KafkaPropertiesVO;
 import com.koy.kaviewer.rest.KaViewerRestApplication;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
 

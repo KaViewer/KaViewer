@@ -26,7 +26,6 @@ public class ClusterController {
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
-    // TODO
     @PostMapping("/a")
     public ResponseEntity<Void> create(@RequestParam("attachment") MultipartFile attachment) {
         clusterService.create(attachment);
