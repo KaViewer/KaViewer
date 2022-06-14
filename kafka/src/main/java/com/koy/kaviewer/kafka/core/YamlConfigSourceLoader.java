@@ -5,16 +5,17 @@ import org.springframework.stereotype.Component;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Component
-public class YamlConfigSourceLoader implements ConfigSourceLoader<Map<String, Object>, PropertiesResources<String>> {
+public class YamlConfigSourceLoader implements ConfigSourceLoader<Map<String, Object>, PropertiesResources<InputStream>> {
 
     @Override
-    public Map<String, Object> load(PropertiesResources<String> source) throws Exception {
+    public Map<String, Object> load(PropertiesResources<InputStream> source) throws Exception {
         final Yaml yaml = new Yaml();
-        return yaml.load(new FileInputStream(source.getResource()));
+        return yaml.load(source.getResource());
     }
 
     @Override
