@@ -30,6 +30,10 @@ public class KafkaService {
 
     public void buildApplication(ConfigurableApplicationContext self, PropertiesResources resources) throws Exception {
         this.kafkaProperties = configResolver.load(resources);
+        if (KafkaApplication.contains(kafkaProperties.getClusterName())) {
+            self.close();
+            return;
+        }
         initKafkaAdminClient(kafkaProperties);
         initKafkaConsumerFactory(kafkaProperties);
 
@@ -48,7 +52,7 @@ public class KafkaService {
         kafkaAdminClient.setKafkaProperties(kafkaProperties);
     }
 
-    private void initKafkaConsumerFactory(KafkaProperties kafkaProperties){
+    private void initKafkaConsumerFactory(KafkaProperties kafkaProperties) {
         kafkaConsumerFactory.createConsumer(kafkaProperties);
     }
 }
