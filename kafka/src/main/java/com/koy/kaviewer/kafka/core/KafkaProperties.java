@@ -13,6 +13,7 @@ import java.util.Properties;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class KafkaProperties extends Properties {
+    private Integer consumerWorkerSize = 3;
     private String encoding = "UTF8";
     private String clusterName;
     private String kafkaClusterVersion;
@@ -110,6 +111,14 @@ public class KafkaProperties extends Properties {
 
     public void setClusterName(String clusterName) {
         this.clusterName = clusterName;
+    }
+
+    public Integer getConsumerWorkerSize() {
+        return consumerWorkerSize;
+    }
+
+    public void setConsumerWorkerSize(Integer consumerWorkerSize) {
+        this.consumerWorkerSize = consumerWorkerSize;
     }
 
     public String getKafkaClusterVersion() {

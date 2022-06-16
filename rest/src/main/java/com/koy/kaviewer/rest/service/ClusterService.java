@@ -1,6 +1,7 @@
 package com.koy.kaviewer.rest.service;
 
 import com.koy.kaviewer.kafka.application.KafkaApplication;
+import com.koy.kaviewer.kafka.exception.ErrorMsg;
 import com.koy.kaviewer.kafka.exception.KaViewerBizException;
 import com.koy.kaviewer.kafka.ipc.KafkaSetupService;
 import com.koy.kaviewer.kafka.core.PropertiesResources;
@@ -18,7 +19,7 @@ public class ClusterService {
     public void create(KafkaPropertiesVO kafkaPropertiesVO) {
         final String clusterName = kafkaPropertiesVO.getClusterName();
         if (KafkaApplication.contains(clusterName)) {
-            throw new KaViewerBizException("Exist Cluster name !");
+            throw new KaViewerBizException(ErrorMsg.CLUSTER_EXIST);
         }
         final KafkaSetupService handler = KaViewerRestApplication.getBean(KafkaSetupService.class);
         final PropertiesResources<KafkaPropertiesVO> propertiesResources = new PropertiesResources<>();

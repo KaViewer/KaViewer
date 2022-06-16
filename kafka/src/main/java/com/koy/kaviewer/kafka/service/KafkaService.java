@@ -6,6 +6,8 @@ import com.koy.kaviewer.kafka.core.ConfigResolver;
 import com.koy.kaviewer.kafka.core.KafkaProperties;
 import com.koy.kaviewer.kafka.core.PropertiesResources;
 import com.koy.kaviewer.kafka.entity.KafkaApplicationCacheEntity;
+import com.koy.kaviewer.kafka.exception.ErrorMsg;
+import com.koy.kaviewer.kafka.exception.KaViewerBizException;
 import org.apache.kafka.clients.admin.AdminClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -32,7 +34,7 @@ public class KafkaService {
         this.kafkaProperties = configResolver.load(resources);
         if (KafkaApplication.contains(kafkaProperties.getClusterName())) {
             self.close();
-            return;
+            throw new KaViewerBizException(ErrorMsg.CLUSTER_EXIST);
         }
         initKafkaAdminClient(kafkaProperties);
         initKafkaConsumerFactory(kafkaProperties);

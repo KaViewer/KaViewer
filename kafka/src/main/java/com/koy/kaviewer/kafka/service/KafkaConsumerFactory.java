@@ -30,11 +30,10 @@ public class KafkaConsumerFactory {
     final void createConsumer(KafkaProperties kafkaProperties) {
         this.kafkaProperties = kafkaProperties;
 
-        // mock config 3 consumers
-        int consumerSize = 3;
-        kafkaConsumers = new ArrayBlockingQueue<>(3);
+        final Integer consumerWorkerSize = this.kafkaProperties.getConsumerWorkerSize();
+        kafkaConsumers = new ArrayBlockingQueue<>(consumerWorkerSize);
 
-        for (int i = 0; i < consumerSize; i++) {
+        for (int i = 0; i < consumerWorkerSize; i++) {
             final KafkaProperties.ConsumerProperties consumerProperties = kafkaProperties.getConsumer();
             final KafkaConsumer<byte[], byte[]> kafkaConsumer4Byte = new KafkaConsumer<>(consumerProperties);
             kafkaConsumers.add(kafkaConsumer4Byte);
