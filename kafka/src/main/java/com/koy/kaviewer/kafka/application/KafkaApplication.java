@@ -31,11 +31,6 @@ public class KafkaApplication implements ApplicationContextAware {
         return clusterHolder.get(key);
     }
 
-    public static <T> T getKafkaApplicationBean(Class<T> clz) {
-        final String cluster = RequestContextManagement.getCluster();
-        return getKafkaApplicationBean(cluster, clz);
-    }
-
     public static <T> T getKafkaApplicationBean(String key, Class<T> clz) {
         return getKafkaApplication(key).getParentKafkaApplicationContext().getBean(clz);
     }

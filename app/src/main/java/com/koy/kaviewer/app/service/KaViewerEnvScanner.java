@@ -39,7 +39,7 @@ public class KaViewerEnvScanner {
         }
 
         envResolvers.stream().filter(resolver -> resolver.support(resourceType)).findFirst().map(it -> it.load(environment))
-                .ifPresent(resources -> kafkaApplicationSetupService.setUp(resources));
+                .ifPresent(kafkaApplicationSetupService::setUp);
 
     }
 

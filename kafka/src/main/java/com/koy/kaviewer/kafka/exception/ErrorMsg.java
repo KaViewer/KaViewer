@@ -1,9 +1,11 @@
 package com.koy.kaviewer.kafka.exception;
 
 public enum ErrorMsg {
-    CLUSTER_EXIST("Cluster already exist.");
+    INIT_ERROR("Init KaViewer Error."),
+    CLUSTER_EXIST("Cluster already exist."),
+    ;
 
-    private String msg;
+    private final String msg;
 
     ErrorMsg(String msg) {
         this.msg = msg;

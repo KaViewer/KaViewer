@@ -36,8 +36,12 @@ public class KafkaService {
             self.close();
             throw new KaViewerBizException(ErrorMsg.CLUSTER_EXIST);
         }
-        initKafkaAdminClient(kafkaProperties);
-        initKafkaConsumerFactory(kafkaProperties);
+        try {
+            initKafkaAdminClient(kafkaProperties);
+            initKafkaConsumerFactory(kafkaProperties);
+        } catch (Exception e) {
+            throw new KaViewerBizException(ErrorMsg.INIT_ERROR);
+        }
 
         final KafkaApplicationCacheEntity kafkaApplicationCacheEntity = new KafkaApplicationCacheEntity();
         kafkaApplicationCacheEntity.setClusterName(kafkaProperties.getClusterName());
