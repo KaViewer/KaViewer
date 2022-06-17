@@ -40,6 +40,7 @@ public class KafkaService {
             initKafkaAdminClient(kafkaProperties);
             initKafkaConsumerFactory(kafkaProperties);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new KaViewerBizException(ErrorMsg.INIT_ERROR);
         }
 
