@@ -1,6 +1,9 @@
 package com.koy.kaviewer.rest.intercepter;
 
+import com.koy.kaviewer.kafka.exception.ErrorMsg;
+import com.koy.kaviewer.kafka.exception.KaViewerBizException;
 import com.koy.kaviewer.kafka.share.RequestContextManagement;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,12 +20,16 @@ public class RequestClusterMetaInterceptor implements WebMvcConfigurer, HandlerI
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(this)
+                .excludePathPatterns("/api/*/cluster")
                 .addPathPatterns("/api/**");
     }
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String clusterName = request.getHeader(CLUSTER_HEADER_KEY);
+        if (StringUtils.isEmpty(clusterName)) {
+            throw new KaViewerBizException(ErrorMsg.NO_CLUSTER_META);
+        }
         RequestContextManagement.create(new RequestContextManagement.RequestContext(clusterName));
         return true;
     }

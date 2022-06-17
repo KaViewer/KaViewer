@@ -1,6 +1,7 @@
 package com.koy.kaviewer.kafka.exception;
 
 public enum ErrorMsg {
+    NO_CLUSTER_META("No Specific Cluster Info."),
     INIT_ERROR("Init KaViewer Error."),
     CLUSTER_EXIST("Cluster already exist."),
     ;
