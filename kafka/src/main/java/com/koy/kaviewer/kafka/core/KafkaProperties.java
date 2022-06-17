@@ -1,5 +1,7 @@
 package com.koy.kaviewer.kafka.core;
 
+import com.koy.kaviewer.kafka.exception.ErrorMsg;
+import com.koy.kaviewer.kafka.exception.KaViewerBizException;
 import com.koy.kaviewer.kafka.ipc.ProducerService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.kafka.clients.admin.AdminClientConfig;
@@ -99,10 +101,17 @@ public class KafkaProperties extends Properties {
     }
 
     public KafkaProperties buildProperties() {
+        if (!isValid()) {
+            throw new KaViewerBizException(ErrorMsg.NO_CLUSTER_META);
+        }
         this.clientId = "KaViewer::" + clusterName;
         setProperty(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, this.bootstrapServers);
         setProperty(AdminClientConfig.CLIENT_ID_CONFIG, this.clientId);
         return this;
+    }
+
+    private boolean isValid() {
+        return StringUtils.isNotEmpty(this.bootstrapServers) && StringUtils.isNotEmpty(clusterName);
     }
 
     public String getClusterName() {
