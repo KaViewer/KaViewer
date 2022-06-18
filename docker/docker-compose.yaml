@@ -21,9 +21,7 @@ services:
       - zookeeper
 
   kaviewer:
-    build:
-      context: ../
-      dockerfile: docker/Dockerfile
+    image: kooooooy/kaviewer:0.0.1
     ports:
       - 9394:9394
     environment:
