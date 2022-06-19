@@ -5,6 +5,7 @@ import com.koy.kaviewer.kafka.application.KafkaApplication;
 import com.koy.kaviewer.kafka.ipc.KafkaSetupService;
 import com.koy.kaviewer.kafka.core.PropertiesResources;
 import com.koy.kaviewer.kafka.service.KafkaService;
+import org.springframework.boot.Banner;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -21,6 +22,7 @@ public class KafkaApplicationSetupService implements KafkaSetupService {
         final SpringApplicationBuilder applicationBuilder = new SpringApplicationBuilder(KafkaApplication.class)
                 .parent(parent)
                 .web(WebApplicationType.NONE)
+                .bannerMode(Banner.Mode.OFF)
                 .properties("spring.application.name=KaViewer::KafkaApplication-" + idx.getAndIncrement())
                 .profiles("kafka");
 
