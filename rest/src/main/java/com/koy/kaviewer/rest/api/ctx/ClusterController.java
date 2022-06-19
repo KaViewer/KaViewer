@@ -5,6 +5,8 @@ import com.koy.kaviewer.rest.service.ClusterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +31,11 @@ public class ClusterController {
     @PostMapping("/a")
     public ResponseEntity<Void> create(@RequestParam("attachment") MultipartFile attachment) {
         clusterService.create(attachment);
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{cluster}")
+    public ResponseEntity<Void> delete(@PathVariable("clusterName") String cluster) {
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 }
