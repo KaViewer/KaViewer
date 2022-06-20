@@ -18,9 +18,13 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/api/v1/cluster")
 public class ClusterController {
 
+    private final ClusterService clusterService;
 
     @Autowired
-    ClusterService clusterService;
+    public ClusterController(ClusterService clusterService) {
+        this.clusterService = clusterService;
+    }
+
 
     @PostMapping
     public ResponseEntity<Void> create(@RequestBody KafkaPropertiesVO kafkaPropertiesVO) {
@@ -35,7 +39,8 @@ public class ClusterController {
     }
 
     @DeleteMapping("/{cluster}")
-    public ResponseEntity<Void> delete(@PathVariable("clusterName") String cluster) {
+    public ResponseEntity<Void> delete(@PathVariable("cluster") String cluster) {
+        clusterService.delete(cluster);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 }
