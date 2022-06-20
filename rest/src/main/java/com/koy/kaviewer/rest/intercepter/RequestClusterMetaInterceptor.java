@@ -20,7 +20,7 @@ public class RequestClusterMetaInterceptor implements WebMvcConfigurer, HandlerI
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(this)
-                .excludePathPatterns("/api/*/cluster")
+                .excludePathPatterns("/api/*/cluster/**")
                 .addPathPatterns("/api/**");
     }
 

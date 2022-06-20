@@ -35,7 +35,7 @@ public class KafkaApplication implements ApplicationContextAware {
             return;
         }
         LOGGER.info("Remove cluster: {}", clusterName);
-        final KafkaApplicationCacheEntity kafkaApplicationCacheEntity = clusterHolder.get(clusterName);
+        final KafkaApplicationCacheEntity kafkaApplicationCacheEntity = clusterHolder.remove(clusterName);
         final ConfigurableApplicationContext kafkaApplicationContext = (ConfigurableApplicationContext) kafkaApplicationCacheEntity.getKafkaApplicationContext();
         kafkaApplicationContext.close();
     }
