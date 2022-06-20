@@ -7,7 +7,10 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ConfigurableApplicationContext;
 
+import java.util.Enumeration;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 @SpringBootApplication(scanBasePackages = {"com.koy.kaviewer.kafka"})
 public class KafkaApplication implements ApplicationContextAware {
@@ -18,8 +21,12 @@ public class KafkaApplication implements ApplicationContextAware {
         return clusterHolder.containsKey(clusterName);
     }
 
-    public static void remove(String clusterName){
-        if (!contains(clusterName)){
+    public static List<String> listAll() {
+        return clusterHolder.values().stream().map(KafkaApplicationCacheEntity::getClusterName).collect(Collectors.toList());
+    }
+
+    public static void remove(String clusterName) {
+        if (!contains(clusterName)) {
             return;
         }
 

@@ -11,10 +11,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
+import java.util.List;
 import java.util.Objects;
 
 @Service
 public class ClusterService {
+
+    public List<String> list() {
+        return KafkaApplication.listAll();
+
+    }
 
     public void create(KafkaPropertiesVO kafkaPropertiesVO) {
         final String clusterName = kafkaPropertiesVO.getClusterName();
