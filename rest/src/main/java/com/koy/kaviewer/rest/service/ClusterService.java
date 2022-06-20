@@ -49,4 +49,8 @@ public class ClusterService {
         }
     }
 
+    public void delete(String clusterName) {
+        KafkaApplication.remove(clusterName);
+    }
+
 }

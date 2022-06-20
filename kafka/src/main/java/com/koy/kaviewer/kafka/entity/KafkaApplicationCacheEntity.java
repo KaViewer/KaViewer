@@ -8,7 +8,7 @@ public class KafkaApplicationCacheEntity {
     private String clusterName;
     private KafkaProperties kafkaProperties;
     private ConfigurableApplicationContext root;
-    private ApplicationContext parentKafkaApplicationContext;
+    private ApplicationContext kafkaApplicationContext;
 
     public String getClusterName() {
         return clusterName;
@@ -34,12 +34,12 @@ public class KafkaApplicationCacheEntity {
         this.root = root;
     }
 
-    public ApplicationContext getParentKafkaApplicationContext() {
-        return parentKafkaApplicationContext;
+    public ApplicationContext getKafkaApplicationContext() {
+        return kafkaApplicationContext;
     }
 
-    public void setParentKafkaApplicationContext(ApplicationContext parentKafkaApplicationContext) {
-        this.parentKafkaApplicationContext = parentKafkaApplicationContext;
+    public void setKafkaApplicationContext(ApplicationContext kafkaApplicationContext) {
+        this.kafkaApplicationContext = kafkaApplicationContext;
     }
 
 }

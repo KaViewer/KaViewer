@@ -47,7 +47,7 @@ public class KafkaService {
         final KafkaApplicationCacheEntity kafkaApplicationCacheEntity = new KafkaApplicationCacheEntity();
         kafkaApplicationCacheEntity.setClusterName(kafkaProperties.getClusterName());
         kafkaApplicationCacheEntity.setRoot((ConfigurableApplicationContext) applicationContext.getParent());
-        kafkaApplicationCacheEntity.setParentKafkaApplicationContext(applicationContext);
+        kafkaApplicationCacheEntity.setKafkaApplicationContext(applicationContext);
         KafkaApplication.putIfAbsent(kafkaApplicationCacheEntity);
     }
 

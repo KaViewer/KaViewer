@@ -1,12 +1,11 @@
 package com.koy.kaviewer.kafka.application;
 
 import com.koy.kaviewer.kafka.entity.KafkaApplicationCacheEntity;
-import com.koy.kaviewer.kafka.share.RequestContextManagement;
-import org.apache.kafka.common.requests.RequestContext;
 import org.springframework.beans.BeansException;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.ConfigurableApplicationContext;
 
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -17,6 +16,16 @@ public class KafkaApplication implements ApplicationContextAware {
 
     public static boolean contains(String clusterName) {
         return clusterHolder.containsKey(clusterName);
+    }
+
+    public static void remove(String clusterName){
+        if (!contains(clusterName)){
+            return;
+        }
+
+        final KafkaApplicationCacheEntity kafkaApplicationCacheEntity = clusterHolder.get(clusterName);
+        final ConfigurableApplicationContext kafkaApplicationContext = (ConfigurableApplicationContext) kafkaApplicationCacheEntity.getKafkaApplicationContext();
+        kafkaApplicationContext.close();
     }
 
     public static void putIfAbsent(KafkaApplicationCacheEntity kafkaApplicationCacheEntity) {
@@ -32,7 +41,7 @@ public class KafkaApplication implements ApplicationContextAware {
     }
 
     public static <T> T getKafkaApplicationBean(String key, Class<T> clz) {
-        return getKafkaApplication(key).getParentKafkaApplicationContext().getBean(clz);
+        return getKafkaApplication(key).getKafkaApplicationContext().getBean(clz);
     }
 
     @Override
