@@ -25,7 +25,7 @@ public class ClusterService {
     public void create(KafkaPropertiesVO kafkaPropertiesVO) {
         final String clusterName = kafkaPropertiesVO.getClusterName();
         if (KafkaApplication.contains(clusterName)) {
-            throw new KaViewerBizException(ErrorMsg.CLUSTER_EXIST);
+            throw KaViewerBizException.of(ErrorMsg.CLUSTER_EXIST);
         }
         final KafkaSetupService handler = KaViewerRestApplication.getBean(KafkaSetupService.class);
         final PropertiesResources<KafkaPropertiesVO> propertiesResources = new PropertiesResources<>();

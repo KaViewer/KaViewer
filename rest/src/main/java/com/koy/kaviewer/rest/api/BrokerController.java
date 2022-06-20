@@ -14,8 +14,12 @@ import java.util.List;
 @RequestMapping("/api/v1/broker")
 public class BrokerController {
 
+    private final BrokerBizService brokerBizService;
+
     @Autowired
-    BrokerBizService brokerBizService;
+    public BrokerController(BrokerBizService brokerBizService) {
+        this.brokerBizService = brokerBizService;
+    }
 
     @GetMapping
     public ResponseEntity<List<BrokerVO>> list() {

@@ -1,5 +1,10 @@
 package com.koy.kaviewer.kafka.share;
 
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Objects;
+import java.util.Optional;
+
 public class RequestContextManagement {
     private static final ThreadLocal<RequestContext> requestContext = new InheritableThreadLocal<>();
 
@@ -13,7 +18,7 @@ public class RequestContextManagement {
     }
 
     public static String getCluster() {
-        return requestContext.get().getClusterName();
+        return Optional.ofNullable(requestContext.get()).orElseGet(() -> new RequestContext(StringUtils.EMPTY)).getClusterName();
     }
 
 

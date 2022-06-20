@@ -3,6 +3,8 @@ package com.koy.kaviewer.rest;
 import com.koy.kaviewer.kafka.application.KafkaApplication;
 import com.koy.kaviewer.kafka.share.RequestContextManagement;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -11,6 +13,7 @@ import org.springframework.context.ApplicationContextAware;
 
 @SpringBootApplication(scanBasePackages = {"com.koy.kaviewer.rest"})
 public class KaViewerRestApplication implements ApplicationContextAware {
+    private static final Logger LOGGER = LoggerFactory.getLogger(KaViewerRestApplication.class);
     private static ApplicationContext rest;
     private static ApplicationContext parent;
 
@@ -24,7 +27,8 @@ public class KaViewerRestApplication implements ApplicationContextAware {
         T target = null;
         try {
             final String cluster = RequestContextManagement.getCluster();
-            if (StringUtils.isNotEmpty(cluster)){
+            if (StringUtils.isNotEmpty(cluster)) {
+                LOGGER.info("Do get bean on cluster :[{}]", cluster);
                 target = KafkaApplication.getKafkaApplicationBean(cluster, clz);
             } else {
                 target = KaViewerRestApplication.parent.getBean(clz);

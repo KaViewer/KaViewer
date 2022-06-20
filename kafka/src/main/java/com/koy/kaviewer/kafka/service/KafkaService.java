@@ -34,14 +34,14 @@ public class KafkaService {
         this.kafkaProperties = configResolver.load(resources);
         if (KafkaApplication.contains(kafkaProperties.getClusterName())) {
             self.close();
-            throw new KaViewerBizException(ErrorMsg.CLUSTER_EXIST);
+            throw KaViewerBizException.of(ErrorMsg.CLUSTER_EXIST);
         }
         try {
             initKafkaAdminClient(kafkaProperties);
             initKafkaConsumerFactory(kafkaProperties);
         } catch (Exception e) {
             e.printStackTrace();
-            throw new KaViewerBizException(ErrorMsg.INIT_ERROR);
+            throw KaViewerBizException.of(ErrorMsg.INIT_ERROR);
         }
 
         final KafkaApplicationCacheEntity kafkaApplicationCacheEntity = new KafkaApplicationCacheEntity();

@@ -2,7 +2,6 @@ package com.koy.kaviewer.kafka.core;
 
 import com.koy.kaviewer.kafka.exception.ErrorMsg;
 import com.koy.kaviewer.kafka.exception.KaViewerBizException;
-import com.koy.kaviewer.kafka.ipc.ProducerService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.kafka.clients.admin.AdminClientConfig;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
@@ -24,12 +23,12 @@ public class KafkaProperties extends Properties {
     private String bootstrapServers;
     private Security security;
     private String clientId;
-    private ConsumerProperties consumer = new ConsumerProperties(this);
-    private ProducerProperties producer = new ProducerProperties(this);
+    private final ConsumerProperties consumer = new ConsumerProperties(this);
+    private final ProducerProperties producer = new ProducerProperties(this);
 
     public static class ConsumerProperties extends Properties {
         private static final AtomicInteger index = new AtomicInteger(0);
-        private final String CLIENT_ID_PREFIX = "KaViewer::Consumer";
+        private static final String CLIENT_ID_PREFIX = "KaViewer::Consumer";
         // string / byte
         private String KeyDeserializer = "string";
         private String ValDeserializer = "string";
@@ -102,7 +101,7 @@ public class KafkaProperties extends Properties {
 
     public KafkaProperties buildProperties() {
         if (!isValid()) {
-            throw new KaViewerBizException(ErrorMsg.NO_CLUSTER_META);
+            throw KaViewerBizException.of(ErrorMsg.NO_CLUSTER_META);
         }
         this.clientId = "KaViewer::" + clusterName;
         setProperty(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, this.bootstrapServers);
@@ -181,10 +180,6 @@ public class KafkaProperties extends Properties {
 
     public ProducerProperties getProducer() {
         return this.producer.buildProducerProperties();
-    }
-
-    public void setConsumer(ConsumerProperties consumer) {
-        this.consumer = consumer;
     }
 
     public String getEncoding() {
