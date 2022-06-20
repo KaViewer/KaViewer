@@ -28,7 +28,7 @@ public class RequestClusterMetaInterceptor implements WebMvcConfigurer, HandlerI
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String clusterName = request.getHeader(CLUSTER_HEADER_KEY);
         if (StringUtils.isEmpty(clusterName)) {
-            throw new KaViewerBizException(ErrorMsg.NO_CLUSTER_META);
+            throw KaViewerBizException.of(ErrorMsg.NO_CLUSTER_META);
         }
         RequestContextManagement.create(new RequestContextManagement.RequestContext(clusterName));
         return true;
