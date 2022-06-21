@@ -21,8 +21,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/producer")
 public class ProducerController {
+    private final ProducerBizService producerBizService;
+
     @Autowired
-    ProducerBizService producerBizService;
+    public ProducerController(ProducerBizService producerBizService) {
+        this.producerBizService = producerBizService;
+    }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> publish(@RequestBody MessageVO messageVO) {

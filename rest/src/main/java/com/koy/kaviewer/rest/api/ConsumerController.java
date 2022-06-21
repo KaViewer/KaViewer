@@ -16,8 +16,13 @@ import java.util.List;
 @RequestMapping("/api/v1/topic")
 public class ConsumerController {
 
+    private final ConsumerBizService consumerBizService;
+
     @Autowired
-    ConsumerBizService consumerBizService;
+    public ConsumerController(ConsumerBizService consumerBizService) {
+        this.consumerBizService = consumerBizService;
+    }
+
 
     @GetMapping("/{topic}/p/{partition}")
     public ResponseEntity<List<MessageRecord<String, String>>> fetch(

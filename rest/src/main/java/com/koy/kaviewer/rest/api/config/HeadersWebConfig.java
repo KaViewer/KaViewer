@@ -21,8 +21,13 @@ import java.util.stream.Collectors;
 
 @Component
 public class HeadersWebConfig implements WebMvcConfigurer, HandlerMethodArgumentResolver {
+    private final ConversionService conversionService;
     @Autowired
-    ConversionService conversionService;
+    public HeadersWebConfig(ConversionService conversionService) {
+        this.conversionService = conversionService;
+    }
+
+
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {

@@ -1,6 +1,5 @@
 package com.koy.kaviewer.rest.api;
 
-import com.koy.kaviewer.kafka.application.KafkaApplication;
 import com.koy.kaviewer.kafka.entity.TopicMetaVO;
 import com.koy.kaviewer.kafka.ipc.TopicService;
 import com.koy.kaviewer.rest.KaViewerRestApplication;
@@ -18,7 +17,6 @@ import java.util.Set;
 @RestController
 @RequestMapping("/api/v1/topic")
 public class TopicController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(TopicController.class);
 
     @GetMapping
     public ResponseEntity<Set<String>> list(@RequestHeader(name = "k-cluster") String cluster) {
