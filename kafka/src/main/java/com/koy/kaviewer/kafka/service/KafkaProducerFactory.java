@@ -3,7 +3,8 @@ package com.koy.kaviewer.kafka.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.koy.kaviewer.kafka.client.KafkaClientWrapper;
-import com.koy.kaviewer.kafka.core.KafkaProperties;
+import com.koy.kaviewer.kafka.entity.properties.KafkaProperties;
+import com.koy.kaviewer.kafka.entity.properties.ProducerProperties;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.header.Header;
@@ -26,7 +27,7 @@ public class KafkaProducerFactory {
     @Autowired
     private KafkaClientWrapper kafkaClientWrapper;
     private KafkaProducer<byte[], byte[]> kafkaProducer4Byte;
-    private KafkaProperties.ProducerProperties producerProperties;
+    private ProducerProperties producerProperties;
     private KafkaProperties kafkaProperties;
 
     private synchronized KafkaProducer<byte[], byte[]> createProducer() {

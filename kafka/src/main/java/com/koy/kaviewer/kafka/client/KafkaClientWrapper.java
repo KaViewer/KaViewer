@@ -1,6 +1,6 @@
 package com.koy.kaviewer.kafka.client;
 
-import com.koy.kaviewer.kafka.core.KafkaProperties;
+import com.koy.kaviewer.kafka.entity.properties.KafkaProperties;
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.DescribeClusterResult;
 import org.apache.kafka.clients.admin.ListTopicsResult;

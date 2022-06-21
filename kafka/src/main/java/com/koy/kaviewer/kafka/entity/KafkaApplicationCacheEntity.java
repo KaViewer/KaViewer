@@ -1,6 +1,6 @@
 package com.koy.kaviewer.kafka.entity;
 
-import com.koy.kaviewer.kafka.core.KafkaProperties;
+import com.koy.kaviewer.kafka.entity.properties.KafkaProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 

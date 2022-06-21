@@ -1,6 +1,8 @@
 package com.koy.kaviewer.kafka.core;
 
 import com.koy.kaviewer.kafka.entity.KafkaPropertiesVO;
+import com.koy.kaviewer.kafka.entity.properties.KafkaProperties;
+import com.koy.kaviewer.kafka.entity.properties.KafkaPropertiesConverter;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
@@ -24,7 +26,7 @@ public class EntityRequestSourceLoader implements ConfigSourceLoader<KafkaProper
         return (Converter<KafkaPropertiesVO, V>) entityConvertor;
     }
 
-    private static final KafkaProperties.KafkaPropertiesConverter<KafkaPropertiesVO> entityConvertor = configs -> {
+    private static final KafkaPropertiesConverter<KafkaPropertiesVO> entityConvertor = configs -> {
         final KafkaProperties kafkaProperties = new KafkaProperties();
         kafkaProperties.setBootstrapServers(configs.getBootstrapServers());
         kafkaProperties.setClusterName(configs.getClusterName());

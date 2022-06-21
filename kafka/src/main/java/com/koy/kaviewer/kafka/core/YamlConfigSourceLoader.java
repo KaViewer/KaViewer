@@ -1,5 +1,7 @@
 package com.koy.kaviewer.kafka.core;
 
+import com.koy.kaviewer.kafka.entity.properties.KafkaProperties;
+import com.koy.kaviewer.kafka.entity.properties.KafkaPropertiesConverter;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.yaml.snakeyaml.Yaml;
@@ -27,7 +29,7 @@ public class YamlConfigSourceLoader implements ConfigSourceLoader<Map<String, Ob
         return (Converter<Map<String, Object>, V>) yamlConvertor;
     }
 
-    private static final KafkaProperties.KafkaPropertiesConverter<Map<String, Object>> yamlConvertor = configs -> {
+    private static final KafkaPropertiesConverter<Map<String, Object>> yamlConvertor = configs -> {
         final KafkaProperties kafkaProperties = new KafkaProperties();
         final String cluster = String.valueOf(configs.get("cluster"));
         final Map<String, Object> bootstrap = (LinkedHashMap<String, Object>) configs.get("bootstrap");

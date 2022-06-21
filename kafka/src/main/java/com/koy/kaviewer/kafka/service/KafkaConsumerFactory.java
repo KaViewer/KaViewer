@@ -1,6 +1,7 @@
 package com.koy.kaviewer.kafka.service;
 
-import com.koy.kaviewer.kafka.core.KafkaProperties;
+import com.koy.kaviewer.kafka.entity.properties.ConsumerProperties;
+import com.koy.kaviewer.kafka.entity.properties.KafkaProperties;
 import com.koy.kaviewer.kafka.entity.TopicMetaVO;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -34,7 +35,7 @@ public class KafkaConsumerFactory {
         kafkaConsumers = new ArrayBlockingQueue<>(consumerWorkerSize);
 
         for (int i = 0; i < consumerWorkerSize; i++) {
-            final KafkaProperties.ConsumerProperties consumerProperties = kafkaProperties.getConsumer();
+            final ConsumerProperties consumerProperties = kafkaProperties.getConsumer();
             final KafkaConsumer<byte[], byte[]> kafkaConsumer4Byte = new KafkaConsumer<>(consumerProperties);
             kafkaConsumers.add(kafkaConsumer4Byte);
         }

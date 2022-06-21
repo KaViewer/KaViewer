@@ -3,7 +3,7 @@ package com.koy.kaviewer.kafka.service;
 import com.koy.kaviewer.kafka.application.KafkaApplication;
 import com.koy.kaviewer.kafka.client.KafkaClientWrapper;
 import com.koy.kaviewer.kafka.core.ConfigResolver;
-import com.koy.kaviewer.kafka.core.KafkaProperties;
+import com.koy.kaviewer.kafka.entity.properties.KafkaProperties;
 import com.koy.kaviewer.kafka.core.PropertiesResources;
 import com.koy.kaviewer.kafka.entity.KafkaApplicationCacheEntity;
 import com.koy.kaviewer.kafka.exception.ErrorMsg;

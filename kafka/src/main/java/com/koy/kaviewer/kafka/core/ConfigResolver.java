@@ -1,12 +1,12 @@
 package com.koy.kaviewer.kafka.core;
 
+import com.koy.kaviewer.kafka.entity.properties.KafkaProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 
 
 @Order(1)
