@@ -23,7 +23,7 @@ services:
   kaviewer:
     build:
       context: ../
-      dockerfile: docker/Dockerfile
+      dockerfile: docker/Dockerfile.local
     ports:
       - 9394:9394
     environment:
