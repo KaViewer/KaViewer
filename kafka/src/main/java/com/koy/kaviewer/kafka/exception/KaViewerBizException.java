@@ -20,7 +20,7 @@ public class KaViewerBizException extends RuntimeException {
     }
 
     public static KaViewerBizException of(ErrorMsg errorMsg) {
-        return new KaViewerBizException(errorMsg, null);
+        return new KaViewerBizException(errorMsg, new IllegalStateException());
     }
 
     public static KaViewerBizException of(ErrorMsg errorMsg, Throwable cause) {
