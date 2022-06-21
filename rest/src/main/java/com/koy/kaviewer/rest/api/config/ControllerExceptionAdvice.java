@@ -13,7 +13,8 @@ public class ControllerExceptionAdvice {
     @ExceptionHandler
     ResponseEntity<String> exceptionHandler(KaViewerBizException kaViewerBizException) {
         final String exceptionMessage = kaViewerBizException.getMessage();
-        return new ResponseEntity<String>(exceptionMessage, HttpStatus.BAD_REQUEST);
+        final String message = kaViewerBizException.getCause().getMessage();
+        return new ResponseEntity<String>(String.join("\n", exceptionMessage, message), HttpStatus.BAD_REQUEST);
     }
 
 }
