@@ -1,5 +1,6 @@
 package com.koy.kaviewer.rest.service;
 
+import com.koy.kaviewer.kafka.exception.KaViewerBizException;
 import com.koy.kaviewer.kafka.ipc.BrokerService;
 import com.koy.kaviewer.rest.KaViewerRestApplication;
 import com.koy.kaviewer.rest.domain.BrokerVO;
@@ -7,7 +8,6 @@ import org.apache.kafka.clients.admin.DescribeClusterResult;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,10 +20,9 @@ public class BrokerBizService {
         try {
             brokerVOs = brokers.nodes().get().stream().map(node -> new BrokerVO(node.id(), node.host(), node.port(), node.rack()))
                     .collect(Collectors.toList());
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
+            throw KaViewerBizException.of(e);
         }
         return brokerVOs;
     }

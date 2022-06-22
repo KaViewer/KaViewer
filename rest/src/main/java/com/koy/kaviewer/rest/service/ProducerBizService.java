@@ -1,5 +1,6 @@
 package com.koy.kaviewer.rest.service;
 
+import com.koy.kaviewer.kafka.exception.KaViewerBizException;
 import com.koy.kaviewer.kafka.ipc.ProducerService;
 import com.koy.kaviewer.rest.KaViewerRestApplication;
 import com.koy.kaviewer.rest.domain.HeaderVO;
@@ -31,6 +32,7 @@ public class ProducerBizService {
             publish(topic, partition, headers, keyContent, valContent);
         } catch (Exception e) {
             e.printStackTrace();
+            throw KaViewerBizException.of(e);
         }
     }
 
@@ -42,6 +44,7 @@ public class ProducerBizService {
             publish(topic, partition, headers, keyContent, valContent);
         } catch (Exception e) {
             e.printStackTrace();
+            throw KaViewerBizException.of(e);
         }
     }
 
@@ -54,6 +57,7 @@ public class ProducerBizService {
             publish(topic, partition, headers, keyContent, valContent);
         } catch (Exception e) {
             e.printStackTrace();
+            throw KaViewerBizException.of(e);
         }
     }
 

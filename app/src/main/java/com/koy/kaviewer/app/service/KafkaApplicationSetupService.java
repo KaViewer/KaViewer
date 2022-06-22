@@ -2,6 +2,7 @@ package com.koy.kaviewer.app.service;
 
 import com.koy.kaviewer.app.KaViewerApplication;
 import com.koy.kaviewer.kafka.application.KafkaApplication;
+import com.koy.kaviewer.kafka.exception.KaViewerBizException;
 import com.koy.kaviewer.kafka.ipc.KafkaSetupService;
 import com.koy.kaviewer.kafka.core.PropertiesResources;
 import com.koy.kaviewer.kafka.service.KafkaService;
@@ -39,6 +40,7 @@ public class KafkaApplicationSetupService implements KafkaSetupService {
                     KaViewerApplication.getArgs(), propertiesResources);
         } catch (Exception e) {
             e.printStackTrace();
+            throw KaViewerBizException.of(e);
         }
     }
 }

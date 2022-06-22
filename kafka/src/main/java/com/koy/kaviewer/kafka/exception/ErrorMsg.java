@@ -5,6 +5,7 @@ public enum ErrorMsg {
     NO_CLUSTER_FOUND("No Specific Cluster Found."),
     INIT_ERROR("Init KaViewer Error."),
     CLUSTER_EXIST("Cluster already exist."),
+    INTERNAL_ERROR("Internal Error."),
     ;
 
     private final String msg;

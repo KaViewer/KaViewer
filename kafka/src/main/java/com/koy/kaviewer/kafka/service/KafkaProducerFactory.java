@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.koy.kaviewer.kafka.client.KafkaClientWrapper;
 import com.koy.kaviewer.kafka.entity.properties.KafkaProperties;
 import com.koy.kaviewer.kafka.entity.properties.ProducerProperties;
+import com.koy.kaviewer.kafka.exception.KaViewerBizException;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.header.Header;
@@ -55,8 +56,8 @@ public class KafkaProducerFactory {
                 return new RecordHeader(k, valBytes);
             } catch (JsonProcessingException e) {
                 e.printStackTrace();
+                throw KaViewerBizException.of(e);
             }
-            return null;
         }).collect(Collectors.toList());
         final ProducerRecord<byte[], byte[]> record =
                 new ProducerRecord<>(topic, partition, new Timestamp(System.currentTimeMillis()).getTime(), key, val, recordHeaders);

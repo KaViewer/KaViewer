@@ -3,6 +3,7 @@ package com.koy.kaviewer.kafka.service;
 import com.koy.kaviewer.kafka.entity.properties.ConsumerProperties;
 import com.koy.kaviewer.kafka.entity.properties.KafkaProperties;
 import com.koy.kaviewer.kafka.entity.TopicMetaVO;
+import com.koy.kaviewer.kafka.exception.KaViewerBizException;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.PartitionInfo;
@@ -49,8 +50,9 @@ public class KafkaConsumerFactory {
             if (Objects.nonNull(consumer)) {
                 kafkaConsumers.add(consumer);
             }
-        } catch (InterruptedException e) {
+        }catch (Exception e){
             e.printStackTrace();
+            throw KaViewerBizException.of(e);
         }
 
         return result;

@@ -52,6 +52,7 @@ public class ClusterService {
             handler.setUp(propertiesResources);
         } catch (Exception e) {
             e.printStackTrace();
+            throw KaViewerBizException.of(e);
         }
     }
 

@@ -41,7 +41,7 @@ public class KafkaService {
             initKafkaConsumerFactory(kafkaProperties);
         } catch (Exception e) {
             e.printStackTrace();
-            throw KaViewerBizException.of(ErrorMsg.INIT_ERROR);
+            throw KaViewerBizException.of(ErrorMsg.INIT_ERROR, e);
         }
 
         final KafkaApplicationCacheEntity kafkaApplicationCacheEntity = new KafkaApplicationCacheEntity();

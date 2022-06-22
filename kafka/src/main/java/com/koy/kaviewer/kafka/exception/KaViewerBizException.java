@@ -23,6 +23,10 @@ public class KaViewerBizException extends RuntimeException {
         return new KaViewerBizException(errorMsg, new IllegalStateException());
     }
 
+    public static KaViewerBizException of(Throwable cause) {
+        return new KaViewerBizException(ErrorMsg.INTERNAL_ERROR, cause);
+    }
+
     public static KaViewerBizException of(ErrorMsg errorMsg, Throwable cause) {
         return new KaViewerBizException(errorMsg, cause);
     }
