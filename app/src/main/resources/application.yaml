@@ -1,3 +1,19 @@
 spring:
   application:
     name: KaViewer
+  jmx:
+    unique-names: true
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      base-path: /monitor
+      exposure:
+        include: info,health
+      cors:
+        allowed-origin-patterns: '*'
+    jmx:
+      exposure:
+        exclude: '*'
