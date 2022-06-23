@@ -14,6 +14,7 @@ management:
         include: info,health
       cors:
         allowed-origin-patterns: '*'
+    # must disable jmx endpoint for JmxEndpoint exception
     jmx:
       exposure:
         exclude: '*'
