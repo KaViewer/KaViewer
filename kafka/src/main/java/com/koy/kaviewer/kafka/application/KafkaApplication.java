@@ -3,7 +3,6 @@ package com.koy.kaviewer.kafka.application;
 import com.koy.kaviewer.kafka.entity.KafkaApplicationCacheEntity;
 import com.koy.kaviewer.kafka.exception.ErrorMsg;
 import com.koy.kaviewer.kafka.exception.KaViewerBizException;
-import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -53,14 +52,14 @@ public class KafkaApplication implements ApplicationContextAware {
     }
 
     public static <T> T getKafkaApplicationBean(String key, Class<T> clz) {
-        if (!contains(key)){
+        if (!contains(key)) {
             throw KaViewerBizException.of(ErrorMsg.NO_CLUSTER_FOUND);
         }
         return getKafkaApplication(key).getKafkaApplicationContext().getBean(clz);
     }
 
     @Override
-    public void setApplicationContext(@NotNull ApplicationContext applicationContext) throws BeansException {
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         KafkaApplication.kafkaApplicationContext = applicationContext;
     }
 }

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 import java.util.Objects;
+import java.util.TreeMap;
 
 @RestControllerAdvice
 public class ControllerExceptionAdvice implements HandlerExceptionResolver {
@@ -45,9 +46,9 @@ public class ControllerExceptionAdvice implements HandlerExceptionResolver {
 
     private Map<String, Object> buildResponse(String message, Throwable e) {
         final Throwable cause = e.getCause();
-        return Map.of(MSG_KEY, StringUtils.isEmpty(message) ? e.getClass().getName() : message,
+        return new TreeMap<>(Map.of(MSG_KEY, StringUtils.isEmpty(message) ? e.getClass().getName() : message,
                 STACKTRACE_KEY, (Objects.isNull(cause) ?
-                        e.getStackTrace()[0].toString() : cause.getStackTrace()[0].toString()));
+                        e.getStackTrace()[0].toString() : cause.getStackTrace()[0].toString())));
     }
 
 }

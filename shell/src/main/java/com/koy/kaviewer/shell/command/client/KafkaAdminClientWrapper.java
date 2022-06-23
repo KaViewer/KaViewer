@@ -1,5 +1,8 @@
 package com.koy.kaviewer.shell.command.client;
 
+import org.apache.kafka.clients.admin.AbortTransactionOptions;
+import org.apache.kafka.clients.admin.AbortTransactionResult;
+import org.apache.kafka.clients.admin.AbortTransactionSpec;
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.AlterClientQuotasOptions;
 import org.apache.kafka.clients.admin.AlterClientQuotasResult;
@@ -49,10 +52,14 @@ import org.apache.kafka.clients.admin.DescribeFeaturesOptions;
 import org.apache.kafka.clients.admin.DescribeFeaturesResult;
 import org.apache.kafka.clients.admin.DescribeLogDirsOptions;
 import org.apache.kafka.clients.admin.DescribeLogDirsResult;
+import org.apache.kafka.clients.admin.DescribeProducersOptions;
+import org.apache.kafka.clients.admin.DescribeProducersResult;
 import org.apache.kafka.clients.admin.DescribeReplicaLogDirsOptions;
 import org.apache.kafka.clients.admin.DescribeReplicaLogDirsResult;
 import org.apache.kafka.clients.admin.DescribeTopicsOptions;
 import org.apache.kafka.clients.admin.DescribeTopicsResult;
+import org.apache.kafka.clients.admin.DescribeTransactionsOptions;
+import org.apache.kafka.clients.admin.DescribeTransactionsResult;
 import org.apache.kafka.clients.admin.DescribeUserScramCredentialsOptions;
 import org.apache.kafka.clients.admin.DescribeUserScramCredentialsResult;
 import org.apache.kafka.clients.admin.ElectLeadersOptions;
@@ -70,6 +77,8 @@ import org.apache.kafka.clients.admin.ListPartitionReassignmentsOptions;
 import org.apache.kafka.clients.admin.ListPartitionReassignmentsResult;
 import org.apache.kafka.clients.admin.ListTopicsOptions;
 import org.apache.kafka.clients.admin.ListTopicsResult;
+import org.apache.kafka.clients.admin.ListTransactionsOptions;
+import org.apache.kafka.clients.admin.ListTransactionsResult;
 import org.apache.kafka.clients.admin.NewPartitionReassignment;
 import org.apache.kafka.clients.admin.NewPartitions;
 import org.apache.kafka.clients.admin.NewTopic;
@@ -79,6 +88,8 @@ import org.apache.kafka.clients.admin.RemoveMembersFromConsumerGroupOptions;
 import org.apache.kafka.clients.admin.RemoveMembersFromConsumerGroupResult;
 import org.apache.kafka.clients.admin.RenewDelegationTokenOptions;
 import org.apache.kafka.clients.admin.RenewDelegationTokenResult;
+import org.apache.kafka.clients.admin.UnregisterBrokerOptions;
+import org.apache.kafka.clients.admin.UnregisterBrokerResult;
 import org.apache.kafka.clients.admin.UpdateFeaturesOptions;
 import org.apache.kafka.clients.admin.UpdateFeaturesResult;
 import org.apache.kafka.clients.admin.UserScramCredentialAlteration;
@@ -86,6 +97,7 @@ import org.apache.kafka.clients.consumer.OffsetAndMetadata;
 import org.apache.kafka.common.ElectionType;
 import org.apache.kafka.common.Metric;
 import org.apache.kafka.common.MetricName;
+import org.apache.kafka.common.TopicCollection;
 import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.TopicPartitionReplica;
 import org.apache.kafka.common.acl.AclBinding;
@@ -138,6 +150,11 @@ public class KafkaAdminClientWrapper extends AdminClient {
     @Override
     public DeleteTopicsResult deleteTopics(Collection<String> collection, DeleteTopicsOptions deleteTopicsOptions) {
         throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public DeleteTopicsResult deleteTopics(TopicCollection topicCollection, DeleteTopicsOptions deleteTopicsOptions) {
+        return null;
     }
 
 
@@ -329,6 +346,31 @@ public class KafkaAdminClientWrapper extends AdminClient {
     @Override
     public UpdateFeaturesResult updateFeatures(Map<String, FeatureUpdate> map, UpdateFeaturesOptions updateFeaturesOptions) {
         throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public UnregisterBrokerResult unregisterBroker(int i, UnregisterBrokerOptions unregisterBrokerOptions) {
+        return null;
+    }
+
+    @Override
+    public DescribeProducersResult describeProducers(Collection<TopicPartition> collection, DescribeProducersOptions describeProducersOptions) {
+        return null;
+    }
+
+    @Override
+    public DescribeTransactionsResult describeTransactions(Collection<String> collection, DescribeTransactionsOptions describeTransactionsOptions) {
+        return null;
+    }
+
+    @Override
+    public AbortTransactionResult abortTransaction(AbortTransactionSpec abortTransactionSpec, AbortTransactionOptions abortTransactionOptions) {
+        return null;
+    }
+
+    @Override
+    public ListTransactionsResult listTransactions(ListTransactionsOptions listTransactionsOptions) {
+        return null;
     }
 
     @Override

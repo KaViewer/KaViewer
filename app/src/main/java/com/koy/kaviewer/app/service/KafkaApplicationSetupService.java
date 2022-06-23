@@ -18,6 +18,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class KafkaApplicationSetupService implements KafkaSetupService {
     public static final AtomicInteger idx = new AtomicInteger(0);
 
+    // IDEA, disable JMX agent
     public void setUp(ConfigurableApplicationContext parent, String[] args, PropertiesResources resources) throws Exception {
 
         final SpringApplicationBuilder applicationBuilder = new SpringApplicationBuilder(KafkaApplication.class)

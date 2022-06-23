@@ -1,11 +1,10 @@
 package com.koy.kaviewer.rest.api.config;
 
 import com.koy.kaviewer.rest.domain.HeaderVO;
+
 import com.koy.kaviewer.rest.domain.MessageHeaders;
 import org.apache.commons.lang3.tuple.Pair;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
-import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
@@ -21,8 +20,6 @@ import java.util.stream.Collectors;
 
 @Component
 public class HeadersWebConfig implements WebMvcConfigurer, HandlerMethodArgumentResolver {
-    @Autowired
-    private ConversionService conversionService;
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
@@ -55,7 +52,7 @@ public class HeadersWebConfig implements WebMvcConfigurer, HandlerMethodArgument
                     final Pair<String, String> valPair = it.get(1);
                     Object val = valPair.getValue();
                     try {
-                        val = conversionService.convert(val, Long.class);
+                        val = Long.parseLong(String.valueOf(val));
                     } catch (Exception ignore) {
 
                     }

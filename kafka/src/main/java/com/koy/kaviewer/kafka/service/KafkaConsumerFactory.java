@@ -95,7 +95,6 @@ public class KafkaConsumerFactory {
                             rec.offset(),
                             rec.timestamp(),
                             rec.timestampType(),
-                            rec.checksum(),
                             rec.serializedKeySize(),
                             rec.serializedValueSize(),
                             keyDeserializer.apply(rec.key(), this.kafkaProperties.getEncoding()),
