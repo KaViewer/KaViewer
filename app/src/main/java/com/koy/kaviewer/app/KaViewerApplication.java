@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.lang.NonNull;
 
 import java.util.Objects;
@@ -22,16 +23,18 @@ public class KaViewerApplication implements ApplicationContextAware {
 
     public static void main(String[] args) {
         args0 = args;
-        SpringApplicationBuilder parentBuilder =
+        SpringApplicationBuilder kaViewerApplicationBuilder =
                 new SpringApplicationBuilder(KaViewerApplication.class)
                         .bannerMode(Banner.Mode.LOG)
                         .web(WebApplicationType.NONE);
-        parentBuilder.run(args);
-        parentBuilder.child(KaViewerRestApplication.class)
-                .properties("spring.application.name=KaViewer-rest")
+        final ConfigurableApplicationContext app = kaViewerApplicationBuilder.run(args);
+        app.setId(KaViewerApplication.class.getSimpleName());
+
+        final ConfigurableApplicationContext rest = kaViewerApplicationBuilder.child(KaViewerRestApplication.class)
                 .profiles("rest")
                 .bannerMode(Banner.Mode.OFF)
                 .run(args);
+        rest.setId(KaViewerRestApplication.class.getSimpleName());
     }
 
     @Override
