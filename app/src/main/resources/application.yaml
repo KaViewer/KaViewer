@@ -4,9 +4,9 @@ spring:
   jmx:
     unique-names: true
 management:
-  endpoint:
-    health:
-      show-details: always
+#  endpoint:
+#    health:
+#      show-details: always
   endpoints:
     web:
       base-path: /monitor
