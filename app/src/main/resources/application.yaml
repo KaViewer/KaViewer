@@ -11,7 +11,7 @@ management:
     web:
       base-path: /monitor
       exposure:
-        include: info,health
+        include: info,health,contexts
       cors:
         allowed-origin-patterns: '*'
     # must disable jmx endpoint for JmxEndpoint exception
