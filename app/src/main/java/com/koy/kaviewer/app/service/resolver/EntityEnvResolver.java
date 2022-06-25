@@ -1,6 +1,6 @@
 package com.koy.kaviewer.app.service.resolver;
 
-import com.koy.kaviewer.kafka.core.PropertiesResources;
+import com.koy.kaviewer.kafka.entity.properties.PropertiesResources;
 import com.koy.kaviewer.kafka.entity.KafkaPropertiesVO;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;

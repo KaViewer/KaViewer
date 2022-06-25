@@ -1,5 +1,6 @@
-package com.koy.kaviewer.kafka.core;
+package com.koy.kaviewer.app.core;
 
+import com.koy.kaviewer.kafka.entity.properties.PropertiesResources;
 import com.koy.kaviewer.kafka.entity.properties.KafkaProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;

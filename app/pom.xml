@@ -18,11 +18,6 @@
     <dependencies>
         <dependency>
             <groupId>com.koy</groupId>
-            <artifactId>kafka</artifactId>
-            <version>0.0.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.koy</groupId>
             <artifactId>rest</artifactId>
             <version>0.0.1</version>
         </dependency>

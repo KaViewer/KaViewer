@@ -9,16 +9,19 @@ import org.springframework.beans.BeansException;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.ApplicationListener;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.event.ContextClosedEvent;
 
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.stream.Collectors;
 
 @SpringBootApplication(scanBasePackages = {"com.koy.kaviewer.kafka"})
-public class KafkaApplication implements ApplicationContextAware {
+public class KafkaApplication implements ApplicationContextAware, ApplicationListener<ContextClosedEvent> {
     private static final Logger LOGGER = LoggerFactory.getLogger(KafkaApplication.class);
-    private static ApplicationContext kafkaApplicationContext;
+    private static final ConcurrentLinkedQueue<ApplicationContext> kafkaApplicationContexts = new ConcurrentLinkedQueue<>();
     private static final ConcurrentHashMap<String, KafkaApplicationCacheEntity> clusterHolder = new ConcurrentHashMap<>();
 
     public static boolean contains(String clusterName) {
@@ -60,6 +63,16 @@ public class KafkaApplication implements ApplicationContextAware {
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        KafkaApplication.kafkaApplicationContext = applicationContext;
+        kafkaApplicationContexts.add(applicationContext);
+    }
+
+    public static ConcurrentLinkedQueue<ApplicationContext> getKafkaApplicationContexts() {
+        return kafkaApplicationContexts;
+    }
+
+    @Override
+    public void onApplicationEvent(ContextClosedEvent event) {
+        final ApplicationContext applicationContext = event.getApplicationContext();
+        kafkaApplicationContexts.remove(applicationContext);
     }
 }

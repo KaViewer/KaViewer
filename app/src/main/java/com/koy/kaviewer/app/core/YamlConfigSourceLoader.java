@@ -1,5 +1,6 @@
-package com.koy.kaviewer.kafka.core;
+package com.koy.kaviewer.app.core;
 
+import com.koy.kaviewer.kafka.entity.properties.PropertiesResources;
 import com.koy.kaviewer.kafka.entity.properties.KafkaProperties;
 import com.koy.kaviewer.kafka.entity.properties.KafkaPropertiesConverter;
 import org.springframework.core.convert.converter.Converter;

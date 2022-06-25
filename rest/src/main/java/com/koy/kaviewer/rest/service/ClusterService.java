@@ -4,7 +4,7 @@ import com.koy.kaviewer.kafka.application.KafkaApplication;
 import com.koy.kaviewer.kafka.exception.ErrorMsg;
 import com.koy.kaviewer.kafka.exception.KaViewerBizException;
 import com.koy.kaviewer.kafka.ipc.KafkaSetupService;
-import com.koy.kaviewer.kafka.core.PropertiesResources;
+import com.koy.kaviewer.kafka.entity.properties.PropertiesResources;
 import com.koy.kaviewer.kafka.entity.KafkaPropertiesVO;
 import com.koy.kaviewer.rest.KaViewerRestApplication;
 import org.springframework.stereotype.Service;

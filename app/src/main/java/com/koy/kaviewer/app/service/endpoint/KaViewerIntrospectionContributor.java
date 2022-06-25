@@ -1,4 +1,4 @@
-package com.koy.kaviewer.app.service;
+package com.koy.kaviewer.app.service.endpoint;
 
 import com.koy.kaviewer.kafka.application.KafkaApplication;
 import org.springframework.boot.actuate.info.Info;

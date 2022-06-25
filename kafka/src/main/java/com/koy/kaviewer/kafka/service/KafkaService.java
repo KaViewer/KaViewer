@@ -2,9 +2,7 @@ package com.koy.kaviewer.kafka.service;
 
 import com.koy.kaviewer.kafka.application.KafkaApplication;
 import com.koy.kaviewer.kafka.client.KafkaClientWrapper;
-import com.koy.kaviewer.kafka.core.ConfigResolver;
 import com.koy.kaviewer.kafka.entity.properties.KafkaProperties;
-import com.koy.kaviewer.kafka.core.PropertiesResources;
 import com.koy.kaviewer.kafka.entity.KafkaApplicationCacheEntity;
 import com.koy.kaviewer.kafka.exception.ErrorMsg;
 import com.koy.kaviewer.kafka.exception.KaViewerBizException;
@@ -16,8 +14,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class KafkaService {
-    @Autowired
-    ConfigResolver configResolver;
 
     @Autowired
     ApplicationContext applicationContext;
@@ -28,10 +24,7 @@ public class KafkaService {
     @Autowired
     KafkaClientWrapper kafkaAdminClient;
 
-    private KafkaProperties kafkaProperties;
-
-    public void buildApplication(ConfigurableApplicationContext self, PropertiesResources resources) throws Exception {
-        this.kafkaProperties = configResolver.load(resources);
+    public void buildApplication(KafkaProperties kafkaProperties, ConfigurableApplicationContext self) throws Exception {
         if (KafkaApplication.contains(kafkaProperties.getClusterName())) {
             self.close();
             throw KaViewerBizException.of(ErrorMsg.CLUSTER_EXIST);

@@ -1,4 +1,4 @@
-package com.koy.kaviewer.kafka.core;
+package com.koy.kaviewer.kafka.entity.properties;
 
 import java.util.EnumSet;
 import java.util.function.Predicate;

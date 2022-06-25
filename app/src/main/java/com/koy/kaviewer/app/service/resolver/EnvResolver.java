@@ -1,6 +1,6 @@
 package com.koy.kaviewer.app.service.resolver;
 
-import com.koy.kaviewer.kafka.core.PropertiesResources;
+import com.koy.kaviewer.kafka.entity.properties.PropertiesResources;
 import org.springframework.core.env.Environment;
 
 import java.util.StringJoiner;

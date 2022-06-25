@@ -1,7 +1,7 @@
 package com.koy.kaviewer.app.service;
 
 import com.koy.kaviewer.app.service.resolver.EnvResolver;
-import com.koy.kaviewer.kafka.core.PropertiesResources;
+import com.koy.kaviewer.kafka.entity.properties.PropertiesResources;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;

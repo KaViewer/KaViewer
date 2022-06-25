@@ -43,4 +43,7 @@ public class KaViewerRestApplication implements ApplicationContextAware {
         return target;
     }
 
+    public static ApplicationContext getRest() {
+        return rest;
+    }
 }
