@@ -9,9 +9,13 @@ import org.springframework.beans.BeansException;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import springfox.documentation.oas.annotations.EnableOpenApi;
 
 
 @SpringBootApplication(scanBasePackages = {"com.koy.kaviewer.rest"})
+@EnableWebMvc
+@EnableOpenApi
 public class KaViewerRestApplication implements ApplicationContextAware {
     private static final Logger LOGGER = LoggerFactory.getLogger(KaViewerRestApplication.class);
     private static ApplicationContext rest;

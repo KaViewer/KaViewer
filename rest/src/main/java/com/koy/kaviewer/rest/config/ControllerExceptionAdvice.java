@@ -1,4 +1,4 @@
-package com.koy.kaviewer.rest.api.config;
+package com.koy.kaviewer.rest.config;
 
 import com.koy.kaviewer.kafka.exception.KaViewerBizException;
 import org.apache.commons.lang3.StringUtils;

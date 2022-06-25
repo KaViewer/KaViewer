@@ -8,3 +8,7 @@ spring:
     multipart:
       max-file-size: 5MB
       max-request-size: 10MB
+springfox:
+  documentation:
+    swagger-ui:
+      enabled: true
