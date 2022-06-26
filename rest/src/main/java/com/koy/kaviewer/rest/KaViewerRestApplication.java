@@ -25,10 +25,9 @@ public class KaViewerRestApplication implements ApplicationContextAware {
         KaViewerRestApplication.parent = applicationContext.getParent();
     }
 
-    public static <T> T getBean(Class<T> clz) {
+    public static <T> T getBean(String cluster, Class<T> clz) {
         T target = null;
         try {
-            final String cluster = RequestContextManagement.getCluster();
             if (StringUtils.isNotEmpty(cluster)) {
                 LOGGER.info("Do get bean on cluster :[{}]", cluster);
                 target = KafkaApplication.getKafkaApplicationBean(cluster, clz);
@@ -39,6 +38,12 @@ public class KaViewerRestApplication implements ApplicationContextAware {
             target = KaViewerRestApplication.rest.getBean(clz);
         }
         return target;
+    }
+
+
+    public static <T> T getBean(Class<T> clz) {
+        final String cluster = RequestContextManagement.getCluster();
+        return getBean(cluster, clz);
     }
 
     public static ApplicationContext getRest() {

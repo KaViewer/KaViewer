@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+// http://localhost:9394/docs/swagger-ui/index.html
 @Configuration
 public class SwaggerConfiguration {
 
