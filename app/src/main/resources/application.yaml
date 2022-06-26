@@ -20,3 +20,6 @@ management:
         exclude: '*'
   server:
     port: 10086
+
+kaviewer:
+  version: @project.version@
