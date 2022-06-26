@@ -8,7 +8,11 @@ spring:
     multipart:
       max-file-size: 5MB
       max-request-size: 10MB
-springfox:
-  documentation:
-    swagger-ui:
+springdoc:
+  packages-to-scan: "com.koy.kaviewer.rest.api"
+  paths-to-match: /api/**
+  swagger-ui:
+    csrf:
       enabled: true
+    path: /docs/swagger-ui.html
+    defaultModelsExpandDepth: -1

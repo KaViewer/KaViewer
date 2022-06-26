@@ -1,39 +1,25 @@
 package com.koy.kaviewer.rest.config;
 
-import org.apache.commons.lang3.StringUtils;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Contact;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.Contact;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
 
 @Configuration
 public class SwaggerConfiguration {
-    @Value("v${kaviewer.version:x,y.z}")
-    private String kaViewerVersion;
 
     @Bean
-    public Docket api() {
-        return new Docket(DocumentationType.OAS_30)
-                .apiInfo(apiInfo())
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("com.koy.kaviewer.rest.api"))
-                .paths(PathSelectors.ant("/api/**"))
-                .build();
-    }
-
-    private ApiInfo apiInfo() {
-        return new ApiInfoBuilder()
-                .title("KaViewer")
-                .license("Apache License Version 2.0")
-                .description("KaViewer Swagger API docs")
-                .contact(new Contact("@Koy", "https://github.com/Koooooo-7", StringUtils.EMPTY))
-                .version(kaViewerVersion)
-                .build();
+    public OpenAPI customOpenAPI(@Value("v${kaviewer.version:x,y.z}") String kaViewerVersion) {
+        return new OpenAPI()
+                .info(new Info()
+                        .title("KaViewer")
+                        .version(kaViewerVersion)
+                        .description("KaViewer Swagger API docs.")
+                        .contact(new Contact().name("@Koy").url("https://github.com/Koooooo-7"))
+                        .license(new License().name("Apache License Version 2.0").url("https://www.apache.org/licenses/LICENSE-2.0"))
+                );
     }
 }
