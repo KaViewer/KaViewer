@@ -49,6 +49,9 @@ public class KafkaProperties extends Properties {
     }
 
     public void setClusterName(String clusterName) {
+        if (StringUtils.isEmpty(clusterName)) {
+            throw KaViewerBizException.of(ErrorMsg.NO_CLUSTER_META);
+        }
         this.clusterName = clusterName;
     }
 
