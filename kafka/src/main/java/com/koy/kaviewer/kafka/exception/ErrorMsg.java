@@ -6,6 +6,7 @@ public enum ErrorMsg {
     INIT_ERROR("Init KaViewer Error."),
     CLUSTER_EXIST("Cluster already exist."),
     INTERNAL_ERROR("Internal Error."),
+    RUNTIME_ERROR("Runtime Error."),
     ;
 
     private final String msg;
