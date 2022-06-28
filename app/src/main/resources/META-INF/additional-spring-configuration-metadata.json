@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "kaviewer.version",
+      "type": "java.lang.String",
+      "description": "KaViewer version based on the pom.xml file."
+    }
+  ]
+}
