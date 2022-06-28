@@ -1,0 +1,57 @@
+replicaCount: 1
+
+image:
+  repository: kooooooy/kaviewer
+  pullPolicy: IfNotPresent
+  tag: latest
+
+set_up_kafka_env:
+  enable: false
+  kaviewer_type: entity
+  kaviewer_cluster: kaviewer-cluster
+  kaviewer_bootstrap: test-kafka-svc:9092
+
+kafka_sidecar:
+  enable: true
+
+
+podAnnotations: {}
+
+service:
+  annotations: {}
+  type: NodePort
+  app:
+    port: 9394
+    nodePort: 9394
+  actuator:
+    port: 10086
+    nodePort: 10086
+
+resources:
+  enable: false
+  requests:
+    cpu: 0.5
+    memory: "512Mi"
+  limits:
+    cpu: 0.5
+    memory: "1Gi"
+
+
+ingress:
+  enabled: false
+  annotations: {}
+  hosts:
+    - host: chart-example.local
+      paths: []
+  tls: []
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 10
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
