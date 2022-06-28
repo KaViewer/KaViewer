@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-kafka-svc
+  labels:
+    test-kafka-svc: kaviewer
+spec:
+  type: NodePort
+  ports:
+    - port: 9092
+      targetPort: 9092
+      protocol: TCP
+      name: http
+  selector:
+    test-kafka-pod: kaviewer

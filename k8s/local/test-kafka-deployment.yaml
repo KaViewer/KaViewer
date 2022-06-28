@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-kafka-deployment
+  labels:
+    test-kafka-deployment: kaviewer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      test-kafka-pod: kaviewer
+  template:
+    metadata:
+      labels:
+        test-kafka-pod: kaviewer
+    spec:
+      containers:
+        - name: test-kafka
+          image: landoop/fast-data-dev
+          ports:
+            - containerPort: 2181
+            - containerPort: 3030
+            - containerPort: 8081
+            - containerPort: 8082
+            - containerPort: 8083
+            - containerPort: 9092
+          env:
+            - name: ADV_HOST
+              value: "127.0.0.1"
