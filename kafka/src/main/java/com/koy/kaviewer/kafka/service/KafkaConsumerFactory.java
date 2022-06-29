@@ -61,7 +61,7 @@ public class KafkaConsumerFactory {
     public List<TopicMetaVO> buildTopicsMeta() {
         return exec((kafkaConsumer) -> {
 
-            final Map<String, List<PartitionInfo>> topics = kafkaConsumer.listTopics();
+            final Map<String, List<PartitionInfo>> topics = kafkaConsumer.listTopics(Duration.ofSeconds(30));
             final List<TopicMetaVO> topicMetaVOS = new ArrayList<>(topics.size());
             topics.forEach((topic, pt) -> {
                 final List<TopicPartition> tps = pt.stream()

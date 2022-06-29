@@ -34,6 +34,9 @@ public class KafkaService {
             initKafkaConsumerFactory(kafkaProperties);
         } catch (Exception e) {
             e.printStackTrace();
+
+            kafkaAdminClient.close();
+            self.close();
             throw KaViewerBizException.of(ErrorMsg.INIT_ERROR, e);
         }
 

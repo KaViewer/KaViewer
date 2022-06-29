@@ -27,6 +27,10 @@ public class KafkaClientWrapper {
         this.delegate = delegate;
     }
 
+    public void close() {
+        this.delegate.close();
+    }
+
     public KafkaProperties getKafkaProperties() {
         return kafkaProperties;
     }
