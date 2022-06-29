@@ -1,8 +1,6 @@
 spring:
   application:
     name: KaViewer
-  jmx:
-    unique-names: true
 management:
   #  endpoint:
   #    health:
@@ -14,10 +12,6 @@ management:
         include: info,health,contexts
       cors:
         allowed-origin-patterns: '*'
-    # must disable jmx endpoint for JmxEndpoint exception
-    jmx:
-      exposure:
-        exclude: '*'
   server:
     port: 10086
 
