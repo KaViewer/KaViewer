@@ -12,6 +12,10 @@ management:
         include: info,health,contexts
       cors:
         allowed-origin-patterns: '*'
+    # must disable jmx endpoint for JmxEndpoint exception
+    jmx:
+      exposure:
+        exclude: '*'
   server:
     port: 10086
 
