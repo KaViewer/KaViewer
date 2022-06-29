@@ -10,6 +10,10 @@ spec:
     - port: 9092
       targetPort: 9092
       protocol: TCP
-      name: http
+      name: kafka
+    - port: 3000
+      targetPort: 3000
+      protocol: TCP
+      name: web
   selector:
     test-kafka-pod: kaviewer

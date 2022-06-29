@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: test-kafka-deployment
+  name: test-kafka-app
   labels:
     test-kafka-deployment: kaviewer
 spec:
@@ -26,4 +26,4 @@ spec:
             - containerPort: 9092
           env:
             - name: ADV_HOST
-              value: "127.0.0.1"
+              value: "localhost"

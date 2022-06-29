@@ -1,6 +1,6 @@
 kind: Namespace
 apiVersion: v1
 metadata:
-  name: kaviewer0
+  name: kaviewer
   labels:
-    test-local-ns: kaviewer0
+    test-local-ns: kaviewer
