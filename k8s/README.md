@@ -18,8 +18,6 @@ kubectl create namespace kaviewer
 
 or use this `yaml` file localed in `k8s/local` folder.
 
-```yaml:
-
 ```shell
 kubectl apply -f test-namespace.yaml
 ```
