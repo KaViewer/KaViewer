@@ -67,7 +67,7 @@ Check Images in Minikube
 #### Install KaViewer
 
 ```shell
-helm install kaviwer-latest-release kaviwer --namespace kaviewer 
+helm install kaviwer-latest-release kaviewer --namespace kaviewer 
 ```
 
 Check `Helm release` to see if KaViewer is installed.
