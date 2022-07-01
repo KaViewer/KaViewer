@@ -1,11 +1,5 @@
 # Usage for local development with Minikube
 
-> Minikube dashboard UI .
-
-```shell
- minikube dashboard
-```
-
 ## Create Test Namespace
 
 > Test namespace is created for local development named `kaviewer``.
@@ -74,6 +68,19 @@ Check `Helm release` to see if KaViewer is installed.
 
 ```shell
  helm list
+```
+
+Check `Minikube dashboard` to see if KaViewer is running.
+
+> Minikube dashboard UI .
+```shell
+ minikube dashboard
+```
+or 
+
+```shell
+kubectl get pods --namespace kaviewer
+kubectl get svc --namespace kaviewer
 ```
 
 Check `KaViewer` UI
