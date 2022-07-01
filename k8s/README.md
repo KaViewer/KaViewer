@@ -67,7 +67,7 @@ Check Images in Minikube
 #### Install KaViewer
 
 ```shell
-helm install kaviwer-latest-release kaviewer --namespace kaviewer 
+helm install kaviewer-latest-release kaviewer --namespace kaviewer 
 ```
 
 Check `Helm release` to see if KaViewer is installed.
@@ -85,12 +85,12 @@ Check `KaViewer` UI
 or
 
 ```shell
- kubectl port-forward svc/kaviwer-latest-release-kaviewer 9394:9394 (app)
- kubectl port-forward svc/kaviwer-latest-release-kaviewer 10086:10086 (actuator endpoint)
+ kubectl port-forward svc/kaviewer-latest-release-kaviewer 9394:9394 (app)
+ kubectl port-forward svc/kaviewer-latest-release-kaviewer 10086:10086 (actuator endpoint)
 ```
 
 #### Uninstall KaViewer
 
 ```shell
-helm uninstall kaviwer-latest-release
+helm uninstall kaviewer-latest-release
 ```
