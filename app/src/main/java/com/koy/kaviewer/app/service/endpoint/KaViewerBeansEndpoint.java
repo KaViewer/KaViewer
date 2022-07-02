@@ -1,7 +1,7 @@
 package com.koy.kaviewer.app.service.endpoint;
 
 import com.koy.kaviewer.kafka.application.KafkaApplication;
-import com.koy.kaviewer.rest.KaViewerRestApplication;
+import com.koy.kaviewer.web.KaViewerRestApplication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.beans.BeansEndpoint;
 import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;

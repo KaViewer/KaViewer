@@ -1,7 +1,7 @@
 package com.koy.kaviewer.app;
 
 
-import com.koy.kaviewer.rest.KaViewerRestApplication;
+import com.koy.kaviewer.web.KaViewerRestApplication;
 import org.springframework.beans.BeansException;
 import org.springframework.boot.Banner;
 import org.springframework.boot.WebApplicationType;
@@ -14,9 +14,7 @@ import org.springframework.lang.NonNull;
 
 import java.util.Objects;
 
-@SpringBootApplication(scanBasePackages = {
-        "com.koy.kaviewer.app", "com.koy.kaviewer.kafka.core",
-})
+@SpringBootApplication(scanBasePackages = {"com.koy.kaviewer.app"})
 public class KaViewerApplication implements ApplicationContextAware {
     private static ApplicationContext root;
     private static String[] args0;

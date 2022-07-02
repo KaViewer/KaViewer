@@ -10,7 +10,7 @@
         <relativePath/>
     </parent>
     <modules>
-        <module>rest</module>
+        <module>web</module>
         <module>kafka</module>
         <module>app</module>
     </modules>
