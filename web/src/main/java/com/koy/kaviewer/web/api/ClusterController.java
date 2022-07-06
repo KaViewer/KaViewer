@@ -1,4 +1,4 @@
-package com.koy.kaviewer.web.api.ctx;
+package com.koy.kaviewer.web.api;
 
 import com.koy.kaviewer.kafka.entity.KafkaPropertiesVO;
 import com.koy.kaviewer.web.service.ClusterService;
