@@ -4,6 +4,9 @@ public class HeaderVO {
     private String key;
     private Object value;
 
+    public HeaderVO() {
+    }
+
     public HeaderVO(String key, Object value) {
         this.key = key;
         this.value = value;
