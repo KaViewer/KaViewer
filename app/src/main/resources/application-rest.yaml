@@ -9,7 +9,7 @@ spring:
       max-file-size: 5MB
       max-request-size: 10MB
 springdoc:
-  packages-to-scan: "com.koy.kaviewer.rest.api"
+  packages-to-scan: "com.koy.kaviewer.web.api"
   paths-to-match: /api/**
   swagger-ui:
     csrf:
