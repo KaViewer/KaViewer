@@ -17,6 +17,6 @@ And use this simple command to run the application:
 `docker build -f docker/Dockerfile.local -t kooooooy/kaviewer:0.0.1 .`
 
 #### Helm Run
-Just check the [KaViewer Helm Chart Usage]("./k8s/README.md") doc and `helm install` the chart.
+Just check the [KaViewer Helm Chart Usage]("/k8s/README.md") doc and `helm install` the chart.
 
 
