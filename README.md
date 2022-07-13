@@ -11,5 +11,12 @@ Hence, KaViewer is here, which is made for both Local, On-Premise and Cloud Nati
 Just `git clone` the repository and `cd` into the directory.
 Then, run `mvn clean package` and `java -jar app/target/app-0.0.1.jar`.
 
+#### Docker Run
+Just `git clone` the repository and `cd` into the directory.
+And use this simple command to run the application:
+`docker build -f docker/Dockerfile.local -t kooooooy/kaviewer:0.0.1 .`
+
+#### Helm Run
+Just check the [KaViewer Helm Chart Usage]("./k8s/README.md") doc and `helm install` the chart.
 
 
