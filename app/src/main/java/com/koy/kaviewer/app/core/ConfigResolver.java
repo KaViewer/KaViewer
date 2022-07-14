@@ -14,12 +14,17 @@ import java.util.List;
 @Service
 public class ConfigResolver implements ConfigSourceLoader<KafkaProperties, PropertiesResources> {
 
+    private final List<ConfigSourceLoader> configSourceLoaders;
+
     @Autowired
-    private List<ConfigSourceLoader> configSourceLoaders;
+    public ConfigResolver(List<ConfigSourceLoader> configSourceLoaders) {
+        this.configSourceLoaders = configSourceLoaders;
+    }
+
 
     @Override
     public KafkaProperties load(PropertiesResources source) throws Exception {
-        final ConfigSourceLoader sourceLoader = configSourceLoaders.stream().filter(loader ->  loader.support(source.getType())).findFirst()
+        final ConfigSourceLoader sourceLoader = configSourceLoaders.stream().filter(loader -> loader.support(source.getType())).findFirst()
                 .orElseThrow(() -> new UnsupportedOperationException("Not Support Config File Type !!!"));
         return (KafkaProperties) sourceLoader.getConvertor().convert(sourceLoader.load(source));
     }

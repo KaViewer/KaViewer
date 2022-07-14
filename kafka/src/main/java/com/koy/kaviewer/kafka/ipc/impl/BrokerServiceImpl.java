@@ -8,8 +8,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class BrokerServiceImpl implements BrokerService {
+
+    private final KafkaClientWrapper kafkaClientWrapper;
+
     @Autowired
-    KafkaClientWrapper kafkaClientWrapper;
+    public BrokerServiceImpl(KafkaClientWrapper kafkaClientWrapper) {
+        this.kafkaClientWrapper = kafkaClientWrapper;
+    }
 
     @Override
     public DescribeClusterResult describeClusters() {

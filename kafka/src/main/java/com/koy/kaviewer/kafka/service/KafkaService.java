@@ -15,14 +15,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class KafkaService {
 
-    @Autowired
-    ApplicationContext applicationContext;
+    private final ApplicationContext applicationContext;
+    private final KafkaConsumerFactory kafkaConsumerFactory;
+    private final KafkaClientWrapper kafkaAdminClient;
 
-    @Autowired
-    KafkaConsumerFactory kafkaConsumerFactory;
-
-    @Autowired
-    KafkaClientWrapper kafkaAdminClient;
+    public KafkaService(ApplicationContext applicationContext, KafkaConsumerFactory kafkaConsumerFactory, KafkaClientWrapper kafkaAdminClient) {
+        this.applicationContext = applicationContext;
+        this.kafkaConsumerFactory = kafkaConsumerFactory;
+        this.kafkaAdminClient = kafkaAdminClient;
+    }
 
     public void buildApplication(KafkaProperties kafkaProperties, ConfigurableApplicationContext self) throws Exception {
         if (KafkaApplication.contains(kafkaProperties.getClusterName())) {

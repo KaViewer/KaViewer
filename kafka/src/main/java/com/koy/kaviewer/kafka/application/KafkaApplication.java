@@ -73,6 +73,7 @@ public class KafkaApplication implements ApplicationContextAware, ApplicationLis
     @Override
     public void onApplicationEvent(ContextClosedEvent event) {
         final ApplicationContext applicationContext = event.getApplicationContext();
+        LOGGER.info("ApplicationContext closed: {}", applicationContext.getId());
         kafkaApplicationContexts.remove(applicationContext);
     }
 }
