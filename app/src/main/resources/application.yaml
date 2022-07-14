@@ -2,9 +2,6 @@ spring:
   application:
     name: KaViewer
 management:
-  #  endpoint:
-  #    health:
-  #      show-details: always
   endpoints:
     web:
       base-path: /monitor
@@ -12,7 +9,7 @@ management:
         include: info,health,contexts
       cors:
         allowed-origin-patterns: '*'
-    # must disable jmx endpoint for JmxEndpoint exception
+    # must disable jmx endpoint for JmxEndpoint/InstanceAlreadyExistsException exception
     jmx:
       exposure:
         exclude: '*'
