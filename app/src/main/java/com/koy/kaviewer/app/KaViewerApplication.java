@@ -1,7 +1,7 @@
 package com.koy.kaviewer.app;
 
 
-import com.koy.kaviewer.web.KaViewerRestApplication;
+import com.koy.kaviewer.web.KaViewerWebApplication;
 import org.springframework.beans.BeansException;
 import org.springframework.boot.Banner;
 import org.springframework.boot.WebApplicationType;
@@ -28,11 +28,11 @@ public class KaViewerApplication implements ApplicationContextAware {
         final ConfigurableApplicationContext app = kaViewerApplicationBuilder.run(args);
         app.setId(KaViewerApplication.class.getSimpleName());
 
-        final ConfigurableApplicationContext rest = kaViewerApplicationBuilder.child(KaViewerRestApplication.class)
-                .profiles("rest")
+        final ConfigurableApplicationContext web = kaViewerApplicationBuilder.child(KaViewerWebApplication.class)
+                .profiles("web")
                 .bannerMode(Banner.Mode.OFF)
                 .run(args);
-        rest.setId(KaViewerRestApplication.class.getSimpleName());
+        web.setId(KaViewerWebApplication.class.getSimpleName());
     }
 
     @Override

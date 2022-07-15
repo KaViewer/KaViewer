@@ -6,7 +6,7 @@ import com.koy.kaviewer.kafka.exception.KaViewerBizException;
 import com.koy.kaviewer.kafka.ipc.KafkaSetupService;
 import com.koy.kaviewer.kafka.entity.properties.PropertiesResources;
 import com.koy.kaviewer.kafka.entity.KafkaPropertiesVO;
-import com.koy.kaviewer.web.KaViewerRestApplication;
+import com.koy.kaviewer.web.KaViewerWebApplication;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,7 +27,7 @@ public class ClusterService {
         if (KafkaApplication.contains(clusterName)) {
             throw KaViewerBizException.of(ErrorMsg.CLUSTER_EXIST);
         }
-        final KafkaSetupService handler = KaViewerRestApplication.getBean(KafkaSetupService.class);
+        final KafkaSetupService handler = KaViewerWebApplication.getBean(KafkaSetupService.class);
         final PropertiesResources<KafkaPropertiesVO> propertiesResources = new PropertiesResources<>();
         propertiesResources.setResource(kafkaPropertiesVO);
         propertiesResources.setType(PropertiesResources.ResourcesType.ENTITY);
@@ -45,7 +45,7 @@ public class ClusterService {
         }
 
         try {
-            final KafkaSetupService handler = KaViewerRestApplication.getBean(KafkaSetupService.class);
+            final KafkaSetupService handler = KaViewerWebApplication.getBean(KafkaSetupService.class);
             final PropertiesResources<InputStream> propertiesResources = new PropertiesResources<>();
             propertiesResources.setResource(multipartFile.getInputStream());
             propertiesResources.setType(type);

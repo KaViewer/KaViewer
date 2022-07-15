@@ -2,7 +2,7 @@ package com.koy.kaviewer.web.service;
 
 import com.koy.kaviewer.kafka.exception.KaViewerBizException;
 import com.koy.kaviewer.kafka.ipc.ProducerService;
-import com.koy.kaviewer.web.KaViewerRestApplication;
+import com.koy.kaviewer.web.KaViewerWebApplication;
 import com.koy.kaviewer.web.domain.HeaderVO;
 import com.koy.kaviewer.web.domain.MessageVO;
 import org.springframework.stereotype.Service;
@@ -64,7 +64,7 @@ public class ProducerBizService {
     public void publish(String topic, int partition, List<HeaderVO> headers, byte[] key, byte[] val) {
 
         final Map<String, Object> headersMap = headers.stream().collect(Collectors.toMap(HeaderVO::getKey, HeaderVO::getValue));
-        final ProducerService producer = KaViewerRestApplication.getBean(ProducerService.class);
+        final ProducerService producer = KaViewerWebApplication.getBean(ProducerService.class);
         producer.publish(topic, partition, headersMap, key, val);
     }
 

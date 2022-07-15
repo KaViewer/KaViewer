@@ -14,15 +14,15 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @SpringBootApplication(scanBasePackages = {"com.koy.kaviewer.web"})
 @EnableWebMvc
-public class KaViewerRestApplication implements ApplicationContextAware {
-    private static final Logger LOGGER = LoggerFactory.getLogger(KaViewerRestApplication.class);
+public class KaViewerWebApplication implements ApplicationContextAware {
+    private static final Logger LOGGER = LoggerFactory.getLogger(KaViewerWebApplication.class);
     private static ApplicationContext rest;
     private static ApplicationContext parent;
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        KaViewerRestApplication.rest = applicationContext;
-        KaViewerRestApplication.parent = applicationContext.getParent();
+        KaViewerWebApplication.rest = applicationContext;
+        KaViewerWebApplication.parent = applicationContext.getParent();
     }
 
     public static <T> T getBean(String cluster, Class<T> clz) {
@@ -32,10 +32,10 @@ public class KaViewerRestApplication implements ApplicationContextAware {
                 LOGGER.info("Do get bean on cluster :[{}]", cluster);
                 target = KafkaApplication.getKafkaApplicationBean(cluster, clz);
             } else {
-                target = KaViewerRestApplication.parent.getBean(clz);
+                target = KaViewerWebApplication.parent.getBean(clz);
             }
         } catch (BeansException ignore) {
-            target = KaViewerRestApplication.rest.getBean(clz);
+            target = KaViewerWebApplication.rest.getBean(clz);
         }
         return target;
     }

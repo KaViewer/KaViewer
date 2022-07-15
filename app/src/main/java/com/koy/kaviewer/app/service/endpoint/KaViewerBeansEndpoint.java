@@ -1,7 +1,7 @@
 package com.koy.kaviewer.app.service.endpoint;
 
 import com.koy.kaviewer.kafka.application.KafkaApplication;
-import com.koy.kaviewer.web.KaViewerRestApplication;
+import com.koy.kaviewer.web.KaViewerWebApplication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.beans.BeansEndpoint;
 import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
@@ -25,7 +25,7 @@ public class KaViewerBeansEndpoint {
 
     @ReadOperation
     public BeansEndpoint.ApplicationBeans beans() {
-        final ConfigurableApplicationContext rest = (ConfigurableApplicationContext) KaViewerRestApplication.getRest();
+        final ConfigurableApplicationContext rest = (ConfigurableApplicationContext) KaViewerWebApplication.getRest();
         final BeansEndpoint restBeanEndPoint = new BeansEndpoint(rest);
         final BeansEndpoint.ApplicationBeans restBeans = restBeanEndPoint.beans();
         final ConcurrentLinkedQueue<ApplicationContext> kafkaApplicationContexts = KafkaApplication.getKafkaApplicationContexts();
