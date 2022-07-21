@@ -4,6 +4,7 @@ import com.koy.kaviewer.web.domain.MessageRecord;
 import com.koy.kaviewer.web.service.ConsumerBizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/topic")
+@CrossOrigin(origins = "*")
 public class ConsumerController {
 
     private final ConsumerBizService consumerBizService;

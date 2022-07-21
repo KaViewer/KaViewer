@@ -4,6 +4,7 @@ import com.koy.kaviewer.kafka.entity.TopicMetaVO;
 import com.koy.kaviewer.kafka.ipc.TopicService;
 import com.koy.kaviewer.web.KaViewerWebApplication;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/api/v1/topic")
+@CrossOrigin(origins = "*")
 public class TopicController {
 
     @GetMapping

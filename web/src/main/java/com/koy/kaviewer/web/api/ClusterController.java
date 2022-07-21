@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,7 @@ import java.util.List;
 @Tag(name = "Cluster Operations", description = "Do operations on cluster.")
 @RestController
 @RequestMapping("/api/v1/cluster")
+@CrossOrigin(origins = "*")
 public class ClusterController {
 
     private final ClusterService clusterService;
@@ -34,7 +36,8 @@ public class ClusterController {
     @Operation(summary = "Get all clusters' name.")
     @GetMapping
     public ResponseEntity<List<String>> list() {
-        final List<String> clusters = clusterService.list();
+        var clusters = List.of("cluster1", "cluster2");
+//        final List<String> clusters = clusterService.list();
         return ResponseEntity.ok(clusters);
     }
 
