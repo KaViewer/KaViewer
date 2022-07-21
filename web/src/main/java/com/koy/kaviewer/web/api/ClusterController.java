@@ -36,8 +36,7 @@ public class ClusterController {
     @Operation(summary = "Get all clusters' name.")
     @GetMapping
     public ResponseEntity<List<String>> list() {
-        var clusters = List.of("cluster1", "cluster2");
-//        final List<String> clusters = clusterService.list();
+        final List<String> clusters = clusterService.list();
         return ResponseEntity.ok(clusters);
     }
 
