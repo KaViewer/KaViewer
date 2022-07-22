@@ -7,15 +7,25 @@ import com.koy.kaviewer.kafka.ipc.KafkaSetupService;
 import com.koy.kaviewer.kafka.entity.properties.PropertiesResources;
 import com.koy.kaviewer.kafka.entity.KafkaPropertiesVO;
 import com.koy.kaviewer.web.KaViewerWebApplication;
+import com.koy.kaviewer.web.domain.ClusterVO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 public class ClusterService {
+
+    private final BrokerBizService brokerBizService;
+
+    @Autowired
+    public ClusterService(BrokerBizService brokerBizService) {
+        this.brokerBizService = brokerBizService;
+    }
 
     public List<String> list() {
         return KafkaApplication.listAll();
@@ -60,4 +70,8 @@ public class ClusterService {
         KafkaApplication.remove(clusterName);
     }
 
+    public List<ClusterVO> meta() {
+        final List<String> clusters = list();
+        return clusters.stream().map(cluster -> new ClusterVO(cluster, brokerBizService.brokers(cluster))).collect(Collectors.toList());
+    }
 }

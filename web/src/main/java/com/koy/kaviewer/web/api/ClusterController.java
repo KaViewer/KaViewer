@@ -1,6 +1,7 @@
 package com.koy.kaviewer.web.api;
 
 import com.koy.kaviewer.kafka.entity.KafkaPropertiesVO;
+import com.koy.kaviewer.web.domain.ClusterVO;
 import com.koy.kaviewer.web.service.ClusterService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -38,6 +39,13 @@ public class ClusterController {
     public ResponseEntity<List<String>> list() {
         final List<String> clusters = clusterService.list();
         return ResponseEntity.ok(clusters);
+    }
+
+    @Operation(summary = "Get all clusters' meta.")
+    @GetMapping("/mata")
+    public ResponseEntity<List<ClusterVO>> meta() {
+        final List<ClusterVO> meta = clusterService.meta();
+        return ResponseEntity.ok(meta);
     }
 
     @Operation(summary = "Create a new cluster.")
