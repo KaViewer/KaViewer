@@ -19,4 +19,9 @@ And use this simple command to run the application:
 #### Helm Run
 Just check the [KaViewer Helm Chart Usage](/k8s/README.md) doc and `helm install` the chart.
 
+## Contributing
+PR is welcome.
+
+## License
+KaViewer is licensed under the Apache License 2.0. @[Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0)
 
