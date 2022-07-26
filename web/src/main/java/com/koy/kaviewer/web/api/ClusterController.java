@@ -42,7 +42,7 @@ public class ClusterController {
     }
 
     @Operation(summary = "Get all clusters' meta.")
-    @GetMapping("/mata")
+    @GetMapping("/meta")
     public ResponseEntity<List<ClusterVO>> meta() {
         final List<ClusterVO> meta = clusterService.meta();
         return ResponseEntity.ok(meta);
