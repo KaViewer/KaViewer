@@ -9,9 +9,11 @@ import org.apache.kafka.clients.admin.ListTopicsResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
 
 @Service
 public class TopicServiceImpl implements TopicService {
@@ -37,7 +39,10 @@ public class TopicServiceImpl implements TopicService {
 
     @Override
     public List<TopicMetaVO> listMeta(String clusterName) {
-        return kafkaConsumerFactory.buildTopicsMeta();
+        return kafkaConsumerFactory.buildTopicsMeta()
+                .stream()
+                .sorted((t1, t2) -> t1.getTopicName().compareToIgnoreCase(t2.getTopicName())
+                ).collect(Collectors.toList());
     }
 
 }
