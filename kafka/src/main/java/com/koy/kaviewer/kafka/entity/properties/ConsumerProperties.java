@@ -24,7 +24,7 @@ public class ConsumerProperties extends Properties {
 
     public ConsumerProperties buildConsumerProperties() {
         final int idx = index.getAndIncrement();
-        this.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, this.kafkaProperties.getBootstrapServers());
+        this.putAll(this.kafkaProperties);
         this.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
         this.put(ConsumerConfig.GROUP_ID_CONFIG, generateClientId("Group", idx));
         this.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, ByteArrayDeserializer.class);

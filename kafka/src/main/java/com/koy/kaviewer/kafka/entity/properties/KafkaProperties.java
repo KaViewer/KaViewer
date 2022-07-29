@@ -1,17 +1,14 @@
 package com.koy.kaviewer.kafka.entity.properties;
 
+import com.koy.kaviewer.kafka.entity.BrokerSecurityType;
 import com.koy.kaviewer.kafka.exception.ErrorMsg;
 import com.koy.kaviewer.kafka.exception.KaViewerBizException;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.kafka.clients.CommonClientConfigs;
 import org.apache.kafka.clients.admin.AdminClientConfig;
-import org.apache.kafka.clients.consumer.ConsumerConfig;
-import org.apache.kafka.clients.producer.ProducerConfig;
-import org.apache.kafka.common.serialization.ByteArrayDeserializer;
-import org.apache.kafka.common.serialization.ByteArraySerializer;
-import org.springframework.core.convert.converter.Converter;
+import org.apache.kafka.common.config.SaslConfigs;
 
 import java.util.Properties;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class KafkaProperties extends Properties {
     private Integer consumerWorkerSize = 3;
@@ -21,13 +18,19 @@ public class KafkaProperties extends Properties {
     private String ZookeeperHost;
     private String zookeeperPort = "2181";
     private String bootstrapServers;
-    private Security security;
+    private String jaasConfig;
+    private String SASLMechanism = "PLAIN";
+    private Security security = new Security();
     private String clientId;
     private final ConsumerProperties consumer = new ConsumerProperties(this);
     private final ProducerProperties producer = new ProducerProperties(this);
 
     static class Security {
-        private String type;
+        private String type = BrokerSecurityType.SASL_SSL.name();
+
+        public void config(KafkaProperties kafkaProperties) {
+            kafkaProperties.setProperty(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, type);
+        }
     }
 
     public KafkaProperties buildProperties() {
@@ -37,6 +40,12 @@ public class KafkaProperties extends Properties {
         this.clientId = "KaViewer::" + clusterName;
         setProperty(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, this.bootstrapServers);
         setProperty(AdminClientConfig.CLIENT_ID_CONFIG, this.clientId);
+        final String jaasConfig = getJaasConfig();
+        if (StringUtils.isNotEmpty(jaasConfig)) {
+            setProperty(SaslConfigs.SASL_JAAS_CONFIG, jaasConfig);
+            setProperty(SaslConfigs.SASL_MECHANISM, SASLMechanism);
+            security.config(this);
+        }
         return this;
     }
 
@@ -102,6 +111,14 @@ public class KafkaProperties extends Properties {
 
     public void setSecurity(Security security) {
         this.security = security;
+    }
+
+    public String getJaasConfig() {
+        return jaasConfig;
+    }
+
+    public void setJaasConfig(String jaasConfig) {
+        this.jaasConfig = jaasConfig;
     }
 
     public String getKey() {

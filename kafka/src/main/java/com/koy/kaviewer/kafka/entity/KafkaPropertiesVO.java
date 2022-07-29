@@ -6,6 +6,7 @@ public class KafkaPropertiesVO {
     private String ZookeeperHost;
     private String zookeeperPort = "2181";
     private String bootstrapServers;
+    private String jaasConfig;
 
 
     @Override
@@ -57,5 +58,14 @@ public class KafkaPropertiesVO {
 
     public void setBootstrapServers(String bootstrapServers) {
         this.bootstrapServers = bootstrapServers;
+    }
+
+
+    public String getJaasConfig() {
+        return jaasConfig;
+    }
+
+    public void setJaasConfig(String jaasConfig) {
+        this.jaasConfig = jaasConfig;
     }
 }

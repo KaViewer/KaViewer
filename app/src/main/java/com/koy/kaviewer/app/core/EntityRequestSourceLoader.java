@@ -31,6 +31,7 @@ public class EntityRequestSourceLoader implements ConfigSourceLoader<KafkaProper
         final KafkaProperties kafkaProperties = new KafkaProperties();
         kafkaProperties.setBootstrapServers(configs.getBootstrapServers());
         kafkaProperties.setClusterName(configs.getClusterName());
+        kafkaProperties.setJaasConfig(configs.getJaasConfig());
         return kafkaProperties.buildProperties();
     };
 }

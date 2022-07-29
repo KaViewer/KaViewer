@@ -3,6 +3,7 @@ package com.koy.kaviewer.app.core;
 import com.koy.kaviewer.kafka.entity.properties.PropertiesResources;
 import com.koy.kaviewer.kafka.entity.properties.KafkaProperties;
 import com.koy.kaviewer.kafka.entity.properties.KafkaPropertiesConverter;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.yaml.snakeyaml.Yaml;
@@ -36,6 +37,8 @@ public class YamlConfigSourceLoader implements ConfigSourceLoader<Map<String, Ob
         final Map<String, Object> bootstrap = (LinkedHashMap<String, Object>) configs.get("bootstrap");
         kafkaProperties.setBootstrapServers(String.valueOf(bootstrap.getOrDefault("servers", "localhost:9092")));
         kafkaProperties.setClusterName(cluster);
+        final String jaasConfig = String.valueOf(configs.getOrDefault("jaas", StringUtils.EMPTY));
+        kafkaProperties.setJaasConfig(jaasConfig);
         return kafkaProperties.buildProperties();
     };
 
