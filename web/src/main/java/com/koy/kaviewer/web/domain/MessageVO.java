@@ -13,7 +13,7 @@ public class MessageVO {
     private String value;
 
     public boolean inValid() {
-        return StringUtils.isEmpty(topic) || StringUtils.isEmpty(key) || StringUtils.isEmpty(value);
+        return StringUtils.isEmpty(topic) || StringUtils.isEmpty(value);
     }
 
     @Override
