@@ -6,6 +6,8 @@ import org.apache.kafka.common.record.TimestampType;
 
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Objects;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class MessageRecord<K, V> {
@@ -20,6 +22,12 @@ public class MessageRecord<K, V> {
     private Map<String, Object> headers;
     private K key;
     private V value;
+    private static final Function<byte[], String> headerConverter = (byteHeader) -> {
+        if (Objects.isNull(byteHeader)) {
+            return String.valueOf((Object)null);
+        }
+        return new String(byteHeader);
+    };
 
     public MessageRecord(String topic, int partition, long offset, long timestamp, TimestampType timestampType, int serializedKeySize, int serializedValueSize, Headers headers, K key, V value) {
         this.topic = topic;
@@ -29,7 +37,8 @@ public class MessageRecord<K, V> {
         this.timestampType = timestampType;
         this.serializedKeySize = serializedKeySize;
         this.serializedValueSize = serializedValueSize;
-        this.headers = Arrays.stream(headers.toArray()).collect(Collectors.toMap(Header::key, h -> new String(h.value())));
+
+        this.headers = Arrays.stream(headers.toArray()).collect(Collectors.toMap(Header::key, h -> headerConverter.apply(h.value()), (v1, v2) -> v2));
         this.key = key;
         this.value = value;
     }
