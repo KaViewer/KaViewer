@@ -1,6 +1,5 @@
 package com.koy.kaviewer.kafka.entity.properties;
 
-import org.apache.kafka.clients.admin.AdminClientConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.ByteArraySerializer;
 
@@ -18,7 +17,7 @@ public class ProducerProperties extends Properties {
     }
 
     public ProducerProperties buildProducerProperties() {
-        this.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, this.kafkaProperties.getBootstrapServers());
+        this.putAll(kafkaProperties);
         this.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, ByteArraySerializer.class);
         this.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, ByteArraySerializer.class);
         this.put(ProducerConfig.CLIENT_ID_CONFIG, getClientId("Client", index.getAndIncrement()));
