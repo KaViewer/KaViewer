@@ -12,6 +12,14 @@ public class HeaderVO {
         this.value = value;
     }
 
+    @Override
+    public String toString() {
+        return "HeaderVO{" +
+                "key='" + key + '\'' +
+                ", value=" + String.valueOf(value) +
+                '}';
+    }
+
     public String getKey() {
         return key;
     }

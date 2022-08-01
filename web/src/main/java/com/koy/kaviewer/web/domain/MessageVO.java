@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
+// org.apache.kafka.clients.producer.ProducerRecord
 public class MessageVO {
 
     private String topic;
