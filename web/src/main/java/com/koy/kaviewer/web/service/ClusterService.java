@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -72,6 +73,8 @@ public class ClusterService {
 
     public List<ClusterVO> meta() {
         final List<String> clusters = list();
-        return clusters.stream().map(cluster -> new ClusterVO(cluster, brokerBizService.brokers(cluster))).collect(Collectors.toList());
+        return clusters.stream().map(cluster ->
+                        new ClusterVO(cluster, brokerBizService.brokers(cluster), KafkaApplication.getKafkaApplication(cluster).getCreateTimestamp()))
+                .sorted(Comparator.comparingLong(ClusterVO::getCreatedTime)).collect(Collectors.toList());
     }
 }

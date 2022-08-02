@@ -5,10 +5,12 @@ import java.util.List;
 public class ClusterVO {
     private String cluster;
     private List<BrokerVO> brokers;
+    private Long createdTime;
 
-    public ClusterVO(String cluster, List<BrokerVO> brokers) {
+    public ClusterVO(String cluster, List<BrokerVO> brokers, Long createdTime) {
         this.cluster = cluster;
         this.brokers = brokers;
+        this.createdTime = createdTime;
     }
 
     public String getCluster() {
@@ -25,6 +27,10 @@ public class ClusterVO {
 
     public void setBrokers(List<BrokerVO> brokers) {
         this.brokers = brokers;
+    }
+
+    public Long getCreatedTime() {
+        return createdTime;
     }
 }
 

@@ -9,6 +9,7 @@ public class KafkaApplicationCacheEntity {
     private KafkaProperties kafkaProperties;
     private ConfigurableApplicationContext root;
     private ApplicationContext kafkaApplicationContext;
+    private final Long createTimestamp = System.currentTimeMillis();
 
     public String getClusterName() {
         return clusterName;
@@ -42,4 +43,7 @@ public class KafkaApplicationCacheEntity {
         this.kafkaApplicationContext = kafkaApplicationContext;
     }
 
+    public Long getCreateTimestamp() {
+        return createTimestamp;
+    }
 }
