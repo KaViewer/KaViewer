@@ -8,7 +8,7 @@ import com.koy.kaviewer.kafka.share.RequestContextManagement;
 import org.springframework.stereotype.Service;
 
 @Service
-public class KaViewerService {
+public class MetaService {
 
     public KafkaPropertiesVO meta() {
         final String cluster = RequestContextManagement.getCluster();
