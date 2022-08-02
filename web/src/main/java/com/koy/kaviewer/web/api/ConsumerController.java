@@ -2,6 +2,8 @@ package com.koy.kaviewer.web.api;
 
 import com.koy.kaviewer.web.domain.MessageRecord;
 import com.koy.kaviewer.web.service.ConsumerBizService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@Tag(name = "Consumer Operations", description = "Do operations on consumer.")
 @RestController
 @RequestMapping("/api/v1/topic")
 @CrossOrigin(origins = "*")
@@ -26,6 +29,7 @@ public class ConsumerController {
     }
 
 
+    @Operation(summary = "Get range messages from a topic.")
     @GetMapping("/{topic}/p/{partition}")
     public ResponseEntity<List<MessageRecord<String, String>>> fetch(
             @PathVariable(name = "topic") String topic,
