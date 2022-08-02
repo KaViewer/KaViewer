@@ -7,7 +7,6 @@ import com.koy.kaviewer.kafka.entity.KafkaApplicationCacheEntity;
 import com.koy.kaviewer.kafka.exception.ErrorMsg;
 import com.koy.kaviewer.kafka.exception.KaViewerBizException;
 import org.apache.kafka.clients.admin.AdminClient;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Service;
@@ -45,6 +44,7 @@ public class KafkaService {
         kafkaApplicationCacheEntity.setClusterName(kafkaProperties.getClusterName());
         kafkaApplicationCacheEntity.setRoot((ConfigurableApplicationContext) applicationContext.getParent());
         kafkaApplicationCacheEntity.setKafkaApplicationContext(applicationContext);
+        kafkaApplicationCacheEntity.setKafkaProperties(kafkaProperties);
         KafkaApplication.putIfAbsent(kafkaApplicationCacheEntity);
     }
 
