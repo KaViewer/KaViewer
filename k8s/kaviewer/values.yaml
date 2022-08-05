@@ -10,6 +10,7 @@ set_up_kafka_env:
   kaviewer_type: entity
   kaviewer_cluster: kaviewer-cluster
   kaviewer_bootstrap: test-kafka-svc:9092
+  kaviewer_jassconfig:
 
 kafka_sidecar:
   enable: true
