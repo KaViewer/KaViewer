@@ -1,6 +1,7 @@
 package com.koy.kaviewer.web.service;
 
 import com.koy.kaviewer.kafka.application.KafkaApplication;
+import com.koy.kaviewer.kafka.entity.KafkaApplicationCacheEntity;
 import com.koy.kaviewer.kafka.exception.ErrorMsg;
 import com.koy.kaviewer.kafka.exception.KaViewerBizException;
 import com.koy.kaviewer.kafka.ipc.KafkaSetupService;
@@ -28,7 +29,7 @@ public class ClusterService {
         this.brokerBizService = brokerBizService;
     }
 
-    public List<String> list() {
+    public List<KafkaApplicationCacheEntity> list() {
         return KafkaApplication.listAll();
 
     }
@@ -72,9 +73,9 @@ public class ClusterService {
     }
 
     public List<ClusterVO> meta() {
-        final List<String> clusters = list();
+        final List<KafkaApplicationCacheEntity> clusters = list();
         return clusters.stream().map(cluster ->
-                        new ClusterVO(cluster, brokerBizService.brokers(cluster), KafkaApplication.getKafkaApplication(cluster).getCreateTimestamp()))
+                        new ClusterVO(cluster.getClusterName(), brokerBizService.brokers(cluster.getClusterName()), KafkaApplication.getKafkaApplication(cluster.getClusterName()).getCreateTimestamp()))
                 .sorted(Comparator.comparingLong(ClusterVO::getCreatedTime)).collect(Collectors.toList());
     }
 }

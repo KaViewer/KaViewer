@@ -1,5 +1,6 @@
 package com.koy.kaviewer.web.api;
 
+import com.koy.kaviewer.kafka.entity.KafkaApplicationCacheEntity;
 import com.koy.kaviewer.kafka.entity.KafkaPropertiesVO;
 import com.koy.kaviewer.web.domain.ClusterVO;
 import com.koy.kaviewer.web.service.ClusterService;
@@ -36,8 +37,8 @@ public class ClusterController {
 
     @Operation(summary = "Get all clusters' name.")
     @GetMapping
-    public ResponseEntity<List<String>> list() {
-        final List<String> clusters = clusterService.list();
+    public ResponseEntity<List<KafkaApplicationCacheEntity>> list() {
+        final List<KafkaApplicationCacheEntity> clusters = clusterService.list();
         return ResponseEntity.ok(clusters);
     }
 

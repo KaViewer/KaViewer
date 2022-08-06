@@ -1,10 +1,13 @@
 package com.koy.kaviewer.kafka.entity;
 
 import com.koy.kaviewer.kafka.entity.properties.KafkaProperties;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 
-public class KafkaApplicationCacheEntity {
+import java.util.Optional;
+
+public class KafkaApplicationCacheEntity implements Cloneable {
     private String clusterName;
     private KafkaProperties kafkaProperties;
     private ConfigurableApplicationContext root;
@@ -45,5 +48,21 @@ public class KafkaApplicationCacheEntity {
 
     public Long getCreateTimestamp() {
         return createTimestamp;
+    }
+
+    @Override
+    public KafkaApplicationCacheEntity clone() {
+        final KafkaApplicationCacheEntity clone = new KafkaApplicationCacheEntity();
+        clone.setClusterName(this.clusterName);
+        final KafkaProperties kafkaProperties = this.getKafkaProperties();
+        final KafkaProperties kafkaPropertiesClone = new KafkaProperties();
+        kafkaPropertiesClone.setClusterName(kafkaProperties.getClusterName());
+        kafkaPropertiesClone.setBootstrapServers(kafkaProperties.getBootstrapServers());
+        // mask security
+        kafkaPropertiesClone.setJaasConfig(Optional.ofNullable(kafkaProperties.getJaasConfig())
+                .orElseGet(() -> StringUtils.EMPTY)
+                .replaceAll("(.*username=).*(password=).*", "$1****** $2*****"));
+        clone.setKafkaProperties(kafkaPropertiesClone);
+        return clone;
     }
 }

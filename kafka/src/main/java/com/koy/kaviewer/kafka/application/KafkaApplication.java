@@ -28,8 +28,8 @@ public class KafkaApplication implements ApplicationContextAware, ApplicationLis
         return clusterHolder.containsKey(clusterName);
     }
 
-    public static List<String> listAll() {
-        return clusterHolder.values().stream().map(KafkaApplicationCacheEntity::getClusterName).collect(Collectors.toList());
+    public static List<KafkaApplicationCacheEntity> listAll() {
+        return clusterHolder.values().stream().map(KafkaApplicationCacheEntity::clone).collect(Collectors.toList());
     }
 
     public static void remove(String clusterName) {
