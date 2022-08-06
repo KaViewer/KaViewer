@@ -137,4 +137,22 @@ public class KafkaProperties extends Properties {
         return encoding;
     }
 
+    @Override
+    public String toString() {
+        return "KafkaProperties{" +
+                "consumerWorkerSize=" + consumerWorkerSize +
+                ", encoding='" + encoding + '\'' +
+                ", clusterName='" + clusterName + '\'' +
+                ", kafkaClusterVersion='" + kafkaClusterVersion + '\'' +
+                ", ZookeeperHost='" + ZookeeperHost + '\'' +
+                ", zookeeperPort='" + zookeeperPort + '\'' +
+                ", bootstrapServers='" + bootstrapServers + '\'' +
+                ", jaasConfig='" + jaasConfig + '\'' +
+                ", SASLMechanism='" + SASLMechanism + '\'' +
+                ", security=" + security +
+                ", clientId='" + clientId + '\'' +
+                ", consumer=" + consumer +
+                ", producer=" + producer +
+                '}';
+    }
 }
