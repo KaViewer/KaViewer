@@ -48,7 +48,7 @@ public class ControllerExceptionAdvice implements HandlerExceptionResolver {
         final Throwable cause = e.getCause();
         return new TreeMap<>(Map.of(MSG_KEY, StringUtils.isEmpty(message) ? e.getClass().getName() : message,
                 STACKTRACE_KEY, (Objects.isNull(cause) ?
-                        e.getStackTrace()[0].toString() : cause.getStackTrace()[0].toString())));
+                        e.getStackTrace()[0].toString() : e.getCause().getMessage())));
     }
 
 }
