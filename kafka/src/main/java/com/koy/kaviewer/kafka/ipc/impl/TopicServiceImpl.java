@@ -6,6 +6,7 @@ import com.koy.kaviewer.kafka.exception.KaViewerBizException;
 import com.koy.kaviewer.kafka.ipc.TopicService;
 import com.koy.kaviewer.kafka.service.KafkaConsumerFactory;
 import org.apache.kafka.clients.admin.ListTopicsResult;
+import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +36,16 @@ public class TopicServiceImpl implements TopicService {
             e.printStackTrace();
             throw KaViewerBizException.of(e);
         }
+    }
+
+    @Override
+    public void create(NewTopic topicName) {
+        try {
+            kafkaClientWrapper.createTopic(topicName);
+        } catch (Exception e) {
+            throw KaViewerBizException.of(e);
+        }
+
     }
 
     @Override

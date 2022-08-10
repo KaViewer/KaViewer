@@ -4,7 +4,11 @@ import com.koy.kaviewer.kafka.entity.properties.KafkaProperties;
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.DescribeClusterResult;
 import org.apache.kafka.clients.admin.ListTopicsResult;
+import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @Component
 public class KafkaClientWrapper {
@@ -37,5 +41,9 @@ public class KafkaClientWrapper {
 
     public void setKafkaProperties(KafkaProperties kafkaProperties) {
         this.kafkaProperties = kafkaProperties;
+    }
+
+    public void createTopic(NewTopic topic) throws ExecutionException, InterruptedException {
+        this.delegate.createTopics(List.of(topic)).all().get();
     }
 }
