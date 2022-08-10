@@ -2,6 +2,7 @@ package com.koy.kaviewer.kafka.ipc.impl;
 
 import com.koy.kaviewer.kafka.client.KafkaClientWrapper;
 import com.koy.kaviewer.kafka.entity.TopicMetaVO;
+import com.koy.kaviewer.kafka.entity.TopicVO;
 import com.koy.kaviewer.kafka.exception.KaViewerBizException;
 import com.koy.kaviewer.kafka.ipc.TopicService;
 import com.koy.kaviewer.kafka.service.KafkaConsumerFactory;
@@ -39,10 +40,11 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public void create(NewTopic topicName) {
+    public void create(TopicVO topic) {
         try {
-            kafkaClientWrapper.createTopic(topicName);
+            kafkaClientWrapper.createTopic(topic.buildNewTopic());
         } catch (Exception e) {
+            e.printStackTrace();
             throw KaViewerBizException.of(e);
         }
 
