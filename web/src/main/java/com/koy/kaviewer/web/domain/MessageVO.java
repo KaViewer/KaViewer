@@ -14,7 +14,7 @@ public class MessageVO {
     private String value;
 
     public boolean inValid() {
-        return StringUtils.isEmpty(topic) || StringUtils.isEmpty(value);
+        return StringUtils.isEmpty(topic);
     }
 
     @Override
