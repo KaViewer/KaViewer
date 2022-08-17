@@ -51,6 +51,16 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
+    public void delete(String topicName) {
+        try {
+            this.kafkaClientWrapper.deleteTopic(topicName);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw KaViewerBizException.of(e);
+        }
+    }
+
+    @Override
     public List<TopicMetaVO> listMeta(String clusterName) {
         return kafkaConsumerFactory.buildTopicsMeta()
                 .stream()

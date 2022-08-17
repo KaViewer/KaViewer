@@ -8,6 +8,7 @@ import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
 @Component
@@ -45,5 +46,9 @@ public class KafkaClientWrapper {
 
     public void createTopic(NewTopic topic) throws ExecutionException, InterruptedException {
         this.delegate.createTopics(List.of(topic)).all().get();
+    }
+
+    public void deleteTopic(String topic) throws ExecutionException, InterruptedException {
+        this.delegate.deleteTopics(Set.of(topic)).all().get();
     }
 }
