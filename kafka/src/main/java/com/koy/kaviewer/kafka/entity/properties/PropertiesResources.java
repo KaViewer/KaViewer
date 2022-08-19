@@ -1,28 +1,15 @@
 package com.koy.kaviewer.kafka.entity.properties;
 
+import lombok.Data;
+
 import java.util.EnumSet;
 import java.util.function.Predicate;
 
+@Data
 public class PropertiesResources<T> {
 
     private T resource;
     private ResourcesType type;
-
-    public T getResource() {
-        return resource;
-    }
-
-    public void setResource(T resource) {
-        this.resource = resource;
-    }
-
-    public ResourcesType getType() {
-        return type;
-    }
-
-    public void setType(ResourcesType type) {
-        this.type = type;
-    }
 
     public enum ResourcesType {
         YAML(s -> s.endsWith(".yaml") || s.endsWith(".yml")),

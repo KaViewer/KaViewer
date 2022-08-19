@@ -3,6 +3,9 @@ package com.koy.kaviewer.kafka.entity.properties;
 import com.koy.kaviewer.kafka.entity.BrokerSecurityType;
 import com.koy.kaviewer.kafka.exception.ErrorMsg;
 import com.koy.kaviewer.kafka.exception.KaViewerBizException;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.kafka.clients.CommonClientConfigs;
 import org.apache.kafka.clients.admin.AdminClientConfig;
@@ -10,6 +13,9 @@ import org.apache.kafka.common.config.SaslConfigs;
 
 import java.util.Properties;
 
+@EqualsAndHashCode(callSuper = false)
+@Data
+@ToString
 public class KafkaProperties extends Properties {
     private Integer consumerWorkerSize = 3;
     private String encoding = "UTF8";
@@ -64,61 +70,9 @@ public class KafkaProperties extends Properties {
         this.clusterName = clusterName;
     }
 
-    public Integer getConsumerWorkerSize() {
-        return consumerWorkerSize;
-    }
-
-    public void setConsumerWorkerSize(Integer consumerWorkerSize) {
-        this.consumerWorkerSize = consumerWorkerSize;
-    }
-
-    public String getKafkaClusterVersion() {
-        return kafkaClusterVersion;
-    }
-
-    public void setKafkaClusterVersion(String kafkaClusterVersion) {
-        this.kafkaClusterVersion = kafkaClusterVersion;
-    }
-
-    public String getZookeeperHost() {
-        return ZookeeperHost;
-    }
-
-    public void setZookeeperHost(String zookeeperHost) {
-        ZookeeperHost = zookeeperHost;
-    }
-
-    public String getZookeeperPort() {
-        return zookeeperPort;
-    }
-
-    public void setZookeeperPort(String zookeeperPort) {
-        this.zookeeperPort = zookeeperPort;
-    }
-
-    public String getBootstrapServers() {
-        return bootstrapServers;
-    }
-
     public void setBootstrapServers(String bootstrapServers) {
         assert StringUtils.isNotEmpty(bootstrapServers);
         this.bootstrapServers = bootstrapServers;
-    }
-
-    public Security getSecurity() {
-        return security;
-    }
-
-    public void setSecurity(Security security) {
-        this.security = security;
-    }
-
-    public String getJaasConfig() {
-        return jaasConfig;
-    }
-
-    public void setJaasConfig(String jaasConfig) {
-        this.jaasConfig = jaasConfig;
     }
 
     public String getKey() {
@@ -131,28 +85,5 @@ public class KafkaProperties extends Properties {
 
     public ProducerProperties getProducer() {
         return this.producer.buildProducerProperties();
-    }
-
-    public String getEncoding() {
-        return encoding;
-    }
-
-    @Override
-    public String toString() {
-        return "KafkaProperties{" +
-                "consumerWorkerSize=" + consumerWorkerSize +
-                ", encoding='" + encoding + '\'' +
-                ", clusterName='" + clusterName + '\'' +
-                ", kafkaClusterVersion='" + kafkaClusterVersion + '\'' +
-                ", ZookeeperHost='" + ZookeeperHost + '\'' +
-                ", zookeeperPort='" + zookeeperPort + '\'' +
-                ", bootstrapServers='" + bootstrapServers + '\'' +
-                ", jaasConfig='" + jaasConfig + '\'' +
-                ", SASLMechanism='" + SASLMechanism + '\'' +
-                ", security=" + security +
-                ", clientId='" + clientId + '\'' +
-                ", consumer=" + consumer +
-                ", producer=" + producer +
-                '}';
     }
 }

@@ -1,12 +1,15 @@
 package com.koy.kaviewer.kafka.entity.properties;
 
-import org.apache.kafka.clients.admin.AdminClientConfig;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.ByteArrayDeserializer;
 
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@EqualsAndHashCode(callSuper = false)
+@Data
 public class ConsumerProperties extends Properties {
     private static final AtomicInteger index = new AtomicInteger(0);
     private static final String CLIENT_ID_PREFIX = "KaViewer::Consumer";
@@ -35,38 +38,6 @@ public class ConsumerProperties extends Properties {
         this.put(ConsumerConfig.CLIENT_ID_CONFIG, generateClientId("Client", idx));
         return this;
 
-    }
-
-    public String getKeyDeserializer() {
-        return KeyDeserializer;
-    }
-
-    public void setKeyDeserializer(String keyDeserializer) {
-        KeyDeserializer = keyDeserializer;
-    }
-
-    public String getValDeserializer() {
-        return ValDeserializer;
-    }
-
-    public void setValDeserializer(String valDeserializer) {
-        ValDeserializer = valDeserializer;
-    }
-
-    public Integer getMaxPollRecords() {
-        return maxPollRecords;
-    }
-
-    public void setMaxPollRecords(Integer maxPollRecords) {
-        this.maxPollRecords = maxPollRecords;
-    }
-
-    public String getAutoOffsetReset() {
-        return autoOffsetReset;
-    }
-
-    public void setAutoOffsetReset(String autoOffsetReset) {
-        this.autoOffsetReset = autoOffsetReset;
     }
 
     public String generateClientId(String dot, int idx) {

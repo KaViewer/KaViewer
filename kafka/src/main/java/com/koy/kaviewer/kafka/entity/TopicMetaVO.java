@@ -1,11 +1,15 @@
 package com.koy.kaviewer.kafka.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
+import lombok.ToString;
 import org.apache.kafka.common.PartitionInfo;
 import org.apache.kafka.common.TopicPartition;
 
 import java.util.List;
 
+@Data
+@ToString
 public class TopicMetaVO {
     private String topicName;
     private int partitionSize;
@@ -17,14 +21,6 @@ public class TopicMetaVO {
         this.partitions = partitions;
         this.partitionSize = partitions.size();
         this.topicPartitions = topicPartitions;
-    }
-
-    public String getTopicName() {
-        return topicName;
-    }
-
-    public int getPartitionSize() {
-        return partitionSize;
     }
 
     @JsonIgnore
