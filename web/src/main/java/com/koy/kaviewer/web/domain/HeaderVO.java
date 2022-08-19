@@ -1,38 +1,15 @@
 package com.koy.kaviewer.web.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+@Data
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class HeaderVO {
     private String key;
     private Object value;
-
-    public HeaderVO() {
-    }
-
-    public HeaderVO(String key, Object value) {
-        this.key = key;
-        this.value = value;
-    }
-
-    @Override
-    public String toString() {
-        return "HeaderVO{" +
-                "key='" + key + '\'' +
-                ", value=" + String.valueOf(value) +
-                '}';
-    }
-
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-    public Object getValue() {
-        return value;
-    }
-
-    public void setValue(Object value) {
-        this.value = value;
-    }
 }

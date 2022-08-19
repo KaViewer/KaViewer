@@ -1,12 +1,20 @@
 package com.koy.kaviewer.web.domain;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 // org.apache.kafka.clients.producer.ProducerRecord
+@Data
+@ToString
+@NoArgsConstructor
 public class MessageVO {
 
+    //    @NotEmpty(message = "topic can not be empty.")
     private String topic;
     private int partition;
     private List<HeaderVO> headers = List.of();
@@ -15,56 +23,5 @@ public class MessageVO {
 
     public boolean inValid() {
         return StringUtils.isEmpty(topic);
-    }
-
-    @Override
-    public String toString() {
-        return "MessageVO{" +
-                "topic='" + topic + '\'' +
-                ", partition=" + partition +
-                ", headers=" + headers +
-                ", key='" + key + '\'' +
-                ", value='" + value + '\'' +
-                '}';
-    }
-
-    public String getTopic() {
-        return topic;
-    }
-
-    public void setTopic(String topic) {
-        this.topic = topic;
-    }
-
-    public int getPartition() {
-        return partition;
-    }
-
-    public void setPartition(int partition) {
-        this.partition = partition;
-    }
-
-    public List<HeaderVO> getHeaders() {
-        return headers;
-    }
-
-    public void setHeaders(List<HeaderVO> headers) {
-        this.headers = headers;
-    }
-
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
     }
 }
