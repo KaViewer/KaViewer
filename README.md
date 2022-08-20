@@ -6,6 +6,9 @@
 Today, we have lots of Kafka tools to use, but we have barely neat web Kafka UI to use and bind to our business services.
 Hence, KaViewer is here, which is made for both Local, On-Premise and Cloud Native service.
 
+## Architecture
+<img width="808" alt="Architecture" src="https://user-images.githubusercontent.com/33706142/185749496-0edb4e0f-f559-4d76-87f1-e441e64f77fd.png">
+
 ## Usage
 #### Local Run
 Just `git clone` the repository and `cd` into the directory.
