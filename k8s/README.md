@@ -40,7 +40,9 @@ kubectl port-forward svc/test-kafka-svc 9092:9092
 
 ## Install KaViewer Helm Chart
 
-Before install, you need to install the local `KaViewer image` into Minikube.
+> [Minikube](https://minikube.sigs.k8s.io/) as example.
+
+Before install, you need to install the local `KaViewer image` into [Minikube](https://minikube.sigs.k8s.io/).
 
 ```shell
  eval $(minikube docker-env)
@@ -62,6 +64,17 @@ Check Images in Minikube
 
 ```shell
 helm install kaviewer-latest-release kaviewer --namespace kaviewer 
+```
+
+```shell
+> Output
+
+Get the application URL by running these commands:
+  export NODE_PORT=$(kubectl get --namespace kaviewer -o jsonpath="{.spec.ports[0].nodePort}" services kaviewer-latest-release)
+  export NODE_IP=$(kubectl get nodes --namespace kaviewer -o jsonpath="{.items[0].status.addresses[0].address}")
+  echo http://$NODE_IP:$NODE_PORT
+
+
 ```
 
 Check `Helm release` to see if KaViewer is installed.
@@ -92,8 +105,8 @@ Check `KaViewer` UI
 or
 
 ```shell
- kubectl port-forward svc/kaviewer-latest-release-kaviewer 9394:9394 (app)
- kubectl port-forward svc/kaviewer-latest-release-kaviewer 10086:10086 (actuator endpoint)
+ kubectl port-forward svc/kaviewer-latest-release 8080:9394 (app)
+ kubectl port-forward svc/kaviewer-latest-release 10086:10086 (actuator endpoint)
 ```
 
 #### Uninstall KaViewer
