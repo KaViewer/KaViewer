@@ -15,7 +15,7 @@
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <springdoc.version>1.6.9</springdoc.version>
+        <springdoc.version>1.6.10</springdoc.version>
     </properties>
 
     <dependencies>
