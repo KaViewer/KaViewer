@@ -25,10 +25,13 @@ public class KafkaApplicationSetupService implements KafkaSetupService {
         this.configResolver = configResolver;
     }
 
-
     // IDEA, disable JMX agent
-    public void setUp(ConfigurableApplicationContext parent, String[] args, PropertiesResources resources) throws Exception {
-        final KafkaProperties kafkaProperties = configResolver.load(resources);
+    public void setUp(KafkaProperties kafkaProperties) throws Exception {
+        setUp((ConfigurableApplicationContext) KaViewerApplication.getRoot(),
+                KaViewerApplication.getArgs(), kafkaProperties);
+    }
+
+    public void setUp(ConfigurableApplicationContext parent, String[] args, KafkaProperties kafkaProperties) throws Exception {
         final String clusterName = kafkaProperties.getClusterName();
         if (KafkaApplication.contains(clusterName)) {
             throw KaViewerBizException.of(ErrorMsg.CLUSTER_EXIST);
@@ -51,8 +54,8 @@ public class KafkaApplicationSetupService implements KafkaSetupService {
     @Override
     public void setUp(PropertiesResources propertiesResources) {
         try {
-            setUp((ConfigurableApplicationContext) KaViewerApplication.getRoot(),
-                    KaViewerApplication.getArgs(), propertiesResources);
+            final KafkaProperties kafkaProperties = configResolver.load(propertiesResources);
+            setUp(kafkaProperties);
         } catch (Exception e) {
             e.printStackTrace();
             throw KaViewerBizException.of(e);

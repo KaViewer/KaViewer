@@ -1,46 +1,29 @@
 package com.koy.kaviewer.app.service;
 
-import com.koy.kaviewer.app.service.resolver.EnvResolver;
-import com.koy.kaviewer.kafka.entity.properties.PropertiesResources;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
+import com.koy.kaviewer.app.configuration.KaViewerConfiguration;
+import com.koy.kaviewer.app.configuration.KaViewerKafkaConfiguration;
+import com.koy.kaviewer.app.service.resolver.KafkaPropertiesConvert;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.util.List;
-import java.util.Objects;
-
 
 @Service
+@RequiredArgsConstructor
 public class KaViewerEnvScanner {
-
-    private final List<EnvResolver> envResolvers;
     private final KafkaApplicationSetupService kafkaApplicationSetupService;
-    private final Environment environment;
+    private final KaViewerConfiguration kaViewerConfiguration;
+    private final KafkaPropertiesConvert kafkaPropertiesConvert;
 
-    @Autowired
-    public KaViewerEnvScanner(List<EnvResolver> envResolvers, KafkaApplicationSetupService kafkaApplicationSetupService, Environment environment) {
-        this.envResolvers = envResolvers;
-        this.kafkaApplicationSetupService = kafkaApplicationSetupService;
-        this.environment = environment;
-    }
 
     @PostConstruct
     public void scanEnv() {
-        final String type = environment.getProperty(EnvResolver.kaViewerConfigKey("type"));
-        if (StringUtils.isEmpty(type)) {
-            return;
+        try {
+            final KaViewerKafkaConfiguration kafkaConfiguration = kaViewerConfiguration.getKafka();
+            kafkaApplicationSetupService.setUp(kafkaPropertiesConvert.convert(kafkaConfiguration));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        final PropertiesResources.ResourcesType resourceType = PropertiesResources.ResourcesType.from(type);
-
-        if (Objects.isNull(resourceType)) {
-            return;
-        }
-
-        envResolvers.stream().filter(resolver -> resolver.support(resourceType)).findFirst().map(it -> it.load(environment))
-                .ifPresent(kafkaApplicationSetupService::setUp);
-
     }
 
 }

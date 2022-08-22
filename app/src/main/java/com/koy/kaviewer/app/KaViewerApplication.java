@@ -1,12 +1,14 @@
 package com.koy.kaviewer.app;
 
 
+import com.koy.kaviewer.app.configuration.KaViewerConfiguration;
 import com.koy.kaviewer.web.KaViewerWebApplication;
 import org.springframework.beans.BeansException;
 import org.springframework.boot.Banner;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -15,6 +17,7 @@ import org.springframework.lang.NonNull;
 import java.util.Objects;
 
 @SpringBootApplication(scanBasePackages = {"com.koy.kaviewer.app"})
+@EnableConfigurationProperties(KaViewerConfiguration.class)
 public class KaViewerApplication implements ApplicationContextAware {
     private static ApplicationContext root;
     private static String[] args0;
