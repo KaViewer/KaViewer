@@ -20,20 +20,6 @@ services:
     depends_on:
       - zookeeper
 
-  kaviewer:
-    build:
-      context: ../
-      dockerfile: docker/Dockerfile.local
-    ports:
-      - 9394:9394
-    environment:
-      KAVIEWER.TYPE:
-      KAVIEWER.CLUSTER:
-      KAVIEWER.BOOTSTRAP:
-    depends_on:
-      - kafka-service
-    container_name: kaviewer
-
 volumes:
   kafka:
 
