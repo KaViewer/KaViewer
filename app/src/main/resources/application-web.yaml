@@ -1,5 +1,5 @@
 server:
-  port: 9394
+  port: ${kaviewer.web.port:9394}
 
 spring:
   application:

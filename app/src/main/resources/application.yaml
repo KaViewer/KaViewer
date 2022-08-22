@@ -4,7 +4,7 @@ spring:
 management:
   endpoints:
     web:
-      base-path: /monitor
+      base-path: ${kaviewer.app.monitor-path:/monitor}
       exposure:
         include: info,health,contexts
       cors:
@@ -14,7 +14,7 @@ management:
       exposure:
         exclude: '*'
   server:
-    port: 10086
+    port: ${kaviewer.app.monitor-port:10086}
 
 kaviewer:
   version: @project.version@
