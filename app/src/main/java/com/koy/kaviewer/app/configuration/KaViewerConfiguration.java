@@ -10,6 +10,7 @@ import javax.annotation.PostConstruct;
 @Data
 @ConfigurationProperties("kaviewer")
 public class KaViewerConfiguration {
+    String name;
     KaViewerAppConfiguration app;
     KaViewerWebConfiguration web;
     KaViewerKafkaConfiguration kafka;
