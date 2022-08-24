@@ -5,11 +5,11 @@ image:
   pullPolicy: IfNotPresent
   tag: latest
 
+config_secret_enable: true
+
 set_up_kafka_env:
-  enable: false
-  kaviewer_type: entity
-  kaviewer_cluster: kaviewer-cluster
-  kaviewer_bootstrap: test-kafka-svc:9092
+  kaviewer_kafka_cluster: kaviewer-cluster
+  kaviewer_kafka_bootstrapServer: test-kafka-svc:9092
   kaviewer_jassconfig:
 
 kafka_sidecar:

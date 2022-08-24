@@ -24,7 +24,11 @@ spec:
           image: {{ .Values.image.repository }}:{{ .Values.image.tag | default "latest" }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-          {{- if .Values.set_up_kafka_env.enable }}
+          {{- if .Values.config_secret_enable }}
+            envFrom:
+              - secretRef:
+                  name: {{ .Chart.Name }}-config-secret
+          {{- else}}
             {{- range $key, $value:= .Values.set_up_kafka_env}}
             - name: {{$key}}
               value: {{$value | quote}}
