@@ -16,17 +16,20 @@ import org.springframework.core.env.Environment;
 import org.springframework.core.env.PropertySource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 import org.webjars.NotFoundException;
 
 import javax.annotation.PostConstruct;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 
 @Service
 @RequiredArgsConstructor
 public class KaViewerEnvScanner {
-    private static final String KAVIEWER_CONFIG = "kaviewer.config.file";
+    private static final String KAVIEWER = "kaviewer";
+    private static final String KAVIEWER_CONFIG = "kaviewer.config.filepath";
     private final KafkaApplicationSetupService kafkaApplicationSetupService;
     private final KaViewerConfiguration kaViewerConfiguration;
     private final KafkaPropertiesConvert kafkaPropertiesConvert;
@@ -38,21 +41,35 @@ public class KaViewerEnvScanner {
     public void scanEnv() {
         final String config = Binder.get(environment).bind(KAVIEWER_CONFIG, String.class).orElseGet(() -> "");
         KaViewerConfiguration kaViewerConfiguration = this.kaViewerConfiguration;
-        if (StringUtils.isNotEmpty(config)) {
-            kaViewerConfiguration = load(KAVIEWER_CONFIG, KaViewerConfiguration.class, config);
-        }
         try {
-            final KaViewerKafkaConfiguration kafkaConfiguration = kaViewerConfiguration.getKafka();
-            kafkaApplicationSetupService.setUp(kafkaPropertiesConvert.convert(kafkaConfiguration));
+            if (StringUtils.isNotEmpty(config)) {
+                kaViewerConfiguration = load(KAVIEWER, KaViewerConfiguration.class, config);
+                Assert.notNull(kaViewerConfiguration, "Config file is invalid to bind.");
+            }
+            bindSetUpKafka(kaViewerConfiguration.getKafka());
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @SneakyThrows
+    private void bindSetUpKafka(KaViewerKafkaConfiguration kafkaConfiguration) {
+        if (Objects.isNull(kafkaConfiguration) || kafkaConfiguration.invalid()) {
+            return;
+        }
+        kafkaApplicationSetupService.setUp(kafkaPropertiesConvert.convert(kafkaConfiguration));
+    }
+
+    @SneakyThrows
     public <T> T load(String name, Class<T> target, String file) {
-//        final Resource resource = new FileSystemResourceLoader().getResource("file:/tmp/config.yaml");
-        final PropertySourceLoader sourceLoader = this.propertySourceLoaders.stream().filter(propertySourceLoader -> Arrays.stream(propertySourceLoader.getFileExtensions()).anyMatch(file::endsWith)).findFirst().orElseThrow(() -> new NotFoundException("Not Found Matched Source Loader"));
+//        final Resource resource = new FileSystemResourceLoader().getResource("file:/example/example-config.yaml");
+        final PropertySourceLoader sourceLoader = this.propertySourceLoaders
+                .stream()
+                .filter(propertySourceLoader -> Arrays.stream(propertySourceLoader.getFileExtensions())
+                        .anyMatch(file::endsWith))
+                .findFirst()
+                .orElseThrow(() -> new NotFoundException("Not Found Matched Source Loader"));
         final List<PropertySource<?>> config = sourceLoader.load(name, new FileSystemResource(file));
         final Iterable<ConfigurationPropertySource> from = ConfigurationPropertySources.from(config);
         final ConfigurationPropertySource next = from.iterator().next();

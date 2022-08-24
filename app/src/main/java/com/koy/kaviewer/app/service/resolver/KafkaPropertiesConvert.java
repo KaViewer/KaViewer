@@ -9,12 +9,12 @@ public class KafkaPropertiesConvert implements EnvConfigConvert<KaViewerKafkaCon
     @Override
     public KafkaProperties convert(KaViewerKafkaConfiguration kaViewerKafkaConfiguration) {
         final String cluster = kaViewerKafkaConfiguration.getCluster();
-        final String bootstrapService = kaViewerKafkaConfiguration.getBootstrapService();
+        final String bootstrapServers = kaViewerKafkaConfiguration.getBootstrapServers();
         final String jaasConfig = kaViewerKafkaConfiguration.getJaasConfig();
 
         final KafkaProperties kafkaProperties = new KafkaProperties();
         kafkaProperties.setClusterName(cluster);
-        kafkaProperties.setBootstrapServers(bootstrapService);
+        kafkaProperties.setBootstrapServers(bootstrapServers);
         kafkaProperties.setJaasConfig(jaasConfig);
         return kafkaProperties.buildProperties();
     }
