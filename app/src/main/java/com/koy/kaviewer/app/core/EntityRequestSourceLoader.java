@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class EntityRequestSourceLoader implements ConfigSourceLoader<KafkaPropertiesVO, PropertiesResources<KafkaPropertiesVO>> {
 
-
     @Override
     public KafkaPropertiesVO load(PropertiesResources<KafkaPropertiesVO> source) {
         return source.getResource();

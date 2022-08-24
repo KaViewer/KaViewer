@@ -11,10 +11,12 @@ import java.util.List;
 @Component
 public class KaViewerIntrospectionContributor implements InfoContributor {
 
+    private static final String KAFKA_CONTEXTS = "kafkaContexts";
+
     @Override
     public void contribute(Info.Builder builder) {
         final List<KafkaApplicationCacheEntity> kafkaContexts = KafkaApplication.listAll();
-        builder.withDetail("kafkaContexts", kafkaContexts);
+        builder.withDetail(KAFKA_CONTEXTS, kafkaContexts);
     }
 
 }

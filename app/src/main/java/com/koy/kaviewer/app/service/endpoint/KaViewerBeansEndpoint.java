@@ -1,7 +1,6 @@
 package com.koy.kaviewer.app.service.endpoint;
 
 import com.koy.kaviewer.common.KafkaApplicationHolder;
-import com.koy.kaviewer.kafka.application.KafkaApplication;
 import com.koy.kaviewer.web.KaViewerWebApplication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.beans.BeansEndpoint;
@@ -23,7 +22,6 @@ public class KaViewerBeansEndpoint {
         this.kaViewerApplicationContext = kaViewerApplicationContext;
     }
 
-
     @ReadOperation
     public BeansEndpoint.ApplicationBeans beans() {
         final ConfigurableApplicationContext rest = (ConfigurableApplicationContext) KaViewerWebApplication.getRest();
@@ -36,6 +34,5 @@ public class KaViewerBeansEndpoint {
             restBeans.getContexts().put(kafkaApplicationContext.getId(), kafkaBeans.getContexts().get(kafkaApplicationContext.getId()));
         });
         return restBeans;
-
     }
 }
