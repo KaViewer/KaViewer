@@ -1,0 +1,5 @@
+kaviewer:
+  kafka:
+    cluster: newCluster
+    bootstrapServers: localhost:9092
+
