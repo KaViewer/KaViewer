@@ -1,6 +1,6 @@
-package com.koy.kaviewer.kafka.entity;
+package com.koy.kaviewer.common.entity;
 
-import com.koy.kaviewer.kafka.entity.properties.KafkaProperties;
+import com.koy.kaviewer.common.entity.properties.KafkaProperties;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.kafka.common.config.SaslConfigs;

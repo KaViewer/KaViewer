@@ -1,8 +1,9 @@
 package com.koy.kaviewer.app.core;
 
-import com.koy.kaviewer.kafka.entity.properties.PropertiesResources;
-import com.koy.kaviewer.kafka.entity.properties.KafkaProperties;
-import com.koy.kaviewer.kafka.entity.properties.KafkaPropertiesConverter;
+import com.koy.kaviewer.common.entity.properties.KafkaProperties;
+import com.koy.kaviewer.common.entity.properties.KafkaPropertiesConverter;
+import com.koy.kaviewer.common.entity.properties.PropertiesResources;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;

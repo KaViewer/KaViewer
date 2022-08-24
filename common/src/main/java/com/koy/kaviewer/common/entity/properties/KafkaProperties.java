@@ -1,8 +1,8 @@
-package com.koy.kaviewer.kafka.entity.properties;
+package com.koy.kaviewer.common.entity.properties;
 
-import com.koy.kaviewer.kafka.entity.BrokerSecurityType;
-import com.koy.kaviewer.kafka.exception.ErrorMsg;
-import com.koy.kaviewer.kafka.exception.KaViewerBizException;
+import com.koy.kaviewer.common.entity.BrokerSecurityType;
+import com.koy.kaviewer.common.exception.ErrorMsg;
+import com.koy.kaviewer.common.exception.KaViewerBizException;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;

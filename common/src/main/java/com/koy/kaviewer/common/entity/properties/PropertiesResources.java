@@ -1,4 +1,4 @@
-package com.koy.kaviewer.kafka.entity.properties;
+package com.koy.kaviewer.common.entity.properties;
 
 import lombok.Data;
 

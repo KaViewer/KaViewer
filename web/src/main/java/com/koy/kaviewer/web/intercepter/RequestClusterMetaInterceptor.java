@@ -1,8 +1,8 @@
 package com.koy.kaviewer.web.intercepter;
 
-import com.koy.kaviewer.kafka.exception.ErrorMsg;
-import com.koy.kaviewer.kafka.exception.KaViewerBizException;
-import com.koy.kaviewer.kafka.share.RequestContextManagement;
+import com.koy.kaviewer.common.exception.ErrorMsg;
+import com.koy.kaviewer.common.exception.KaViewerBizException;
+import com.koy.kaviewer.common.share.RequestContextManagement;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;

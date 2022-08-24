@@ -22,6 +22,11 @@
             <artifactId>web</artifactId>
             <version>${parent.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.koy</groupId>
+            <artifactId>kafka</artifactId>
+            <version>${parent.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

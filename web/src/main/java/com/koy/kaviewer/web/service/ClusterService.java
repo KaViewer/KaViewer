@@ -1,12 +1,12 @@
 package com.koy.kaviewer.web.service;
 
-import com.koy.kaviewer.kafka.application.KafkaApplication;
-import com.koy.kaviewer.kafka.entity.KafkaApplicationCacheEntity;
-import com.koy.kaviewer.kafka.exception.ErrorMsg;
-import com.koy.kaviewer.kafka.exception.KaViewerBizException;
-import com.koy.kaviewer.kafka.ipc.KafkaSetupService;
-import com.koy.kaviewer.kafka.entity.properties.PropertiesResources;
-import com.koy.kaviewer.kafka.entity.KafkaPropertiesVO;
+import com.koy.kaviewer.common.KafkaApplicationHolder;
+import com.koy.kaviewer.common.entity.KafkaApplicationCacheEntity;
+import com.koy.kaviewer.common.entity.KafkaPropertiesVO;
+import com.koy.kaviewer.common.entity.properties.PropertiesResources;
+import com.koy.kaviewer.common.exception.ErrorMsg;
+import com.koy.kaviewer.common.exception.KaViewerBizException;
+import com.koy.kaviewer.common.ipc.KafkaSetupService;
 import com.koy.kaviewer.web.KaViewerWebApplication;
 import com.koy.kaviewer.web.domain.ClusterVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,13 +30,12 @@ public class ClusterService {
     }
 
     public List<KafkaApplicationCacheEntity> list() {
-        return KafkaApplication.listAll();
-
+        return KafkaApplicationHolder.listAll();
     }
 
     public void create(KafkaPropertiesVO kafkaPropertiesVO) {
         final String clusterName = kafkaPropertiesVO.getClusterName();
-        if (KafkaApplication.contains(clusterName)) {
+        if (KafkaApplicationHolder.contains(clusterName)) {
             throw KaViewerBizException.of(ErrorMsg.CLUSTER_EXIST);
         }
         final KafkaSetupService handler = KaViewerWebApplication.getBean(KafkaSetupService.class);
@@ -69,13 +68,13 @@ public class ClusterService {
     }
 
     public void delete(String clusterName) {
-        KafkaApplication.remove(clusterName);
+        KafkaApplicationHolder.remove(clusterName);
     }
 
     public List<ClusterVO> meta() {
         final List<KafkaApplicationCacheEntity> clusters = list();
         return clusters.stream().map(cluster ->
-                        new ClusterVO(cluster.getClusterName(), brokerBizService.brokers(cluster.getClusterName()), KafkaApplication.getKafkaApplication(cluster.getClusterName()).getCreateTimestamp()))
+                        new ClusterVO(cluster.getClusterName(), brokerBizService.brokers(cluster.getClusterName()), KafkaApplicationHolder.getKafkaApplication(cluster.getClusterName()).getCreateTimestamp()))
                 .sorted(Comparator.comparingLong(ClusterVO::getCreatedTime)).collect(Collectors.toList());
     }
 }

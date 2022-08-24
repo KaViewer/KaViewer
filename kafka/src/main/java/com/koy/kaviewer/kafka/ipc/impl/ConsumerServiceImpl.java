@@ -1,7 +1,7 @@
 package com.koy.kaviewer.kafka.ipc.impl;
 
 import com.koy.kaviewer.kafka.client.KafkaClientWrapper;
-import com.koy.kaviewer.kafka.ipc.ConsumerService;
+import com.koy.kaviewer.common.ipc.ConsumerService;
 import com.koy.kaviewer.kafka.service.KafkaConsumerFactory;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.common.errors.SerializationException;

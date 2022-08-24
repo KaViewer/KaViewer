@@ -1,11 +1,10 @@
 package com.koy.kaviewer.kafka.service;
 
-import com.koy.kaviewer.kafka.entity.properties.ConsumerProperties;
-import com.koy.kaviewer.kafka.entity.properties.KafkaProperties;
-import com.koy.kaviewer.kafka.entity.TopicMetaVO;
-import com.koy.kaviewer.kafka.exception.KaViewerBizException;
+import com.koy.kaviewer.common.entity.TopicMetaVO;
+import com.koy.kaviewer.common.entity.properties.ConsumerProperties;
+import com.koy.kaviewer.common.entity.properties.KafkaProperties;
+import com.koy.kaviewer.common.exception.KaViewerBizException;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.PartitionInfo;
 import org.apache.kafka.common.TopicPartition;

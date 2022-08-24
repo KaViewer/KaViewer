@@ -1,7 +1,7 @@
 package com.koy.kaviewer.app.service.endpoint;
 
+import com.koy.kaviewer.common.entity.KafkaApplicationCacheEntity;
 import com.koy.kaviewer.kafka.application.KafkaApplication;
-import com.koy.kaviewer.kafka.entity.KafkaApplicationCacheEntity;
 import org.springframework.boot.actuate.info.Info;
 import org.springframework.boot.actuate.info.InfoContributor;
 import org.springframework.stereotype.Component;

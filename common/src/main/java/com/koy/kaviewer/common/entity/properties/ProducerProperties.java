@@ -1,4 +1,4 @@
-package com.koy.kaviewer.kafka.entity.properties;
+package com.koy.kaviewer.common.entity.properties;
 
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.ByteArraySerializer;

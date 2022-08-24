@@ -1,7 +1,7 @@
 package com.koy.kaviewer.web;
 
-import com.koy.kaviewer.kafka.application.KafkaApplication;
-import com.koy.kaviewer.kafka.share.RequestContextManagement;
+import com.koy.kaviewer.common.KafkaApplicationHolder;
+import com.koy.kaviewer.common.share.RequestContextManagement;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +30,7 @@ public class KaViewerWebApplication implements ApplicationContextAware {
         try {
             if (StringUtils.isNotEmpty(cluster)) {
                 LOGGER.info("Do get bean on cluster :[{}]", cluster);
-                target = KafkaApplication.getKafkaApplicationBean(cluster, clz);
+                target = KafkaApplicationHolder.getKafkaApplicationBean(cluster, clz);
             } else {
                 target = KaViewerWebApplication.parent.getBean(clz);
             }

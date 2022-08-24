@@ -34,7 +34,7 @@
         </dependency>
         <dependency>
             <groupId>com.koy</groupId>
-            <artifactId>kafka</artifactId>
+            <artifactId>common</artifactId>
             <version>${parent.version}</version>
         </dependency>
     </dependencies>

@@ -2,12 +2,13 @@ package com.koy.kaviewer.app.service;
 
 import com.koy.kaviewer.app.KaViewerApplication;
 import com.koy.kaviewer.app.core.ConfigResolver;
+import com.koy.kaviewer.common.KafkaApplicationHolder;
+import com.koy.kaviewer.common.entity.properties.KafkaProperties;
+import com.koy.kaviewer.common.entity.properties.PropertiesResources;
+import com.koy.kaviewer.common.exception.ErrorMsg;
+import com.koy.kaviewer.common.exception.KaViewerBizException;
+import com.koy.kaviewer.common.ipc.KafkaSetupService;
 import com.koy.kaviewer.kafka.application.KafkaApplication;
-import com.koy.kaviewer.kafka.entity.properties.KafkaProperties;
-import com.koy.kaviewer.kafka.exception.ErrorMsg;
-import com.koy.kaviewer.kafka.exception.KaViewerBizException;
-import com.koy.kaviewer.kafka.ipc.KafkaSetupService;
-import com.koy.kaviewer.kafka.entity.properties.PropertiesResources;
 import com.koy.kaviewer.kafka.service.KafkaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
@@ -33,7 +34,7 @@ public class KafkaApplicationSetupService implements KafkaSetupService {
 
     public void setUp(ConfigurableApplicationContext parent, String[] args, KafkaProperties kafkaProperties) throws Exception {
         final String clusterName = kafkaProperties.getClusterName();
-        if (KafkaApplication.contains(clusterName)) {
+        if (KafkaApplicationHolder.contains(clusterName)) {
             throw KaViewerBizException.of(ErrorMsg.CLUSTER_EXIST);
         }
 

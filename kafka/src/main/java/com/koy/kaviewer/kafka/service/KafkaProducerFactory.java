@@ -1,8 +1,8 @@
 package com.koy.kaviewer.kafka.service;
 
+import com.koy.kaviewer.common.entity.properties.KafkaProperties;
+import com.koy.kaviewer.common.entity.properties.ProducerProperties;
 import com.koy.kaviewer.kafka.client.KafkaClientWrapper;
-import com.koy.kaviewer.kafka.entity.properties.KafkaProperties;
-import com.koy.kaviewer.kafka.entity.properties.ProducerProperties;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.header.Header;

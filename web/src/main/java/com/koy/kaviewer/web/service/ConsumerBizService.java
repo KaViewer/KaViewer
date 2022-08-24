@@ -1,8 +1,8 @@
 package com.koy.kaviewer.web.service;
 
-import com.koy.kaviewer.kafka.ipc.ConsumerService;
-import com.koy.kaviewer.kafka.ipc.TopicService;
-import com.koy.kaviewer.kafka.share.RequestContextManagement;
+import com.koy.kaviewer.common.ipc.ConsumerService;
+import com.koy.kaviewer.common.ipc.TopicService;
+import com.koy.kaviewer.common.share.RequestContextManagement;
 import com.koy.kaviewer.web.KaViewerWebApplication;
 import com.koy.kaviewer.web.domain.MessageRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecord;

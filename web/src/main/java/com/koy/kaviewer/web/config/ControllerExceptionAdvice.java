@@ -1,6 +1,6 @@
 package com.koy.kaviewer.web.config;
 
-import com.koy.kaviewer.kafka.exception.KaViewerBizException;
+import com.koy.kaviewer.common.exception.KaViewerBizException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

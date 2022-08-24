@@ -1,6 +1,6 @@
 package com.koy.kaviewer.kafka.ipc.impl;
 
-import com.koy.kaviewer.kafka.ipc.ProducerService;
+import com.koy.kaviewer.common.ipc.ProducerService;
 import com.koy.kaviewer.kafka.service.KafkaProducerFactory;
 import org.apache.kafka.common.header.Header;
 import org.apache.kafka.common.header.internals.RecordHeader;

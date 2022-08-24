@@ -1,6 +1,6 @@
 package com.koy.kaviewer.web.api;
 
-import com.koy.kaviewer.kafka.entity.KafkaPropertiesVO;
+import com.koy.kaviewer.common.entity.KafkaPropertiesVO;
 import com.koy.kaviewer.web.service.MetaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

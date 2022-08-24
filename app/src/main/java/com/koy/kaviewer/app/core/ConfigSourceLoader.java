@@ -1,6 +1,6 @@
 package com.koy.kaviewer.app.core;
 
-import com.koy.kaviewer.kafka.entity.properties.PropertiesResources;
+import com.koy.kaviewer.common.entity.properties.PropertiesResources;
 import org.springframework.core.convert.converter.Converter;
 
 public interface ConfigSourceLoader<T, S> {

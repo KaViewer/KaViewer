@@ -1,17 +1,15 @@
 package com.koy.kaviewer.kafka.ipc.impl;
 
+import com.koy.kaviewer.common.entity.TopicMetaVO;
+import com.koy.kaviewer.common.entity.TopicVO;
+import com.koy.kaviewer.common.exception.KaViewerBizException;
+import com.koy.kaviewer.common.ipc.TopicService;
 import com.koy.kaviewer.kafka.client.KafkaClientWrapper;
-import com.koy.kaviewer.kafka.entity.TopicMetaVO;
-import com.koy.kaviewer.kafka.entity.TopicVO;
-import com.koy.kaviewer.kafka.exception.KaViewerBizException;
-import com.koy.kaviewer.kafka.ipc.TopicService;
 import com.koy.kaviewer.kafka.service.KafkaConsumerFactory;
 import org.apache.kafka.clients.admin.ListTopicsResult;
-import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;

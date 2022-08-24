@@ -1,8 +1,7 @@
-package com.koy.kaviewer.kafka.share;
+package com.koy.kaviewer.common.share;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.Objects;
 import java.util.Optional;
 
 public class RequestContextManagement {

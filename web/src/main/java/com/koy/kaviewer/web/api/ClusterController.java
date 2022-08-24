@@ -1,7 +1,7 @@
 package com.koy.kaviewer.web.api;
 
-import com.koy.kaviewer.kafka.entity.KafkaApplicationCacheEntity;
-import com.koy.kaviewer.kafka.entity.KafkaPropertiesVO;
+import com.koy.kaviewer.common.entity.KafkaApplicationCacheEntity;
+import com.koy.kaviewer.common.entity.KafkaPropertiesVO;
 import com.koy.kaviewer.web.domain.ClusterVO;
 import com.koy.kaviewer.web.service.ClusterService;
 import io.swagger.v3.oas.annotations.Operation;

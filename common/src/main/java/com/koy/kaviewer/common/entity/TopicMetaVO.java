@@ -1,4 +1,4 @@
-package com.koy.kaviewer.kafka.entity;
+package com.koy.kaviewer.common.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;

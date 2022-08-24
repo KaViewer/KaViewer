@@ -1,7 +1,7 @@
-package com.koy.kaviewer.kafka.ipc;
+package com.koy.kaviewer.common.ipc;
 
-import com.koy.kaviewer.kafka.entity.TopicMetaVO;
-import com.koy.kaviewer.kafka.entity.TopicVO;
+import com.koy.kaviewer.common.entity.TopicMetaVO;
+import com.koy.kaviewer.common.entity.TopicVO;
 
 import java.util.List;
 import java.util.Set;
