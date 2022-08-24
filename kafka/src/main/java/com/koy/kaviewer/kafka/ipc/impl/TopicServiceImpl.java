@@ -6,6 +6,7 @@ import com.koy.kaviewer.common.exception.KaViewerBizException;
 import com.koy.kaviewer.common.ipc.TopicService;
 import com.koy.kaviewer.kafka.client.KafkaClientWrapper;
 import com.koy.kaviewer.kafka.service.KafkaConsumerFactory;
+import lombok.RequiredArgsConstructor;
 import org.apache.kafka.clients.admin.ListTopicsResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,12 +17,10 @@ import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class TopicServiceImpl implements TopicService {
-    @Autowired
-    KafkaClientWrapper kafkaClientWrapper;
-
-    @Autowired
-    KafkaConsumerFactory kafkaConsumerFactory;
+    private final KafkaClientWrapper kafkaClientWrapper;
+    private final KafkaConsumerFactory kafkaConsumerFactory;
 
     @Override
     public Set<String> list(String clusterName) {

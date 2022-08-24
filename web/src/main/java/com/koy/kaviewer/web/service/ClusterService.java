@@ -9,6 +9,7 @@ import com.koy.kaviewer.common.exception.KaViewerBizException;
 import com.koy.kaviewer.common.ipc.KafkaSetupService;
 import com.koy.kaviewer.web.KaViewerWebApplication;
 import com.koy.kaviewer.web.domain.ClusterVO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,14 +21,10 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class ClusterService {
 
     private final BrokerBizService brokerBizService;
-
-    @Autowired
-    public ClusterService(BrokerBizService brokerBizService) {
-        this.brokerBizService = brokerBizService;
-    }
 
     public List<KafkaApplicationCacheEntity> list() {
         return KafkaApplicationHolder.listAll();

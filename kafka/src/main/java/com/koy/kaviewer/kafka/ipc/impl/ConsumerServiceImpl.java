@@ -3,9 +3,9 @@ package com.koy.kaviewer.kafka.ipc.impl;
 import com.koy.kaviewer.kafka.client.KafkaClientWrapper;
 import com.koy.kaviewer.common.ipc.ConsumerService;
 import com.koy.kaviewer.kafka.service.KafkaConsumerFactory;
+import lombok.RequiredArgsConstructor;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.common.errors.SerializationException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
@@ -17,12 +17,10 @@ import java.util.function.BiFunction;
 
 
 @Service
+@RequiredArgsConstructor
 public class ConsumerServiceImpl implements ConsumerService {
-    @Autowired
-    KafkaClientWrapper kafkaClientWrapper;
-
-    @Autowired
-    KafkaConsumerFactory kafkaConsumerFactory;
+    private final KafkaClientWrapper kafkaClientWrapper;
+    private final KafkaConsumerFactory kafkaConsumerFactory;
 
     private static final BiFunction<byte[], String, String> stringDeserializer = (data, encoding) -> {
         try {

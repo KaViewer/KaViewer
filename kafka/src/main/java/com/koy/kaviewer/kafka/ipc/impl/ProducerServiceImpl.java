@@ -2,6 +2,7 @@ package com.koy.kaviewer.kafka.ipc.impl;
 
 import com.koy.kaviewer.common.ipc.ProducerService;
 import com.koy.kaviewer.kafka.service.KafkaProducerFactory;
+import lombok.RequiredArgsConstructor;
 import org.apache.kafka.common.header.Header;
 import org.apache.kafka.common.header.internals.RecordHeader;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +16,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class ProducerServiceImpl implements ProducerService {
 
     private final KafkaProducerFactory kafkaProducerFactory;
-
-    @Autowired
-    public ProducerServiceImpl(KafkaProducerFactory kafkaProducerFactory) {
-        this.kafkaProducerFactory = kafkaProducerFactory;
-    }
 
     @Override
     public boolean publish(String topic, int partition, Map<String, Object> headers, byte[] key, byte[] val) {
