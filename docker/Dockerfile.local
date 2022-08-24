@@ -1,4 +1,5 @@
 # docker build -f docker/Dockerfile.local -t kooooooy/kaviewer:0.0.1 .
+# docker build -f docker/Dockerfile.local -t kaviewer:0.0.1 ../ --progress=plain
 FROM maven:3.6.0-jdk-11-slim AS package
 WORKDIR /kaviewer
 COPY ../ .

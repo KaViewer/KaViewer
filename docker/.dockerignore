@@ -1,0 +1,6 @@
+*
+!app/src/
+!kafka/src/
+!web/src/
+!**/pom.xml
+
