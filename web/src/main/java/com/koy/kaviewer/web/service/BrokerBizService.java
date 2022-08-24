@@ -1,7 +1,7 @@
 package com.koy.kaviewer.web.service;
 
 import com.koy.kaviewer.common.exception.KaViewerBizException;
-import com.koy.kaviewer.common.ipc.BrokerService;
+import com.koy.kaviewer.common.service.BrokerService;
 import com.koy.kaviewer.common.share.RequestContextManagement;
 import com.koy.kaviewer.web.KaViewerWebApplication;
 import com.koy.kaviewer.web.domain.BrokerVO;

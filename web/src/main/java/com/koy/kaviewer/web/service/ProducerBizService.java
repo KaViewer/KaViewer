@@ -1,7 +1,7 @@
 package com.koy.kaviewer.web.service;
 
 import com.koy.kaviewer.common.exception.KaViewerBizException;
-import com.koy.kaviewer.common.ipc.ProducerService;
+import com.koy.kaviewer.common.service.ProducerService;
 import com.koy.kaviewer.web.KaViewerWebApplication;
 import com.koy.kaviewer.web.domain.HeaderVO;
 import com.koy.kaviewer.web.domain.MessageVO;

@@ -1,4 +1,4 @@
-package com.koy.kaviewer.common.ipc;
+package com.koy.kaviewer.common.service;
 
 import com.koy.kaviewer.common.entity.TopicMetaVO;
 import com.koy.kaviewer.common.entity.TopicVO;

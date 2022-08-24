@@ -1,6 +1,6 @@
-package com.koy.kaviewer.kafka.ipc.impl;
+package com.koy.kaviewer.kafka.impl;
 
-import com.koy.kaviewer.common.ipc.BrokerService;
+import com.koy.kaviewer.common.service.BrokerService;
 import com.koy.kaviewer.kafka.client.KafkaClientWrapper;
 import lombok.RequiredArgsConstructor;
 import org.apache.kafka.clients.admin.DescribeClusterResult;

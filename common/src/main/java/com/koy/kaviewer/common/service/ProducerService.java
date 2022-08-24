@@ -1,4 +1,4 @@
-package com.koy.kaviewer.common.ipc;
+package com.koy.kaviewer.common.service;
 
 import java.util.Map;
 

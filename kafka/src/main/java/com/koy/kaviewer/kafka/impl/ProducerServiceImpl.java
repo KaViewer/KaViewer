@@ -1,11 +1,10 @@
-package com.koy.kaviewer.kafka.ipc.impl;
+package com.koy.kaviewer.kafka.impl;
 
-import com.koy.kaviewer.common.ipc.ProducerService;
+import com.koy.kaviewer.common.service.ProducerService;
 import com.koy.kaviewer.kafka.service.KafkaProducerFactory;
 import lombok.RequiredArgsConstructor;
 import org.apache.kafka.common.header.Header;
 import org.apache.kafka.common.header.internals.RecordHeader;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;

@@ -1,4 +1,4 @@
-package com.koy.kaviewer.common.ipc;
+package com.koy.kaviewer.common.service;
 
 import org.apache.kafka.clients.admin.DescribeClusterResult;
 

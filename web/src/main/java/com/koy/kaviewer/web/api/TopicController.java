@@ -2,7 +2,7 @@ package com.koy.kaviewer.web.api;
 
 import com.koy.kaviewer.common.entity.TopicMetaVO;
 import com.koy.kaviewer.common.entity.TopicVO;
-import com.koy.kaviewer.common.ipc.TopicService;
+import com.koy.kaviewer.common.service.TopicService;
 import com.koy.kaviewer.web.KaViewerWebApplication;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

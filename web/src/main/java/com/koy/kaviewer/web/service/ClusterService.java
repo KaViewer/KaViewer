@@ -6,11 +6,10 @@ import com.koy.kaviewer.common.entity.KafkaPropertiesVO;
 import com.koy.kaviewer.common.entity.properties.PropertiesResources;
 import com.koy.kaviewer.common.exception.ErrorMsg;
 import com.koy.kaviewer.common.exception.KaViewerBizException;
-import com.koy.kaviewer.common.ipc.KafkaSetupService;
+import com.koy.kaviewer.common.service.KafkaSetupService;
 import com.koy.kaviewer.web.KaViewerWebApplication;
 import com.koy.kaviewer.web.domain.ClusterVO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 

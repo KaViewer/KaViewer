@@ -1,7 +1,7 @@
-package com.koy.kaviewer.kafka.ipc.impl;
+package com.koy.kaviewer.kafka.impl;
 
 import com.koy.kaviewer.kafka.client.KafkaClientWrapper;
-import com.koy.kaviewer.common.ipc.ConsumerService;
+import com.koy.kaviewer.common.service.ConsumerService;
 import com.koy.kaviewer.kafka.service.KafkaConsumerFactory;
 import lombok.RequiredArgsConstructor;
 import org.apache.kafka.clients.consumer.ConsumerRecord;

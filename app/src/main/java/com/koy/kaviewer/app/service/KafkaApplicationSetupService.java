@@ -7,7 +7,7 @@ import com.koy.kaviewer.common.entity.properties.KafkaProperties;
 import com.koy.kaviewer.common.entity.properties.PropertiesResources;
 import com.koy.kaviewer.common.exception.ErrorMsg;
 import com.koy.kaviewer.common.exception.KaViewerBizException;
-import com.koy.kaviewer.common.ipc.KafkaSetupService;
+import com.koy.kaviewer.common.service.KafkaSetupService;
 import com.koy.kaviewer.kafka.application.KafkaApplication;
 import com.koy.kaviewer.kafka.service.KafkaService;
 import org.springframework.beans.factory.annotation.Autowired;
