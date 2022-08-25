@@ -1,5 +1,6 @@
 package com.koy.kaviewer.common.configuration;
 
+import com.koy.kaviewer.common.toggle.KaViewerMode;
 import lombok.Data;
 import lombok.ToString;
 import org.springframework.beans.factory.FactoryBean;
@@ -11,6 +12,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class KaViewerConfiguration implements FactoryBean<KaViewerConfiguration> {
     @ToString.Exclude
     private KaViewerConfiguration INSTANCE = this;
+    private KaViewerMode mode = KaViewerMode.LITE;
     KaViewerAppConfiguration app;
     KaViewerWebConfiguration web;
     KaViewerKafkaConfiguration kafka;
