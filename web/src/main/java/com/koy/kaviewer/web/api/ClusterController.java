@@ -1,8 +1,10 @@
 package com.koy.kaviewer.web.api;
 
-import com.koy.kaviewer.common.configuration.KaViewerConfiguration;
 import com.koy.kaviewer.common.entity.KafkaApplicationCacheEntity;
 import com.koy.kaviewer.common.entity.KafkaPropertiesVO;
+import com.koy.kaviewer.common.toggle.FeatureToggle;
+import com.koy.kaviewer.common.toggle.Operations;
+import com.koy.kaviewer.common.toggle.toggles.ClusterToggles;
 import com.koy.kaviewer.web.domain.ClusterVO;
 import com.koy.kaviewer.web.service.ClusterService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -46,6 +48,7 @@ public class ClusterController {
         return ResponseEntity.ok(meta);
     }
 
+    @FeatureToggle(toggleGroup = ClusterToggles.class, operation = Operations.CREATE)
     @Operation(summary = "Create a new cluster.")
     @PostMapping
     public ResponseEntity<Void> create(@RequestBody KafkaPropertiesVO kafkaPropertiesVO) {
@@ -60,6 +63,7 @@ public class ClusterController {
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
+    @FeatureToggle(toggleGroup = ClusterToggles.class, operation = Operations.DELETE)
     @Operation(summary = "Delete a cluster.")
     @DeleteMapping("/{cluster}")
     public ResponseEntity<Void> delete(@PathVariable("cluster") String cluster) {

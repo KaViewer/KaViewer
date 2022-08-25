@@ -3,6 +3,10 @@ package com.koy.kaviewer.web.api;
 import com.koy.kaviewer.common.entity.TopicMetaVO;
 import com.koy.kaviewer.common.entity.TopicVO;
 import com.koy.kaviewer.common.service.TopicService;
+import com.koy.kaviewer.common.toggle.FeatureToggle;
+import com.koy.kaviewer.common.toggle.Operations;
+import com.koy.kaviewer.common.toggle.toggles.ClusterToggles;
+import com.koy.kaviewer.common.toggle.toggles.TopicToggles;
 import com.koy.kaviewer.web.KaViewerWebApplication;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +36,7 @@ public class TopicController {
 
     }
 
+    @FeatureToggle(toggleGroup = TopicToggles.class, operation = Operations.CREATE)
     @PostMapping
     public ResponseEntity<Void> createTopic(@RequestBody TopicVO newTopic) {
         final TopicService topicService = KaViewerWebApplication.getBean(TopicService.class);
@@ -48,6 +53,7 @@ public class TopicController {
 
     }
 
+    @FeatureToggle(toggleGroup = TopicToggles.class, operation = Operations.DELETE)
     @DeleteMapping
     public ResponseEntity<List<TopicMetaVO>> delete(@RequestParam(value = "topic", required = true) String topic) {
         final TopicService topicService = KaViewerWebApplication.getBean(TopicService.class);
