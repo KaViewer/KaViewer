@@ -1,6 +1,7 @@
 package com.koy.kaviewer.web;
 
 import com.koy.kaviewer.common.KafkaApplicationHolder;
+import com.koy.kaviewer.common.configuration.KaViewerConfiguration;
 import com.koy.kaviewer.common.share.RequestContextManagement;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -23,6 +24,10 @@ public class KaViewerWebApplication implements ApplicationContextAware {
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         KaViewerWebApplication.rest = applicationContext;
         KaViewerWebApplication.parent = applicationContext.getParent();
+    }
+
+    public static KaViewerConfiguration getKaViewerConfiguration() {
+        return KaViewerWebApplication.parent.getBean(KaViewerConfiguration.class);
     }
 
     public static <T> T getBean(String cluster, Class<T> clz) {

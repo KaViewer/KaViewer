@@ -1,4 +1,4 @@
-package com.koy.kaviewer.app.configuration;
+package com.koy.kaviewer.common.configuration;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,6 +1,6 @@
 package com.koy.kaviewer.app.service.resolver;
 
-import com.koy.kaviewer.app.configuration.KaViewerKafkaConfiguration;
+import com.koy.kaviewer.common.configuration.KaViewerKafkaConfiguration;
 import com.koy.kaviewer.common.entity.properties.KafkaProperties;
 import org.springframework.stereotype.Component;
 

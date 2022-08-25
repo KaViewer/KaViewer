@@ -1,7 +1,7 @@
 package com.koy.kaviewer.app.service;
 
-import com.koy.kaviewer.app.configuration.KaViewerConfiguration;
-import com.koy.kaviewer.app.configuration.KaViewerKafkaConfiguration;
+import com.koy.kaviewer.common.configuration.KaViewerConfiguration;
+import com.koy.kaviewer.common.configuration.KaViewerKafkaConfiguration;
 import com.koy.kaviewer.app.service.resolver.KafkaPropertiesConvert;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -44,6 +44,7 @@ public class KaViewerEnvScanner {
         try {
             if (StringUtils.isNotEmpty(config)) {
                 kaViewerConfiguration = load(KAVIEWER, KaViewerConfiguration.class, config);
+                this.kaViewerConfiguration.updateINSTANCE(kaViewerConfiguration);
                 Assert.notNull(kaViewerConfiguration, "Config file is invalid to bind.");
             }
             bindSetUpKafka(kaViewerConfiguration.getKafka());

@@ -1,12 +1,13 @@
 package com.koy.kaviewer.web.api;
 
+import com.koy.kaviewer.common.configuration.KaViewerConfiguration;
 import com.koy.kaviewer.common.entity.KafkaApplicationCacheEntity;
 import com.koy.kaviewer.common.entity.KafkaPropertiesVO;
 import com.koy.kaviewer.web.domain.ClusterVO;
 import com.koy.kaviewer.web.service.ClusterService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -26,18 +27,16 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/cluster")
 @CrossOrigin(origins = "*")
+@RequiredArgsConstructor
 public class ClusterController {
 
     private final ClusterService clusterService;
-
-    @Autowired
-    public ClusterController(ClusterService clusterService) {
-        this.clusterService = clusterService;
-    }
+    private final KaViewerConfiguration kaViewerConfiguration;
 
     @Operation(summary = "Get all clusters' name.")
     @GetMapping
     public ResponseEntity<List<KafkaApplicationCacheEntity>> list() {
+        System.out.println(kaViewerConfiguration);
         final List<KafkaApplicationCacheEntity> clusters = clusterService.list();
         return ResponseEntity.ok(clusters);
     }
@@ -45,6 +44,7 @@ public class ClusterController {
     @Operation(summary = "Get all clusters' meta.")
     @GetMapping("/meta")
     public ResponseEntity<List<ClusterVO>> meta() {
+        System.out.println(kaViewerConfiguration.getINSTANCE());
         final List<ClusterVO> meta = clusterService.meta();
         return ResponseEntity.ok(meta);
     }
