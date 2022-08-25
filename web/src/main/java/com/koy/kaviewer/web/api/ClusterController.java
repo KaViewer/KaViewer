@@ -31,12 +31,10 @@ import java.util.List;
 public class ClusterController {
 
     private final ClusterService clusterService;
-    private final KaViewerConfiguration kaViewerConfiguration;
 
     @Operation(summary = "Get all clusters' name.")
     @GetMapping
     public ResponseEntity<List<KafkaApplicationCacheEntity>> list() {
-        System.out.println(kaViewerConfiguration);
         final List<KafkaApplicationCacheEntity> clusters = clusterService.list();
         return ResponseEntity.ok(clusters);
     }
@@ -44,7 +42,6 @@ public class ClusterController {
     @Operation(summary = "Get all clusters' meta.")
     @GetMapping("/meta")
     public ResponseEntity<List<ClusterVO>> meta() {
-        System.out.println(kaViewerConfiguration.getINSTANCE());
         final List<ClusterVO> meta = clusterService.meta();
         return ResponseEntity.ok(meta);
     }

@@ -1,7 +1,7 @@
 package com.koy.kaviewer.app;
 
 
-import com.koy.kaviewer.app.configuration.KaViewerConfiguration;
+import com.koy.kaviewer.common.configuration.KaViewerConfiguration;
 import com.koy.kaviewer.web.KaViewerWebApplication;
 import org.springframework.beans.BeansException;
 import org.springframework.boot.Banner;
