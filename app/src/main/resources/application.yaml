@@ -10,6 +10,7 @@ management:
       cors:
         allowed-origin-patterns: '*'
     # must disable jmx endpoint for JmxEndpoint/InstanceAlreadyExistsException exception
+    # https://github.com/spring-projects/spring-boot/issues/31718
     jmx:
       exposure:
         exclude: '*'
