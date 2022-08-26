@@ -1,5 +1,9 @@
 kaviewer:
+  toggle:
+    topic:
+      delete: true
+#    consumer:
+#      read: false
   kafka:
     cluster: newCluster
     bootstrapServers: localhost:9092
-
