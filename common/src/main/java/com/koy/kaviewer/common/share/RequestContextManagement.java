@@ -1,5 +1,7 @@
 package com.koy.kaviewer.common.share;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Optional;
@@ -12,25 +14,23 @@ public class RequestContextManagement {
         requestContext.set(ctx);
     }
 
+    public static ThreadLocal<RequestContext> getRequestContext() {
+        return requestContext;
+    }
+
     public static void reset() {
         requestContext.remove();
     }
 
     public static String getCluster() {
-        return Optional.ofNullable(requestContext.get()).orElseGet(() -> new RequestContext(StringUtils.EMPTY)).getClusterName();
+        return requestContext.get().getClusterName();
     }
 
 
+    @Data
+    @NoArgsConstructor
     public static class RequestContext {
         private String clusterName;
-
-        public RequestContext(String clusterName) {
-            this.clusterName = clusterName;
-        }
-
-        public String getClusterName() {
-            return clusterName;
-        }
     }
 
 
