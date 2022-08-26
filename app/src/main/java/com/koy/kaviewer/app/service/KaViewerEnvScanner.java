@@ -3,6 +3,7 @@ package com.koy.kaviewer.app.service;
 import com.koy.kaviewer.common.configuration.KaViewerConfiguration;
 import com.koy.kaviewer.common.configuration.KaViewerKafkaConfiguration;
 import com.koy.kaviewer.app.service.resolver.KafkaPropertiesConvert;
+import com.koy.kaviewer.common.constant.CommonConstant;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.StringUtils;
@@ -28,7 +29,6 @@ import java.util.Objects;
 @Service
 @RequiredArgsConstructor
 public class KaViewerEnvScanner {
-    private static final String KAVIEWER = "kaviewer";
     private static final String KAVIEWER_CONFIG = "kaviewer.config.filepath";
     private final KafkaApplicationSetupService kafkaApplicationSetupService;
     private final KaViewerConfiguration kaViewerConfiguration;
@@ -43,10 +43,11 @@ public class KaViewerEnvScanner {
         KaViewerConfiguration kaViewerConfiguration = this.kaViewerConfiguration;
         try {
             if (StringUtils.isNotEmpty(config)) {
-                kaViewerConfiguration = load(KAVIEWER, KaViewerConfiguration.class, config);
-                this.kaViewerConfiguration.updateINSTANCE(kaViewerConfiguration);
+                kaViewerConfiguration = load(CommonConstant.KAVIEWER, KaViewerConfiguration.class, config);
                 Assert.notNull(kaViewerConfiguration, "Config file is invalid to bind.");
             }
+            this.kaViewerConfiguration.renew(kaViewerConfiguration);
+
             bindSetUpKafka(kaViewerConfiguration.getKafka());
 
         } catch (Exception e) {

@@ -1,5 +1,8 @@
 package com.koy.kaviewer.web.api;
 
+import com.koy.kaviewer.common.toggle.FeatureToggle;
+import com.koy.kaviewer.common.toggle.Operations;
+import com.koy.kaviewer.common.toggle.toggles.ConsumerToggles;
 import com.koy.kaviewer.web.domain.MessageRecord;
 import com.koy.kaviewer.web.service.ConsumerBizService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,7 +31,7 @@ public class ConsumerController {
         this.consumerBizService = consumerBizService;
     }
 
-
+    @FeatureToggle(toggleGroup = ConsumerToggles.class, operation = Operations.READ)
     @Operation(summary = "Get range messages from a topic.")
     @GetMapping("/{topic}/p/{partition}")
     public ResponseEntity<List<MessageRecord<String, String>>> fetch(
