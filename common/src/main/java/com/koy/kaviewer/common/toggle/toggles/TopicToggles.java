@@ -8,8 +8,8 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum TopicToggles implements Toggle<TopicToggles> {
-    CREAT(0, Operations.CREATE),
-    DELETE(1, Operations.DELETE),
+    CREAT_TOPIC(0, Operations.CREATE),
+    DELETE_TOPIC(1, Operations.DELETE),
     ;
 
     private final int flag;

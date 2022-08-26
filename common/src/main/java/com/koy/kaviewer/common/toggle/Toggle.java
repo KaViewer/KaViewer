@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public interface Toggle<T extends Toggle<T>> {
     default int offset() {
-        return getFlag() ^ 2;
+        return (int) Math.pow(2, getFlag());
     }
 
     int getFlag();
