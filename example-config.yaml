@@ -1,3 +1,6 @@
+#Env
+#kaviewer.config.filepath=/kaviewer/example-config.yaml
+#kaviewer_mode=LITE
 kaviewer:
   toggle:
     topic:
