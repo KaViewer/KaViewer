@@ -4,6 +4,8 @@ kaviewer:
       delete: true
 #    consumer:
 #      read: false
+#    cluster:
+#      create: true
   kafka:
     cluster: newCluster
     bootstrapServers: localhost:9092
