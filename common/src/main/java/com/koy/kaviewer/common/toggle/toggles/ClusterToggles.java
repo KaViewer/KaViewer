@@ -8,7 +8,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum ClusterToggles implements Toggle<ClusterToggles> {
-    CREAT(0, Operations.CREATE),
+    CREATE(0, Operations.CREATE),
     DELETE(1, Operations.DELETE),
     ;
 

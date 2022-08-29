@@ -1,5 +1,6 @@
 package com.koy.kaviewer.web.core;
 
+import com.koy.kaviewer.common.entity.PermissionVO;
 import com.koy.kaviewer.common.toggle.FeatureToggle;
 import com.koy.kaviewer.common.toggle.ToggleResolver;
 import lombok.SneakyThrows;
@@ -12,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Aspect
 @Component
@@ -35,5 +38,9 @@ public class FeatureToggleAdvice {
             proceed = pjp.proceed();
         }
         return proceed;
+    }
+
+    public List<PermissionVO> permission() {
+        return toggleResolver.permission();
     }
 }

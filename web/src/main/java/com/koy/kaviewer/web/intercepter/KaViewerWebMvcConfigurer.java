@@ -20,6 +20,7 @@ public class KaViewerWebMvcConfigurer implements WebMvcConfigurer {
 
         registry.addInterceptor(requestClusterMetaInterceptor)
                 .excludePathPatterns("/api/*/cluster/**")
+                .excludePathPatterns("/api/*/permission/**")
                 .addPathPatterns("/api/**");
     }
 
