@@ -23,7 +23,7 @@ public class ClusterFeatureToggleResolver extends FeatureToggleConditionResolver
 
     @Override
     public boolean enable(FeatureToggle featureToggle) {
-        return enable(ClusterToggles.CREATE, featureToggle.operation());
+        return enable(ClusterToggles.CREATE_CLUSTER, featureToggle.operation());
     }
 
     @Override

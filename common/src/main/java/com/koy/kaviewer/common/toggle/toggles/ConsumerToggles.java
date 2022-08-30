@@ -8,8 +8,8 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum ConsumerToggles implements Toggle<ConsumerToggles> {
-    READ(0, Operations.READ),
-    WRITE(1, Operations.WRITE),
+    READ_MESSAGE(0, Operations.READ),
+    PUBLISH_MESSAGE(1, Operations.WRITE),
     ;
 
     private final int flag;
@@ -17,7 +17,7 @@ public enum ConsumerToggles implements Toggle<ConsumerToggles> {
 
     @Override
     public int lite() {
-        return READ.offset();
+        return READ_MESSAGE.offset();
     }
 
     @Override

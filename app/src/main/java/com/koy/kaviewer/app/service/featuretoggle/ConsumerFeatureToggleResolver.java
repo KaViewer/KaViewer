@@ -25,7 +25,7 @@ public class ConsumerFeatureToggleResolver extends FeatureToggleConditionResolve
     @Override
     public boolean enable(FeatureToggle featureToggle) {
         final Operations operation = featureToggle.operation();
-        return enable(ConsumerToggles.READ, operation);
+        return enable(ConsumerToggles.READ_MESSAGE, operation);
     }
 
     @Override
