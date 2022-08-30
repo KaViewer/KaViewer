@@ -35,8 +35,8 @@ public class TopicFeatureToggleResolver extends FeatureToggleConditionResolver {
         permissionVO.setToggles(toggles);
 
         Arrays.stream(topicToggles).forEach(it -> {
-            final boolean enable = enable(it, it.getOperations());
-            toggles.put(it.getOperations(), enable);
+            final boolean enable = enable(it, it.getOperation());
+            toggles.put(it.getOperation(), enable);
         });
         return List.of(permissionVO);
     }

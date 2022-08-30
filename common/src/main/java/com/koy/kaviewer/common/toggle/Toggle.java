@@ -9,7 +9,7 @@ public interface Toggle<T extends Toggle<T>> {
 
     int getFlag();
 
-    Operations getOperations();
+    Operations getOperation();
 
     default int lite() {
         return 1;
@@ -22,6 +22,6 @@ public interface Toggle<T extends Toggle<T>> {
     T[] toggles();
 
     default int offsetFrom(Operations operation) {
-        return Arrays.stream(toggles()).filter(it -> it.getOperations() == operation).findFirst().map(Toggle::offset).orElseGet(() -> 0);
+        return Arrays.stream(toggles()).filter(it -> it.getOperation() == operation).findFirst().map(Toggle::offset).orElseGet(() -> 0);
     }
 }

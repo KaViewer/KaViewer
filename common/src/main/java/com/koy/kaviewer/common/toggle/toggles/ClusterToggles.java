@@ -13,7 +13,7 @@ public enum ClusterToggles implements Toggle<ClusterToggles> {
     ;
 
     private final int flag;
-    private final Operations operations;
+    private final Operations operation;
 
     @Override
     public int lite() {

@@ -8,7 +8,6 @@ import com.koy.kaviewer.common.toggle.FeatureToggle;
 import com.koy.kaviewer.common.toggle.Operations;
 import com.koy.kaviewer.common.toggle.Toggle;
 import com.koy.kaviewer.common.toggle.toggles.ConsumerToggles;
-import com.koy.kaviewer.common.toggle.toggles.TopicToggles;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -49,8 +48,8 @@ public class ConsumerFeatureToggleResolver extends FeatureToggleConditionResolve
         permissionVO.setToggles(toggles);
 
         Arrays.stream(consumerToggles).forEach(it -> {
-            final boolean enable = enable(it, it.getOperations());
-            toggles.put(it.getOperations(), enable);
+            final boolean enable = enable(it, it.getOperation());
+            toggles.put(it.getOperation(), enable);
         });
         return List.of(permissionVO);
     }

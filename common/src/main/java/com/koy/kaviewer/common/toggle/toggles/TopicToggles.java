@@ -13,7 +13,7 @@ public enum TopicToggles implements Toggle<TopicToggles> {
     ;
 
     private final int flag;
-    private final Operations operations;
+    private final Operations operation;
 
     @Override
     public int lite() {

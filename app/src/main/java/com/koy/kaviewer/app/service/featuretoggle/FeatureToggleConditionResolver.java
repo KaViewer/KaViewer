@@ -45,7 +45,7 @@ public abstract class FeatureToggleConditionResolver implements ToggleResolver {
 
         AtomicInteger mask = new AtomicInteger(0);
         configToggles.forEach((key, toEnable) ->
-                Arrays.stream(toggle.toggles()).filter(el -> el.getOperations().name().equalsIgnoreCase(key))
+                Arrays.stream(toggle.toggles()).filter(el -> el.getOperation().name().equalsIgnoreCase(key))
                         .findFirst()
                         .ifPresent(it -> {
                             final int offset = it.offset();
