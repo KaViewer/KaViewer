@@ -56,6 +56,7 @@ public class ClusterController {
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
+    @FeatureToggle(toggleGroup = ClusterToggles.class, operation = Operations.CREATE)
     @Operation(summary = "Create a new cluster.")
     @PostMapping("/a")
     public ResponseEntity<Void> create(@RequestParam("attachment") MultipartFile attachment) {

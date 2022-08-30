@@ -1,5 +1,8 @@
 package com.koy.kaviewer.web.api;
 
+import com.koy.kaviewer.common.toggle.FeatureToggle;
+import com.koy.kaviewer.common.toggle.Operations;
+import com.koy.kaviewer.common.toggle.toggles.ConsumerToggles;
 import com.koy.kaviewer.web.domain.HeaderVO;
 import com.koy.kaviewer.web.domain.MessageHeaders;
 import com.koy.kaviewer.web.domain.MessageVO;
@@ -30,6 +33,7 @@ public class ProducerController {
         this.producerBizService = producerBizService;
     }
 
+    @FeatureToggle(toggleGroup = ConsumerToggles.class, operation = Operations.WRITE)
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> publish(@RequestBody MessageVO messageVO) {
         if (messageVO.inValid()) {
@@ -39,6 +43,7 @@ public class ProducerController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @FeatureToggle(toggleGroup = ConsumerToggles.class, operation = Operations.WRITE)
     @PostMapping(path = "/skmv", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Void> publish(
             @RequestParam(name = "key") String key,
@@ -55,6 +60,7 @@ public class ProducerController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @FeatureToggle(toggleGroup = ConsumerToggles.class, operation = Operations.WRITE)
     @PostMapping(path = "/mksv", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Void> publish(
             @RequestParam(name = "key") MultipartFile key,
@@ -72,6 +78,7 @@ public class ProducerController {
     }
 
 
+    @FeatureToggle(toggleGroup = ConsumerToggles.class, operation = Operations.WRITE)
     @PostMapping(path = "/mkmv", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Void> publish(
             @RequestParam(name = "key") MultipartFile key,
