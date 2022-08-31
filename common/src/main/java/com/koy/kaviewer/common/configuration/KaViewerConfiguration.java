@@ -2,9 +2,7 @@ package com.koy.kaviewer.common.configuration;
 
 import com.koy.kaviewer.common.toggle.KaViewerMode;
 import lombok.Data;
-import lombok.SneakyThrows;
 import lombok.ToString;
-import org.springframework.beans.factory.FactoryBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.Locale;
@@ -14,7 +12,7 @@ import java.util.stream.Collectors;
 @ToString
 @Data
 @ConfigurationProperties("kaviewer")
-public class KaViewerConfiguration implements FactoryBean<KaViewerConfiguration> {
+public class KaViewerConfiguration {
     @ToString.Exclude
     private KaViewerConfiguration INSTANCE = this;
     private KaViewerMode mode = KaViewerMode.LITE;
@@ -22,18 +20,6 @@ public class KaViewerConfiguration implements FactoryBean<KaViewerConfiguration>
     private KaViewerWebConfiguration web;
     private KaViewerKafkaConfiguration kafka;
     private Map<String, Boolean> toggle = Map.of();
-
-
-    @SneakyThrows
-    @Override
-    public KaViewerConfiguration getObject() {
-        return INSTANCE;
-    }
-
-    @Override
-    public Class<?> getObjectType() {
-        return KaViewerConfiguration.class;
-    }
 
     public void renew(KaViewerConfiguration kaViewerConfiguration) {
         INSTANCE = kaViewerConfiguration;

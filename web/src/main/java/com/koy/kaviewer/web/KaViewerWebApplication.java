@@ -27,7 +27,7 @@ public class KaViewerWebApplication implements ApplicationContextAware {
     }
 
     public static KaViewerConfiguration getKaViewerConfiguration() {
-        return KaViewerWebApplication.parent.getBean(KaViewerConfiguration.class).getObject();
+        return KaViewerWebApplication.parent.getBean(KaViewerConfiguration.class).getINSTANCE();
     }
 
     public static <T> T getBean(String cluster, Class<T> clz) {

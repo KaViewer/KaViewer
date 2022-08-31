@@ -15,8 +15,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 @RequiredArgsConstructor
 public abstract class FeatureToggleConditionResolver implements ToggleResolver {
 
-    protected final KaViewerConfiguration kaViewerConfiguration;
-
     public <T extends Toggle<T>> boolean enable(T toggle, Operations operations) {
         final int offset = toggle.offsetFrom(operations);
         return (offset & mergeModeMask(toggle, modeMask(toggle))) != 0;
@@ -40,7 +38,7 @@ public abstract class FeatureToggleConditionResolver implements ToggleResolver {
     abstract Map<String, Boolean> getConfigTogglesFromConfiguration(KaViewerConfiguration config);
 
     private <T extends Toggle<T>> int mergeModeMask(T toggle, int modeMask) {
-        final KaViewerConfiguration config = kaViewerConfiguration.getObject();
+        final KaViewerConfiguration config = KaViewerWebApplication.getKaViewerConfiguration();
         final Map<String, Boolean> configToggles = getConfigTogglesFromConfiguration(config);
 
         AtomicInteger mask = new AtomicInteger(0);
