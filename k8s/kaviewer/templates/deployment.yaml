@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Chart.Name }}-apps
+  name: {{ .Chart.Name }}-app
   labels:
     {{- include "kaviewer.labels" . | nindent 4 }}
 spec:
@@ -23,12 +23,22 @@ spec:
         - name: {{ .Chart.Name }}
           image: {{ .Values.image.repository }}:{{ .Values.image.tag | default "latest" }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- if .Values.config_configmap_enable }}
+          volumeMounts:
+            - name: configmap-config
+              mountPath: /etc/config
+          {{- end}}
           env:
+          {{- if .Values.config_configmap_enable }}
+            - name: KAVIEWER_CONFIG_FILEPATH
+              value: /etc/config/kaviewer-config.yaml
+          {{- end}}
           {{- if .Values.config_secret_enable }}
           envFrom:
             - secretRef:
                   name: {{ .Chart.Name }}-config-secret
-          {{- else}}
+          {{- end}}
+          {{- if .Values.config_env_enable }}
             {{- range $key, $value:= .Values.set_up_kafka_env}}
             - name: {{$key}}
               value: {{$value | quote}}
@@ -58,6 +68,13 @@ spec:
   {{- if .Values.resources.enabled -}}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+  {{- end}}
+
+  {{- if .Values.config_configmap_enable }}
+      volumes:
+        - name: configmap-config
+          configMap:
+            name: {{ .Chart.Name }}-config-configmap
   {{- end}}
       {{- with .Values.nodeSelector }}
       nodeSelector:

@@ -5,17 +5,23 @@ image:
   pullPolicy: IfNotPresent
   tag: latest
 
-config_secret_enable: true
+# Way to mount is enough
+# Secret
+config_secret_enable: false
+#ConfigMap
+config_configmap_enable: true
+#Env
+config_env_enable: false
 
 set_up_kafka_env:
-  kaviewer_toggle_topic_delete: false
-  kaviewer_mode: FULL
+  kaviewer_toggle_topic_delete: true
+  kaviewer_mode: LITE
 #  kaviewer_kafka_cluster: kaviewer-cluster
 #  kaviewer_kafka_bootstrapServer: test-kafka-svc:9092
 #  kaviewer_jassconfig:
 
-kafka_sidecar:
-  enable: true
+#kafka_sidecar:
+#  enable: true
 
 
 podAnnotations: {}

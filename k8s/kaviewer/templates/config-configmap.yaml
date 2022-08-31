@@ -1,0 +1,17 @@
+{{- if .Values.config_configmap_enable -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Chart.Name }}-config-configmap
+  labels:
+    {{- include "kaviewer.labels" . | nindent 4 }}
+data:
+  kaviewer-config.yaml: |
+    kaviewer:
+      mode: FULL
+      toggle:
+         topic:
+          delete: false
+         cluster:
+          create: false
+{{- end}}
