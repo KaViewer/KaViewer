@@ -25,8 +25,8 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
           {{- if .Values.config_secret_enable }}
-            envFrom:
-              - secretRef:
+          envFrom:
+            - secretRef:
                   name: {{ .Chart.Name }}-config-secret
           {{- else}}
             {{- range $key, $value:= .Values.set_up_kafka_env}}

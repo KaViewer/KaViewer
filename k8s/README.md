@@ -49,7 +49,10 @@ Before install, you need to install the local `KaViewer image` into [Minikube](h
 ```
 
 ```shell
+# Already mvn build locally
  docker build -f docker/Dockerfile -t kooooooy/kaviewer:latest .  
+# Plain project to build locally
+ docker build -f docker/Dockerfile.local -t kooooooy/kaviewer:latest .  
 ```
 
 Check Images in Minikube

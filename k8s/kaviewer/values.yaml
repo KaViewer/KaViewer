@@ -8,9 +8,11 @@ image:
 config_secret_enable: true
 
 set_up_kafka_env:
-  kaviewer_kafka_cluster: kaviewer-cluster
-  kaviewer_kafka_bootstrapServer: test-kafka-svc:9092
-  kaviewer_jassconfig:
+  kaviewer_toggle_topic_delete: false
+  kaviewer_mode: FULL
+#  kaviewer_kafka_cluster: kaviewer-cluster
+#  kaviewer_kafka_bootstrapServer: test-kafka-svc:9092
+#  kaviewer_jassconfig:
 
 kafka_sidecar:
   enable: true

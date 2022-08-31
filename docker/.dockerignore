@@ -20,6 +20,7 @@
 
 *
 !app/src/
+!app/target/app-*.jar
 !kafka/src/
 !web/src/
 !common/src/
