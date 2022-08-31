@@ -1,6 +1,7 @@
 package com.koy.kaviewer.app.service.featuretoggle;
 
 import com.koy.kaviewer.common.configuration.KaViewerConfiguration;
+import com.koy.kaviewer.common.entity.PermissionVO;
 import com.koy.kaviewer.common.toggle.KaViewerMode;
 import com.koy.kaviewer.common.toggle.Operations;
 import com.koy.kaviewer.common.toggle.Toggle;
@@ -9,6 +10,8 @@ import com.koy.kaviewer.web.KaViewerWebApplication;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -63,5 +66,20 @@ public abstract class FeatureToggleConditionResolver implements ToggleResolver {
 
         return modeMask + mask.get();
     }
+
+    protected <T extends Toggle<T>> List<PermissionVO> doPermission(Class<T> clz, T toggle) {
+        final T[] targetToggles = toggle.toggles();
+        final Map<Operations, Boolean> toggles = new HashMap<>(targetToggles.length);
+        final PermissionVO permissionVO = new PermissionVO();
+        permissionVO.setType(clz);
+        permissionVO.setToggles(toggles);
+
+        Arrays.stream(targetToggles).forEach(it -> {
+            final boolean enable = enable(it, it.getOperation());
+            toggles.put(it.getOperation(), enable);
+        });
+        return List.of(permissionVO);
+    }
+
 
 }

@@ -10,17 +10,11 @@ import com.koy.kaviewer.common.toggle.Toggle;
 import com.koy.kaviewer.common.toggle.toggles.ConsumerToggles;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Component
 public class ConsumerFeatureToggleResolver extends FeatureToggleConditionResolver {
-
-    public ConsumerFeatureToggleResolver(KaViewerConfiguration kaViewerConfiguration) {
-        super(kaViewerConfiguration);
-    }
 
     @Override
     public boolean enable(FeatureToggle featureToggle) {
@@ -41,17 +35,7 @@ public class ConsumerFeatureToggleResolver extends FeatureToggleConditionResolve
 
     @Override
     public List<PermissionVO> permission() {
-        final ConsumerToggles[] consumerToggles = ConsumerToggles.values();
-        final Map<Operations, Boolean> toggles = new HashMap<>(consumerToggles.length);
-        final PermissionVO permissionVO = new PermissionVO();
-        permissionVO.setType(ConsumerToggles.class);
-        permissionVO.setToggles(toggles);
-
-        Arrays.stream(consumerToggles).forEach(it -> {
-            final boolean enable = enable(it, it.getOperation());
-            toggles.put(it.getOperation(), enable);
-        });
-        return List.of(permissionVO);
+        return doPermission(ConsumerToggles.class, ConsumerToggles.READ_MESSAGE);
     }
 
 

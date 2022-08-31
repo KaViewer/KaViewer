@@ -4,22 +4,15 @@ import com.koy.kaviewer.common.configuration.KaViewerConfiguration;
 import com.koy.kaviewer.common.constant.CommonConstant;
 import com.koy.kaviewer.common.entity.PermissionVO;
 import com.koy.kaviewer.common.toggle.FeatureToggle;
-import com.koy.kaviewer.common.toggle.Operations;
 import com.koy.kaviewer.common.toggle.Toggle;
 import com.koy.kaviewer.common.toggle.toggles.TopicToggles;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Component
 public class TopicFeatureToggleResolver extends FeatureToggleConditionResolver {
-
-    public TopicFeatureToggleResolver(KaViewerConfiguration kaViewerConfiguration) {
-        super(kaViewerConfiguration);
-    }
 
     @Override
     public boolean enable(FeatureToggle featureToggle) {
@@ -28,17 +21,7 @@ public class TopicFeatureToggleResolver extends FeatureToggleConditionResolver {
 
     @Override
     public List<PermissionVO> permission() {
-        final TopicToggles[] topicToggles = TopicToggles.values();
-        final Map<Operations, Boolean> toggles = new HashMap<>(topicToggles.length);
-        final PermissionVO permissionVO = new PermissionVO();
-        permissionVO.setType(TopicToggles.class);
-        permissionVO.setToggles(toggles);
-
-        Arrays.stream(topicToggles).forEach(it -> {
-            final boolean enable = enable(it, it.getOperation());
-            toggles.put(it.getOperation(), enable);
-        });
-        return List.of(permissionVO);
+        return doPermission(TopicToggles.class, TopicToggles.CREAT_TOPIC);
     }
 
 
