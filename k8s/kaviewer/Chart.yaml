@@ -4,4 +4,4 @@ description: An Viewer and Operator for Kafka.
 type: application
 version: 0.0.1
 appVersion: "latest"
-icon: "https://example.com/example/kaviewer.png"
+icon: "https://raw.githubusercontent.com/KaViewer/KaViewer-UI/master/kaviewer.ico"
