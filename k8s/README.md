@@ -35,7 +35,7 @@ kubectl apply -f test-kafka-service.yaml
 Using `port-forwarding` to access Kafka and test with local Kafka manager or `KaViewer` app locally.
 
 ```shell
-kubectl port-forward svc/test-kafka-svc 9092:9092
+kubectl port-forward svc/test-kafka-svc 9092:9092 -n kaviewer
 ```
 
 ## Install KaViewer Helm Chart
@@ -83,7 +83,7 @@ Get the application URL by running these commands:
 Check `Helm release` to see if KaViewer is installed.
 
 ```shell
- helm list
+ helm list -n kaviewer
 ```
 
 Check `Minikube dashboard` to see if KaViewer is running.
@@ -108,8 +108,8 @@ Check `KaViewer` UI
 or
 
 ```shell
- kubectl port-forward svc/kaviewer-latest-release 8080:9394 (app)
- kubectl port-forward svc/kaviewer-latest-release 10086:10086 (actuator endpoint)
+ kubectl port-forward svc/kaviewer-latest-release 8080:9394 -n kaviewer (app)
+ kubectl port-forward svc/kaviewer-latest-release 10086:10086 -n kaviewer (actuator endpoint)
 ```
 
 #### Uninstall KaViewer

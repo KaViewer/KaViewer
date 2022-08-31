@@ -5,3 +5,6 @@ type: application
 version: 0.0.1
 appVersion: "latest"
 icon: "https://raw.githubusercontent.com/KaViewer/KaViewer-UI/master/kaviewer.ico"
+maintainers:
+  - name: Koy Zhuang
+    url: https://github.com/Koooooo-7
