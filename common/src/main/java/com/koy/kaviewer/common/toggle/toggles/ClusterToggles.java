@@ -10,6 +10,7 @@ import lombok.Getter;
 public enum ClusterToggles implements Toggle<ClusterToggles> {
     CREATE_CLUSTER(0, Operations.CREATE),
     DELETE_CLUSTER(1, Operations.DELETE),
+    READ_CLUSTER_META(2, Operations.READ),
     ;
 
     private final int flag;
