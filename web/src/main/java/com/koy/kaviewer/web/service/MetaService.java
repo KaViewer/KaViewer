@@ -4,7 +4,7 @@ import com.koy.kaviewer.common.KafkaApplicationHolder;
 import com.koy.kaviewer.common.entity.KafkaApplicationCacheEntity;
 import com.koy.kaviewer.common.entity.KafkaPropertiesVO;
 import com.koy.kaviewer.common.entity.properties.KafkaProperties;
-import com.koy.kaviewer.common.share.RequestContextManagement;
+import com.koy.kaviewer.web.core.RequestContextManagement;
 import org.springframework.stereotype.Service;
 
 @Service

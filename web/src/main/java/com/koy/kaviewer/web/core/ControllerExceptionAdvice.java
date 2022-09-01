@@ -1,4 +1,4 @@
-package com.koy.kaviewer.web.config;
+package com.koy.kaviewer.web.core;
 
 import com.koy.kaviewer.common.exception.KaViewerBizException;
 import org.apache.commons.lang3.StringUtils;

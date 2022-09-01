@@ -1,6 +1,6 @@
 package com.koy.kaviewer.web.intercepter;
 
-import com.koy.kaviewer.common.share.RequestContextManagement;
+import com.koy.kaviewer.web.core.RequestContextManagement;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;

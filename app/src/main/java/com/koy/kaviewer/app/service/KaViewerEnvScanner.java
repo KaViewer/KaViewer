@@ -29,7 +29,6 @@ import java.util.Objects;
 @Service
 @RequiredArgsConstructor
 public class KaViewerEnvScanner {
-    private static final String KAVIEWER_CONFIG = "kaviewer.config.filepath";
     private final KafkaApplicationSetupService kafkaApplicationSetupService;
     private final KaViewerConfiguration kaViewerConfiguration;
     private final KafkaPropertiesConvert kafkaPropertiesConvert;
@@ -39,7 +38,7 @@ public class KaViewerEnvScanner {
 
     @PostConstruct
     public void scanEnv() {
-        final String config = Binder.get(environment).bind(KAVIEWER_CONFIG, String.class).orElseGet(() -> "");
+        final String config = Binder.get(environment).bind(CommonConstant.KAVIEWER_CONFIG_FILEPATH, String.class).orElseGet(() -> "");
         KaViewerConfiguration kaViewerConfiguration = this.kaViewerConfiguration;
         try {
             if (StringUtils.isNotEmpty(config)) {

@@ -2,7 +2,7 @@ package com.koy.kaviewer.web;
 
 import com.koy.kaviewer.common.KafkaApplicationHolder;
 import com.koy.kaviewer.common.configuration.KaViewerConfiguration;
-import com.koy.kaviewer.common.share.RequestContextManagement;
+import com.koy.kaviewer.web.core.RequestContextManagement;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,10 +1,7 @@
-package com.koy.kaviewer.common.share;
+package com.koy.kaviewer.web.core;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.Optional;
 
 public class RequestContextManagement {
     private static final ThreadLocal<RequestContext> requestContext = new InheritableThreadLocal<>();

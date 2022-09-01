@@ -2,7 +2,7 @@ package com.koy.kaviewer.web.service;
 
 import com.koy.kaviewer.common.service.ConsumerService;
 import com.koy.kaviewer.common.service.TopicService;
-import com.koy.kaviewer.common.share.RequestContextManagement;
+import com.koy.kaviewer.web.core.RequestContextManagement;
 import com.koy.kaviewer.web.KaViewerWebApplication;
 import com.koy.kaviewer.web.domain.MessageRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
