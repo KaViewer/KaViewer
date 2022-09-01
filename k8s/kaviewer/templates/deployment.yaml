@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Chart.Name }}-app
+  name: {{ .Chart.Name }}-{{ .Release.Name }}-app
   labels:
     {{- include "kaviewer.labels" . | nindent 4 }}
 spec:
@@ -74,7 +74,7 @@ spec:
       volumes:
         - name: configmap-config
           configMap:
-            name: {{ .Chart.Name }}-config-configmap
+            name: {{ .Chart.Name }}-{{ .Release.Name }}-config-configmap
   {{- end}}
       {{- with .Values.nodeSelector }}
       nodeSelector:

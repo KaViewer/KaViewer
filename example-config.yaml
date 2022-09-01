@@ -2,6 +2,7 @@
 #kaviewer.config.filepath=/kaviewer/example-config.yaml
 #kaviewer_mode=LITE
 kaviewer:
+  mode: FULL
   toggle:
     topic:
       delete: true
@@ -9,6 +10,6 @@ kaviewer:
 #      read: false
 #    cluster:
 #      create: true
-  kafka:
-    cluster: newCluster
-    bootstrapServers: localhost:9092
+#  kafka:
+#    cluster: newCluster
+#    bootstrapServers: localhost:9092

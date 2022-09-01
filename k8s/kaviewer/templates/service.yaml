@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "kaviewer.fullname" . }}
+  name: {{ include "kaviewer.fullname" . }}-{{ .Release.Name }}-service
   labels:
     {{- include "kaviewer.labels" . | nindent 4 }}
 spec:

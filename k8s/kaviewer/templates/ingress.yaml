@@ -8,7 +8,7 @@ apiVersion: extensions/v1beta1
 {{- end }}
 kind: Ingress
 metadata:
-  name: {{ $fullName }}
+  name: {{ $fullName }}-{{ .Release.Name }}-ingress
   labels:
     {{- include "kaviewer.labels" . | nindent 4 }}
   {{- with .Values.ingress.annotations }}
