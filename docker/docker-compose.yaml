@@ -21,14 +21,13 @@ services:
       - zookeeper
 
   kaviewer:
-    image: kooooooy/kaviewer:0.0.1
+    image: kooooooy/kaviewer:0.0.1-beta
     ports:
       - 9394:9394
     environment:
-      KAVIEWER.TYPE:
-      KAVIEWER.CLUSTER:
-      KAVIEWER.BOOTSTRAP:
-
+      KAVIEWER.TOGGLE.TOPIC.DELETE:
+      KAVIEWER.KAFKA.CLUSTER:
+      KAVIEWER.KAFKA.BOOTSTRAPSERVERS:
 
     depends_on:
       - kafka-service
