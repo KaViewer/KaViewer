@@ -29,4 +29,4 @@ PR is welcome.
 KaViewer is licensed under the Apache License 2.0. @[Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0)
 
 ## Star History
-<img height="150px" src="https://api.star-history.com/svg?repos=KaViewer/KaViewer&amp;type=Date" title="Star History" width="80%"/>
+<img height="280px" src="https://api.star-history.com/svg?repos=KaViewer/KaViewer&amp;type=Date" title="Star History" width="80%"/>
