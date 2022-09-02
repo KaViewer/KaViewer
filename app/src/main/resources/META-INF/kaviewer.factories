@@ -1,0 +1,2 @@
+com.koy.kaviewer.app.persist.Persistent=\
+com.koy.kaviewer.app.persist.EmptyPersistentHandler

@@ -1,9 +1,11 @@
 package com.koy.kaviewer.app.service;
 
+import com.koy.kaviewer.app.persist.PersistKafkaPropertiesHandler;
 import com.koy.kaviewer.common.configuration.KaViewerConfiguration;
 import com.koy.kaviewer.common.configuration.KaViewerKafkaConfiguration;
 import com.koy.kaviewer.app.service.resolver.KafkaPropertiesConvert;
 import com.koy.kaviewer.common.constant.CommonConstant;
+import com.koy.kaviewer.common.entity.properties.KafkaProperties;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.StringUtils;
@@ -21,9 +23,11 @@ import org.springframework.util.Assert;
 import org.webjars.NotFoundException;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 
 @Service
@@ -34,7 +38,7 @@ public class KaViewerEnvScanner {
     private final KafkaPropertiesConvert kafkaPropertiesConvert;
     private final Environment environment;
     private final List<PropertySourceLoader> propertySourceLoaders;
-
+    private final PersistKafkaPropertiesHandler persistKafkaPropertiesHandler;
 
     @PostConstruct
     public void scanEnv() {
@@ -47,19 +51,22 @@ public class KaViewerEnvScanner {
             }
             this.kaViewerConfiguration.renew(kaViewerConfiguration);
 
-            bindSetUpKafka(kaViewerConfiguration.getKafka());
+            final List<KafkaProperties> persistKafkaProperties = Optional.ofNullable(persistKafkaPropertiesHandler.load()).orElseGet(ArrayList::new);
+
+            final KaViewerKafkaConfiguration kaViewerKafkaConfiguration = kaViewerConfiguration.getKafka();
+            if (Objects.nonNull(kaViewerKafkaConfiguration) && kaViewerKafkaConfiguration.valid()) {
+                final KafkaProperties setupKafkaProperties = kafkaPropertiesConvert.convert(kaViewerKafkaConfiguration);
+                persistKafkaProperties.add(setupKafkaProperties);
+            }
+            bindSetUpKafka(persistKafkaProperties);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    @SneakyThrows
-    private void bindSetUpKafka(KaViewerKafkaConfiguration kafkaConfiguration) {
-        if (Objects.isNull(kafkaConfiguration) || kafkaConfiguration.invalid()) {
-            return;
-        }
-        kafkaApplicationSetupService.setUp(kafkaPropertiesConvert.convert(kafkaConfiguration));
+    private void bindSetUpKafka(List<KafkaProperties> kafkaProperties) {
+        kafkaProperties.stream().filter(Objects::nonNull).forEach(kafkaApplicationSetupService::setUp);
     }
 
     @SneakyThrows

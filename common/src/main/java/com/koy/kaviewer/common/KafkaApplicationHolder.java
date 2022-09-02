@@ -1,6 +1,7 @@
 package com.koy.kaviewer.common;
 
 import com.koy.kaviewer.common.entity.KafkaApplicationCacheEntity;
+import com.koy.kaviewer.common.entity.properties.KafkaProperties;
 import com.koy.kaviewer.common.exception.ErrorMsg;
 import com.koy.kaviewer.common.exception.KaViewerBizException;
 import org.springframework.context.ApplicationContext;
@@ -65,6 +66,10 @@ public class KafkaApplicationHolder {
             throw KaViewerBizException.of(ErrorMsg.NO_CLUSTER_FOUND);
         }
         return getKafkaApplication(key).getKafkaApplicationContext().getBean(clz);
+    }
+
+    public static List<KafkaProperties> getKafkaProperties() {
+        return clusterHolder.values().stream().map(kafkaApplicationCacheEntity -> kafkaApplicationCacheEntity.getKafkaProperties().clone()).collect(Collectors.toList());
     }
 
 

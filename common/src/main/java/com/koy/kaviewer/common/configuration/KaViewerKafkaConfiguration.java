@@ -14,7 +14,7 @@ public class KaViewerKafkaConfiguration {
     String bootstrapServers;
     String jaasConfig;
 
-    public boolean invalid() {
-        return StringUtils.isAnyEmpty(cluster, bootstrapServers);
+    public boolean valid() {
+        return !StringUtils.isAnyEmpty(cluster, bootstrapServers);
     }
 }

@@ -27,9 +27,13 @@ public class KafkaApplicationSetupService implements KafkaSetupService {
     }
 
     // IDEA, disable JMX agent
-    public void setUp(KafkaProperties kafkaProperties) throws Exception {
-        setUp((ConfigurableApplicationContext) KaViewerApplication.getRoot(),
-                KaViewerApplication.getArgs(), kafkaProperties);
+    public void setUp(KafkaProperties kafkaProperties) {
+        try {
+            setUp((ConfigurableApplicationContext) KaViewerApplication.getRoot(),
+                    KaViewerApplication.getArgs(), kafkaProperties);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void setUp(ConfigurableApplicationContext parent, String[] args, KafkaProperties kafkaProperties) throws Exception {

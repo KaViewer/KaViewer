@@ -16,7 +16,7 @@ import java.util.Properties;
 @EqualsAndHashCode(callSuper = false)
 @Data
 @ToString
-public class KafkaProperties extends Properties {
+public class KafkaProperties extends Properties implements Cloneable {
     private Integer consumerWorkerSize = 3;
     private String encoding = "UTF8";
     private String clusterName;
@@ -30,6 +30,15 @@ public class KafkaProperties extends Properties {
     private String clientId;
     private final ConsumerProperties consumer = new ConsumerProperties(this);
     private final ProducerProperties producer = new ProducerProperties(this);
+
+    @Override
+    public KafkaProperties clone() {
+        final KafkaProperties clone = new KafkaProperties();
+        clone.setClusterName(clusterName);
+        clone.setBootstrapServers(bootstrapServers);
+        clone.setJaasConfig(jaasConfig);
+        return clone;
+    }
 
     static class Security {
         private String type = BrokerSecurityType.SASL_SSL.name();
