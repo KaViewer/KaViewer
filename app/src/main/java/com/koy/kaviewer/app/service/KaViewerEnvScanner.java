@@ -47,15 +47,17 @@ public class KaViewerEnvScanner {
         try {
             if (StringUtils.isNotEmpty(config)) {
                 kaViewerConfiguration = load(CommonConstant.KAVIEWER, KaViewerConfiguration.class, config);
-                Assert.notNull(kaViewerConfiguration, "Config file is invalid to bind.");
+                Assert.notNull(kaViewerConfiguration, "Config file is invalid to bind");
             }
             this.kaViewerConfiguration.renew(kaViewerConfiguration);
 
             final List<KafkaProperties> persistKafkaProperties = Optional.ofNullable(persistKafkaPropertiesHandler.load()).orElseGet(ArrayList::new);
 
             final KaViewerKafkaConfiguration kaViewerKafkaConfiguration = kaViewerConfiguration.getKafka();
+
             if (Objects.nonNull(kaViewerKafkaConfiguration) && kaViewerKafkaConfiguration.valid()) {
                 final KafkaProperties setupKafkaProperties = kafkaPropertiesConvert.convert(kaViewerKafkaConfiguration);
+                // TODO distinct properties between persist and setup config
                 persistKafkaProperties.add(setupKafkaProperties);
             }
             bindSetUpKafka(persistKafkaProperties);
@@ -77,7 +79,7 @@ public class KaViewerEnvScanner {
                 .filter(propertySourceLoader -> Arrays.stream(propertySourceLoader.getFileExtensions())
                         .anyMatch(file::endsWith))
                 .findFirst()
-                .orElseThrow(() -> new NotFoundException("Not Found Matched Source Loader"));
+                .orElseThrow(() -> new NotFoundException("Not found matched source loader"));
         final List<PropertySource<?>> config = sourceLoader.load(name, new FileSystemResource(file));
         final Iterable<ConfigurationPropertySource> from = ConfigurationPropertySources.from(config);
         final ConfigurationPropertySource next = from.iterator().next();

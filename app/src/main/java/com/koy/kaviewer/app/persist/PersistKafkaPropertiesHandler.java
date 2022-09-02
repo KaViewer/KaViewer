@@ -81,7 +81,7 @@ public class PersistKafkaPropertiesHandler implements ApplicationListener<Contex
 
     @PreDestroy
     public void doPersist() {
-        log.info("PreDestroy do persist kafkaProperties.");
+        log.info("PreDestroy do persist kafkaProperties");
         final List<KafkaProperties> kafkaProperties = KafkaApplicationHolder.getKafkaProperties();
         if (kafkaProperties.isEmpty()) {
             return;
