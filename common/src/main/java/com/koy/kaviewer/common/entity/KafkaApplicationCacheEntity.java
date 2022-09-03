@@ -26,11 +26,15 @@ public class KafkaApplicationCacheEntity implements Cloneable {
 
         final KafkaProperties kafkaProperties = this.getKafkaProperties();
         final KafkaProperties kafkaPropertiesClone = new KafkaProperties();
+
         kafkaPropertiesClone.putAll(kafkaProperties);
-        // mask security
-        kafkaPropertiesClone.put(SaslConfigs.SASL_JAAS_CONFIG, Optional.ofNullable(kafkaProperties.getJaasConfig())
+
+        kafkaPropertiesClone.setClusterName(kafkaProperties.getClusterName());
+        kafkaPropertiesClone.setBootstrapServers(kafkaProperties.getBootstrapServers());
+        kafkaPropertiesClone.setJaasConfig(Optional.ofNullable(kafkaProperties.getJaasConfig())
                 .orElseGet(() -> StringUtils.EMPTY)
                 .replaceAll("(.*username=).*(password=).*", "$1****** $2*****"));
+        // mask security
         clone.setKafkaProperties(kafkaPropertiesClone);
         return clone;
     }

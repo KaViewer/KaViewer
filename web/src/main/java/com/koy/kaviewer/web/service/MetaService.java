@@ -12,7 +12,7 @@ public class MetaService {
 
     public KafkaPropertiesVO meta() {
         final String cluster = RequestContextManagement.getCluster();
-        final KafkaApplicationCacheEntity kafkaApplication = KafkaApplicationHolder.getKafkaApplication(cluster);
+        final KafkaApplicationCacheEntity kafkaApplication = KafkaApplicationHolder.getKafkaApplication(cluster).clone();
         final KafkaProperties kafkaProperties = kafkaApplication.getKafkaProperties();
         final KafkaPropertiesVO kafkaPropertiesVO = new KafkaPropertiesVO();
         kafkaPropertiesVO.setBootstrapServers(kafkaProperties.getBootstrapServers());
