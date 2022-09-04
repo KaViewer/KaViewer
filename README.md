@@ -1,6 +1,8 @@
 <img width="296" alt="image" src="https://user-images.githubusercontent.com/33706142/185340722-6e070255-3a82-45e7-9e80-a7704dc30764.png">
 
 > <img src="https://github.githubassets.com/images/modules/profile/achievements/quickdraw-default.png" width="35" alt="Achievement: Quickdraw"> An Viewer and Operator for Kafka.
+---
+![kaviewer-auto](https://user-images.githubusercontent.com/33706142/188315278-89ee6d19-02a0-4333-92ca-56e5b02fbb30.gif)
 
 <img width="1360" alt="image" src="https://user-images.githubusercontent.com/33706142/188314516-c63cb925-c044-456e-a6eb-cfc129bdd88e.png">
 
