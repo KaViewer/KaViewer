@@ -66,8 +66,8 @@ public class ClusterController {
 
     @FeatureToggle(toggleGroup = ClusterToggles.class, operation = Operations.DELETE)
     @Operation(summary = "Delete a cluster.")
-    @DeleteMapping("/{cluster}")
-    public ResponseEntity<Void> delete(@PathVariable("cluster") String cluster) {
+    @DeleteMapping
+    public ResponseEntity<Void> delete(@RequestParam("cluster") String cluster) {
         clusterService.delete(cluster);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
