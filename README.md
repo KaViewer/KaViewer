@@ -1,6 +1,8 @@
 <img width="296" alt="image" src="https://user-images.githubusercontent.com/33706142/185340722-6e070255-3a82-45e7-9e80-a7704dc30764.png">
 
-> :incoming_envelope: An Viewer and Operator for Kafka.
+> <img src="https://github.githubassets.com/images/modules/profile/achievements/quickdraw-default.png" width="35" alt="Achievement: Quickdraw"> An Viewer and Operator for Kafka.
+
+<img width="1360" alt="image" src="https://user-images.githubusercontent.com/33706142/188314516-c63cb925-c044-456e-a6eb-cfc129bdd88e.png">
 
 ## Description
 Today, we have lots of Kafka tools to use, but we have barely neat web Kafka UI to use and bind to our business services.
@@ -23,10 +25,13 @@ And use this simple command to run the application:
 Just check the [KaViewer Helm Chart Usage](/k8s/README.md) doc and `helm install` the chart.
 
 ## Contributing
-PR is welcome.
+
+Folk this project and build locally `mvn clean build`.
+Make your best changes and send a PR. :rocket:
+Using the `Issue` trace is a plus.
 
 ## License
-KaViewer is licensed under the Apache License 2.0. @[Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0)
+KaViewer is licensed under the Apache License 2.0. @[Koy](https://github.com/Koooooo-7)
 
 ## Star History
 <img height="280px" src="https://api.star-history.com/svg?repos=KaViewer/KaViewer&amp;type=Date" title="Star History" width="80%"/>
