@@ -1,5 +1,6 @@
 package com.koy.kaviewer.web.intercepter;
 
+import com.koy.kaviewer.common.constant.CommonConstant;
 import com.koy.kaviewer.common.exception.ErrorMsg;
 import com.koy.kaviewer.common.exception.KaViewerBizException;
 import com.koy.kaviewer.web.core.RequestContextManagement;
@@ -13,14 +14,14 @@ import javax.servlet.http.HttpServletResponse;
 
 @Component
 public class RequestClusterMetaInterceptor implements HandlerInterceptor {
-    private static final String CLUSTER_HEADER_KEY = "k-cluster";
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (HttpMethod.OPTIONS.matches(request.getMethod())) {
             return true;
         }
-        String clusterName = request.getHeader(CLUSTER_HEADER_KEY);
+
+        String clusterName = request.getHeader(CommonConstant.KAVIEWER_CLUSTER_HEADER_KEY);
         if (StringUtils.isEmpty(clusterName)) {
             throw KaViewerBizException.of(ErrorMsg.NO_CLUSTER_META);
         }

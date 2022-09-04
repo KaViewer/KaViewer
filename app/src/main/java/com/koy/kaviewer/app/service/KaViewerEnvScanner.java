@@ -7,7 +7,7 @@ import com.koy.kaviewer.app.service.resolver.KafkaPropertiesConvert;
 import com.koy.kaviewer.common.constant.CommonConstant;
 import com.koy.kaviewer.common.entity.properties.KafkaProperties;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.context.properties.bind.BindResult;
 import org.springframework.boot.context.properties.bind.Bindable;
@@ -23,6 +23,7 @@ import org.springframework.util.Assert;
 import org.webjars.NotFoundException;
 
 import javax.annotation.PostConstruct;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -32,6 +33,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class KaViewerEnvScanner {
     private final KafkaApplicationSetupService kafkaApplicationSetupService;
     private final KaViewerConfiguration kaViewerConfiguration;
@@ -43,6 +45,7 @@ public class KaViewerEnvScanner {
     @PostConstruct
     public void scanEnv() {
         final String config = Binder.get(environment).bind(CommonConstant.KAVIEWER_CONFIG_FILEPATH, String.class).orElseGet(() -> "");
+        log.info("Scan KAVIEWER_CONFIG_FILEPATH: [{}]", config);
         KaViewerConfiguration kaViewerConfiguration = this.kaViewerConfiguration;
         try {
             if (StringUtils.isNotEmpty(config)) {
@@ -63,6 +66,7 @@ public class KaViewerEnvScanner {
             bindSetUpKafka(persistKafkaProperties);
 
         } catch (Exception e) {
+            log.error("scanEnv error:", e);
             e.printStackTrace();
         }
     }
@@ -71,8 +75,7 @@ public class KaViewerEnvScanner {
         kafkaProperties.stream().filter(Objects::nonNull).forEach(kafkaApplicationSetupService::setUp);
     }
 
-    @SneakyThrows
-    public <T> T load(String name, Class<T> target, String file) {
+    public <T> T load(String name, Class<T> target, String file) throws IOException {
 //        final Resource resource = new FileSystemResourceLoader().getResource("file:/example/example-config.yaml");
         final PropertySourceLoader sourceLoader = this.propertySourceLoaders
                 .stream()

@@ -2,6 +2,7 @@ package com.koy.kaviewer.kafka.application;
 
 import com.koy.kaviewer.common.KafkaApplicationHolder;
 import com.koy.kaviewer.common.entity.KafkaApplicationCacheEntity;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -14,8 +15,8 @@ import org.springframework.context.event.ContextClosedEvent;
 import java.util.List;
 
 @SpringBootApplication(scanBasePackages = {"com.koy.kaviewer.kafka"})
+@Slf4j
 public class KafkaApplication implements ApplicationContextAware, ApplicationListener<ContextClosedEvent> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(KafkaApplication.class);
 
     public static boolean contains(String clusterName) {
         return KafkaApplicationHolder.contains(clusterName);
@@ -43,7 +44,7 @@ public class KafkaApplication implements ApplicationContextAware, ApplicationLis
     @Override
     public void onApplicationEvent(ContextClosedEvent event) {
         final ApplicationContext applicationContext = event.getApplicationContext();
-        LOGGER.info("ApplicationContext closed: {}", applicationContext.getId());
+        log.info("ApplicationContext closed: {}", applicationContext.getId());
         KafkaApplicationHolder.remove(applicationContext);
     }
 }

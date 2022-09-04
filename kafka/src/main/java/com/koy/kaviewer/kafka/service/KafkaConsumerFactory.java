@@ -1,9 +1,11 @@
 package com.koy.kaviewer.kafka.service;
 
 import com.koy.kaviewer.common.entity.TopicMetaVO;
+
 import com.koy.kaviewer.common.entity.properties.ConsumerProperties;
 import com.koy.kaviewer.common.entity.properties.KafkaProperties;
 import com.koy.kaviewer.common.exception.KaViewerBizException;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.PartitionInfo;
@@ -24,6 +26,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Repository
+@Slf4j
 public class KafkaConsumerFactory {
 
     private BlockingQueue<KafkaConsumer<byte[], byte[]>> kafkaConsumers;
@@ -33,6 +36,7 @@ public class KafkaConsumerFactory {
         this.kafkaProperties = kafkaProperties;
 
         final Integer consumerWorkerSize = this.kafkaProperties.getConsumerWorkerSize();
+        log.info("Config consumerWorkerSize is: [{}]", consumerWorkerSize);
         kafkaConsumers = new ArrayBlockingQueue<>(consumerWorkerSize);
 
         // TODO lazy init consumers instead of create all size first
@@ -77,20 +81,21 @@ public class KafkaConsumerFactory {
     public List<ConsumerRecord<String, String>> fetchMessage(String topic, int partition, int size, String sorted,
                                                              BiFunction<byte[], String, String> keyDeserializer,
                                                              BiFunction<byte[], String, String> valDeserializer) {
+
+        log.info("Receive fetchMessage params, topic:[{}], partition:[{}], size:[{}]", topic, partition, size);
         // max size is 200
         if (size > 200) size = 200;
-
 
         int finalSize = size;
         return exec((kafkaConsumer -> {
             Set<TopicPartition> topicPartitions;
             // fetch All
-            if (partition == -1){
-                 List<PartitionInfo> partitionInfos = kafkaConsumer.partitionsFor(topic, Duration.ofSeconds(30L));
-                  topicPartitions = partitionInfos.stream()
+            if (partition == -1) {
+                List<PartitionInfo> partitionInfos = kafkaConsumer.partitionsFor(topic, Duration.ofSeconds(30L));
+                topicPartitions = partitionInfos.stream()
                         .map(pt -> new TopicPartition(topic, pt.partition()))
                         .collect(Collectors.toSet());
-            }else {
+            } else {
                 topicPartitions = Set.of(new TopicPartition(topic, partition));
             }
             kafkaConsumer.assign(topicPartitions);
@@ -102,7 +107,7 @@ public class KafkaConsumerFactory {
             });
             List<ConsumerRecord<byte[], byte[]>> records = new ArrayList<>(finalSize);
 
-            final  var recordsOrigin = kafkaConsumer.poll(Duration.ofSeconds(30));
+            final var recordsOrigin = kafkaConsumer.poll(Duration.ofSeconds(30));
 
             for (TopicPartition tp : topicPartitions) {
                 records.addAll(recordsOrigin.records(tp));

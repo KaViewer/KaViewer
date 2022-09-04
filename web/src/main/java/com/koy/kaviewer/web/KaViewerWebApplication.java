@@ -3,9 +3,8 @@ package com.koy.kaviewer.web;
 import com.koy.kaviewer.common.KafkaApplicationHolder;
 import com.koy.kaviewer.common.configuration.KaViewerConfiguration;
 import com.koy.kaviewer.web.core.RequestContextManagement;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -15,8 +14,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @SpringBootApplication(scanBasePackages = {"com.koy.kaviewer.web"})
 @EnableWebMvc
+@Slf4j
 public class KaViewerWebApplication implements ApplicationContextAware {
-    private static final Logger LOGGER = LoggerFactory.getLogger(KaViewerWebApplication.class);
     private static ApplicationContext rest;
     private static ApplicationContext parent;
 
@@ -34,12 +33,13 @@ public class KaViewerWebApplication implements ApplicationContextAware {
         T target = null;
         try {
             if (StringUtils.isNotEmpty(cluster)) {
-                LOGGER.info("Do get bean on cluster :[{}]", cluster);
+                log.info("Do get bean on cluster :[{}]", cluster);
                 target = KafkaApplicationHolder.getKafkaApplicationBean(cluster, clz);
             } else {
                 target = KaViewerWebApplication.parent.getBean(clz);
             }
         } catch (BeansException ignore) {
+            log.error("Do get bean in rest application context with clz:[{}]", clz.getSimpleName());
             target = KaViewerWebApplication.rest.getBean(clz);
         }
         return target;

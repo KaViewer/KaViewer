@@ -6,12 +6,14 @@ import com.koy.kaviewer.common.exception.ErrorMsg;
 import com.koy.kaviewer.common.exception.KaViewerBizException;
 import com.koy.kaviewer.kafka.application.KafkaApplication;
 import com.koy.kaviewer.kafka.client.KafkaClientWrapper;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.admin.AdminClient;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public class KafkaService {
 
     private final ApplicationContext applicationContext;
@@ -50,6 +52,7 @@ public class KafkaService {
 
 
     private void initKafkaAdminClient(KafkaProperties kafkaProperties) {
+        log.info("Start init Kafka AdminClient");
         final AdminClient adminClient = AdminClient.create(kafkaProperties);
 
         kafkaAdminClient.setDelegate(adminClient);
@@ -57,6 +60,7 @@ public class KafkaService {
     }
 
     private void initKafkaConsumerFactory(KafkaProperties kafkaProperties) {
+        log.info("Start init Kafka Consumer Factory");
         kafkaConsumerFactory.createConsumer(kafkaProperties);
     }
 }
