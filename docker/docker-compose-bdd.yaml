@@ -24,6 +24,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    environment:
+      KAVIEWER.MODE: FULL
     ports:
       - 9394:9394
     depends_on:
