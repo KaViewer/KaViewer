@@ -29,9 +29,14 @@ jobs:
       - name: pwd
         run: pwd
 
-      - name: ll
+      - name: ll01
         run: ls app/
 
+      - name: ll02
+        run: ls app/target
+
+      - name: ll03
+        run: ls
 #      - name: Copy file to docker
 #        run: mv . docker/
 #
