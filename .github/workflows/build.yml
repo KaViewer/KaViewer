@@ -26,6 +26,9 @@ jobs:
       - name: Build with Maven
         run: mvn clean package -Dmaven.test.skip=true --file pom.xml
 
+      - name: ls
+        run: ls app/
+
       - name: Copy file to docker
         run: mv app/target/ docker/app/target
 
