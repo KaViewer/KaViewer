@@ -23,7 +23,7 @@ services:
   kaviewer:
     build:
       context: .
-      dockerfile: Dockerfile.bdd
+      dockerfile: Dockerfile
     ports:
       - 9394:9394
     depends_on:
