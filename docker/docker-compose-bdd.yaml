@@ -22,8 +22,8 @@ services:
 
   kaviewer:
     build:
-      context: ../
-      dockerfile: docker/Dockerfile.local
+      context: .
+      dockerfile: docker/Dockerfile
     ports:
       - 9394:9394
     depends_on:
