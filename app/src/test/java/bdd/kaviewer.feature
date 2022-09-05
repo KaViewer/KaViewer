@@ -6,7 +6,7 @@ Feature: Cluster Operations
     * url baseUrl
     * def pb =  payloadBuilder
     * def clusterApi = '/api/v1/cluster'
-    * def clusterDummyName = 'dummyCluster'
+    * def clusterDummyName = 'dummyCluster222'
 
   Scenario: Create a cluster
     Given path clusterApi

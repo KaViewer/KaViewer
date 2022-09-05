@@ -6,8 +6,10 @@ function fn() {
         })
         return tpl;
     }
-    return {
+    var config = {
         baseUrl: 'http://localhost:9394',
         payloadBuilder: pb,
     };
+
+    return config;
 }
