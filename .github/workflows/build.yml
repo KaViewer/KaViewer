@@ -31,7 +31,7 @@ jobs:
 
 
       - name: Copy file to docker
-        run: mkdir docker/app && mv app/ docker/app/
+        run: mkdir -p docker/app/target/ && mv app/target/*.jar docker/app/target/
 
       - name: ll04
         run: ls docker/app/
