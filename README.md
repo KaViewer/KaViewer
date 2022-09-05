@@ -29,7 +29,7 @@ Just check the [KaViewer Helm Chart Usage](/k8s/README.md) doc and `helm install
 ## Contributing
 
 Folk this project and build locally `mvn clean build`.
-Make your best changes and send a PR. :rocket:
+Make your best changes and send a PR. :rocket:  
 Using the `Issue` trace is a plus.
 
 ## License
