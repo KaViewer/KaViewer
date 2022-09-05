@@ -37,8 +37,12 @@ jobs:
 
       - name: ll03
         run: ls
-#      - name: Copy file to docker
-#        run: mv . docker/
+
+      - name: Copy file to docker
+        run: mv app/target/ docker/
+
+      - name: ll04
+        run: ls docker/
 #
 #      - name: ll
 #        run: ls docker/
