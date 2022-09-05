@@ -17,14 +17,15 @@ public class RequestContextInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if (HttpMethod.OPTIONS.matches(request.getMethod())) {
+        final String method = request.getMethod();
+        if (HttpMethod.OPTIONS.matches(method)) {
             log.info("Options request, pass");
             return true;
         }
         final String url = request.getRequestURI();
         final String queryString = String.valueOf(request.getQueryString());
         final String cluster = String.valueOf(request.getHeader(CommonConstant.KAVIEWER_CLUSTER_HEADER_KEY));
-        log.info("Receive request, request url:[{}], queryString:[{}], cluster:[{}]", url, queryString, cluster);
+        log.info("Receive request method: [{}], request url:[{}], queryString:[{}], cluster:[{}]", method, url, queryString, cluster);
         RequestContextManagement.create(new RequestContextManagement.RequestContext());
         return true;
     }
