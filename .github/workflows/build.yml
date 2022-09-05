@@ -39,3 +39,6 @@ jobs:
           name: bdd-test-report-${{ github.event.pull_request.head.sha }}
           path: app/target/karate-reports/
           retention-days: 3
+
+      - name: Comments report artifact
+        run: echo "${{ env.FOOBAR }}"
