@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-latest
-#          , windows-latest
+          #          , windows-latest
         ]
 
     steps:
@@ -26,21 +26,11 @@ jobs:
       - name: Build with Maven
         run: mvn clean package -Dmaven.test.skip=true --file pom.xml
 
-      - name: ls
-        run: ls app/
-
-
       - name: Copy file to docker
         run: mkdir -p docker/app/target/ && mv app/target/*.jar docker/app/target/
-
-      - name: ll04
-        run: ls docker/app/
-
-      - name: ll05
-        run: ls docker/app/target
 
       - name: Run Docker Env for BDD
         run: docker-compose -f docker/docker-compose-bdd.yaml up -d
 
       - name: Run BDD test
-        run: mvn test
+        run: mvn test -DargLine="-Dkarate.env=e2e"
