@@ -32,6 +32,12 @@ jobs:
       - name: ll
         run: ls
 
+      - name: Copy file to docker
+        run: mv . docker/
+
+      - name: ll
+        run: ls docker/
+
       - name: Run Docker Env for BDD
         run: docker-compose -f docker/docker-compose-bdd.yaml up -d
 
