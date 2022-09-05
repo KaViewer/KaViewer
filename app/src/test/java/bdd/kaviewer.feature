@@ -15,10 +15,10 @@ Feature: Cluster Operations
     Then status 200
 
   Scenario: Get the created created
-    Given path clusterApi
+    Given path clusterApi+"/meta"
     When method GET
     Then status 200
-    And match response[*] contains clusterDummyName
+    And match response[*].cluster contains clusterDummyName
 
 #  Scenario: Create a topic
 
