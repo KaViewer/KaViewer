@@ -39,5 +39,5 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: bdd-test-report-${{ github.event.pull_request.head.sha }}
-          path: app/target/karate-reports/karate-summary.html
+          path: app/target/karate-reports/
           retention-days: 3
