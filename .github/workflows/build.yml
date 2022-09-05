@@ -34,3 +34,10 @@ jobs:
 
       - name: Run BDD test
         run: mvn test -DargLine="-Dkarate.env=e2e"
+
+      - name: Upload BDD test report
+        uses: actions/upload-artifact@v3
+        with:
+          name: bdd-test-report
+          path: app/target/karate-reports/karate-summary.html
+          retention-days: 3
