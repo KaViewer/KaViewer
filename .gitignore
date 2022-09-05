@@ -57,3 +57,4 @@ build/
 ### VS Code ###
 .vscode/
 /*/dependency-reduced-pom.xml
+/web/src/main/resources/static/dist/
