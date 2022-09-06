@@ -50,13 +50,12 @@ autoconfiguration mechanism.
 ![kaviewer-auto](https://user-images.githubusercontent.com/33706142/188315278-89ee6d19-02a0-4333-92ca-56e5b02fbb30.gif)
 
 
-#### Local Run
-
-Just `git clone` the repository and `cd` into the directory. Then, run `mvn clean package`
-and `java -jar app/target/app-0.0.1.jar`.
+#### Build Run
+Use `git clone` to clone the repository.  
+Go into the directory and run `mvn clean package` to build.   
+Run `java -jar app/target/app-0.0.1.jar`.
 
 #### Docker Run
-
 Just `git clone` the repository and `cd` into the directory. And use this simple command to run the application:
 `docker build -f docker/Dockerfile.local -t kooooooy/kaviewer:0.0.1 .`
 
