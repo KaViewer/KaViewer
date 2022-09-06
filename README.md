@@ -56,12 +56,21 @@ Go into the directory and run `mvn clean package` to build.
 Run `java -jar app/target/app-0.0.1.jar`.
 
 #### Docker Run
-Just `git clone` the repository and `cd` into the directory. And use this simple command to run the application:
-`docker build -f docker/Dockerfile.local -t kooooooy/kaviewer:0.0.1 .`
+
+> Make sure you already have the docker env.  
+ 
+There have many [`docker-compose file`](/docker) for different scenarios.
+
+- Run with DockerHub public image  
+  `docker-compose -f docker-compose.yaml up -d`  
+
+- Checkout use this simple command to run the application from project:  
+  `docker-compose -f docker-compose-local-app.yaml up -d`  
 
 #### Helm Run
 
-Just check the [KaViewer Helm Chart Usage](/k8s/README.md) doc and `helm install` the chart.
+Please check the [KaViewer Helm Chart Usage](/k8s/README.md) doc.  
+And run `helm install` to install chart.
 
 ## Architecture
 
