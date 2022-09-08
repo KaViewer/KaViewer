@@ -18,8 +18,8 @@ let you can view and operate kafka with permission control, more details see [Ar
 KaViewer natural support those operations:
 
 - Add/Delete New Kafka Cluster/Broker (Not delete the real instance).
-- Add/Delete Topic
-- Publish and Consumer kafka message
+- Add/Delete Topic.
+- Publish/Consumer Messages.
 
 Based on those function, there have two mode to suit different scenario.
 
@@ -27,7 +27,7 @@ Based on those function, there have two mode to suit different scenario.
 - LITE (default)
   Only Support view kafka message.
 
-And support the custom toggle config to enable or disable those operations.
+And support the custom toggle config to enable or disable those operations as well.
 
 | Group            | Config Name                    | Config Value | Description                         |
 |------------------|--------------------------------|--------------|-------------------------------------|
