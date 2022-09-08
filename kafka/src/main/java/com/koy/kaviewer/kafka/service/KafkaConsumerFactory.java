@@ -64,6 +64,9 @@ public class KafkaConsumerFactory {
     }
 
     public List<TopicMetaVO> buildTopicsMeta() {
+        return buildTopicsMeta(false);
+    }
+    public List<TopicMetaVO> buildTopicsMeta(boolean assign) {
         return exec((kafkaConsumer) -> {
 
             final Map<String, List<PartitionInfo>> topics = kafkaConsumer.listTopics(Duration.ofSeconds(30));
@@ -71,7 +74,9 @@ public class KafkaConsumerFactory {
             topics.forEach((topic, pt) -> {
                 final List<TopicPartition> tps = pt.stream()
                         .map(p -> new TopicPartition(topic, p.partition())).collect(Collectors.toList());
-                kafkaConsumer.assign(tps);
+                if (assign) {
+                    kafkaConsumer.assign(tps);
+                }
                 topicMetaVOS.add(new TopicMetaVO(topic, pt, tps));
             });
             return topicMetaVOS;

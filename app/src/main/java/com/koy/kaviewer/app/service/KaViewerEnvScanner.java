@@ -53,6 +53,7 @@ public class KaViewerEnvScanner {
                 Assert.notNull(kaViewerConfiguration, "Config file is invalid to bind");
             }
             this.kaViewerConfiguration.renew(kaViewerConfiguration);
+            log.info("Current working in [{}] mode", kaViewerConfiguration.getMode());
 
             final List<KafkaProperties> persistKafkaProperties = Optional.ofNullable(persistKafkaPropertiesHandler.load()).orElseGet(ArrayList::new);
 
