@@ -20,7 +20,7 @@ Feature: Cluster Operations
     When method post
     Then status 200
 
-  Scenario: Get the created created
+  Scenario: Get the created cluster
     Given path clusterApi, 'meta'
     When method GET
     Then status 200
@@ -49,14 +49,14 @@ Feature: Cluster Operations
     And match response[*].value contains 'mockValue'
     And match response[*].topic contains topicMockName
 
-  Scenario: Delete a topic
+  Scenario: Delete the topic
     Given path topicApi
     And param topic = topicMockName
     And header k-cluster = clusterMockName
     When method delete
     Then status 200
 
-  Scenario: Can not found the topic
+  Scenario: Check the topic not exist
     Given path topicApi, 'meta'
     And header k-cluster = clusterMockName
     When method get
