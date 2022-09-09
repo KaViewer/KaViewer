@@ -2,6 +2,10 @@
 
 > <img src="https://github.githubassets.com/images/modules/profile/achievements/quickdraw-default.png" width="35" alt="Achievement: Quickdraw"> An Viewer and Operator for Kafka.
 ---
+[![KaViewer CI](https://github.com/KaViewer/KaViewer/actions/workflows/build.yml/badge.svg)](https://github.com/KaViewer/KaViewer/actions/workflows/build.yml)
+[![CodeQL](https://github.com/KaViewer/KaViewer/actions/workflows/codescan.yml/badge.svg)](https://github.com/KaViewer/KaViewer/actions/workflows/codescan.yml)
+[![GitHub license](https://img.shields.io/github/license/KaViewer/KaViewer)](https://github.com/KaViewer/KaViewer/blob/main/LICENSE)
+---
 
 <img width="1360" alt="image" src="https://user-images.githubusercontent.com/33706142/188314516-c63cb925-c044-456e-a6eb-cfc129bdd88e.png">
 
