@@ -71,10 +71,9 @@ There have many [`docker-compose file`](/docker) for different scenarios.
 - Checkout use this simple command to run the application from project:  
   `docker-compose -f docker-compose-local-app.yaml up -d`  
 
-#### Helm Run
-
-Please check the [KaViewer Helm Chart Usage](/k8s/README.md) doc.  
-And run `helm install` to install chart.
+#### Kubernetes Run
+KaViewer uses the `Helm`to install and deploy to kubernetes resources.  
+Please check the [KaViewer Helm Chart Usage](/k8s/README.md) doc for more details.  
 
 ## Architecture
 
