@@ -8,6 +8,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextClosedEvent;
 import org.springframework.core.io.UrlResource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
+import org.springframework.core.io.support.SpringFactoriesLoader;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.CollectionUtils;
@@ -63,7 +64,10 @@ public class PersistKafkaPropertiesHandler implements ApplicationListener<Contex
                         handlers.add(instance);
                     }
                 }
-                persistHandlers.putIfAbsent(factoryTypeName, handlers);
+
+                final List<Persistent> persists = persistHandlers.getOrDefault(factoryTypeName, new ArrayList<>());
+                persists.addAll(handlers);
+                persistHandlers.put(factoryTypeName, persists);
             }
         }
     }
