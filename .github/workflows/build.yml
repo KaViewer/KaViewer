@@ -33,6 +33,9 @@ jobs:
       - name: Run BDD test
         run: mvn test -DargLine="-Dkarate.env=e2e"
 
+      - name: Upload coverage reports to Codecov with GitHub Action
+        uses: codecov/codecov-action@v3
+
       - name: Upload BDD test report
         uses: actions/upload-artifact@v3
         with:
