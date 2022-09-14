@@ -36,7 +36,7 @@ jobs:
       - name: Upload coverage reports to Codecov with GitHub Action
         uses: codecov/codecov-action@v3
         with:
-          files: /home/runner/work/KaViewer/KaViewer/app/target/karate-reports/karate-summary.html
+          files: /home/runner/work/KaViewer/KaViewer/app/target/karate-reports
 
       - name: Upload BDD test report
         uses: actions/upload-artifact@v3
