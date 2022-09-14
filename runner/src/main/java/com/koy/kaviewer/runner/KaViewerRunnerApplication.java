@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Import runner.jar in pom like.
  *<dependency>
  * 			<groupId>com.koy</groupId>
- * 			<artifactId>runner</artifactId>
+ * 			<artifactId>kaviewer-runner</artifactId>
  * 			<version>0.0.1</version>
  * 		</dependency>
  * Run the KaViewerRunnerApplication to start the KaViewer.
