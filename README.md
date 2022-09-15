@@ -42,10 +42,11 @@ And support the custom toggle config to enable or disable those operations as we
 | Consumer         | kaviewer.toggle.consumer.write | Boolean      | Allow to publish new message (true) |
 | Consumer         | kaviewer.toggle.consumer.read  | Boolean      | Allow to consume new message (true) |
 
-### Persist SPI
+### Persist API
 
-The exposed SPI interface `Persistent` let you do the enhancement to persist KaViewer data. It is similar to SpringBoot
-autoconfiguration mechanism.
+The exposed API interface `Persistent` let you do the enhancement to persist KaViewer data. It is similar to SpringBoot
+autoconfiguration mechanism. You can import `kaviewer-runner.jar` as dependency and implement the `Persistent`
+interface, then add the `META-INF/kaviewer.factories` to do the trick.
 
 ## Usage
 
