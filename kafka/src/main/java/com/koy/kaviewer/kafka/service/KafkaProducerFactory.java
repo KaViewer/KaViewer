@@ -28,7 +28,7 @@ public class KafkaProducerFactory {
             return this.kafkaProducer4Byte;
         }
         this.kafkaProperties = kafkaClientWrapper.getKafkaProperties();
-        this.producerProperties = this.kafkaProperties.getProducer();
+        this.producerProperties = this.kafkaProperties.getProducerProperties();
 
         kafkaProducer4Byte = new KafkaProducer<>(producerProperties);
 

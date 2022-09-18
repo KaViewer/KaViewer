@@ -41,7 +41,7 @@ public class KafkaProperties extends Properties implements Cloneable {
     }
 
     static class Security {
-        private String type = BrokerSecurityType.SASL_SSL.name();
+        private final String type = BrokerSecurityType.SASL_SSL.name();
 
         public void config(KafkaProperties kafkaProperties) {
             kafkaProperties.setProperty(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, type);
@@ -84,15 +84,15 @@ public class KafkaProperties extends Properties implements Cloneable {
         this.bootstrapServers = bootstrapServers;
     }
 
-    public String getKey() {
+    public String getClusterKey() {
         return clusterName + "-" + kafkaClusterVersion;
     }
 
-    public ConsumerProperties getConsumer() {
+    public ConsumerProperties getConsumerProperties() {
         return this.consumer.buildConsumerProperties();
     }
 
-    public ProducerProperties getProducer() {
+    public ProducerProperties getProducerProperties() {
         return this.producer.buildProducerProperties();
     }
 }

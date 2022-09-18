@@ -14,8 +14,10 @@ public class PropertiesResources<T> {
     public enum ResourcesType {
         YAML(s -> s.endsWith(".yaml") || s.endsWith(".yml")),
         ENTITY(s -> s.equalsIgnoreCase("entity")),
-        CONFIGMAP(s -> s.equalsIgnoreCase("configMap")),
-        CRD;
+        // dynamic import from kubernetes resources
+//        CONFIGMAP(s -> s.equalsIgnoreCase("configMap")),
+//        CRD
+        ;
 
         private Predicate<String> from;
 

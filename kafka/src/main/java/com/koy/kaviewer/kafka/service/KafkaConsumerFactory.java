@@ -41,7 +41,7 @@ public class KafkaConsumerFactory {
 
         // TODO lazy init consumers instead of create all size first
         for (int i = 0; i < consumerWorkerSize; i++) {
-            final ConsumerProperties consumerProperties = kafkaProperties.getConsumer();
+            final ConsumerProperties consumerProperties = kafkaProperties.getConsumerProperties();
             final KafkaConsumer<byte[], byte[]> kafkaConsumer4Byte = new KafkaConsumer<>(consumerProperties);
             kafkaConsumers.add(kafkaConsumer4Byte);
         }
