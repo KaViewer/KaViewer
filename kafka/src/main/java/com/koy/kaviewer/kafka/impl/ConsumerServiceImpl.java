@@ -38,7 +38,7 @@ public class ConsumerServiceImpl implements ConsumerService {
     private static final Map<String, BiFunction<byte[], String, String>> deserializers = Map.of("string", stringDeserializer, "byte", byteDeserializer);
 
     @Override
-    public List<ConsumerRecord<String, String>> fetchMessage(String topic, int partition, int size, String sorted, BiFunction<byte[], String, String> keyDeserializer, BiFunction<byte[], String, String> valDeserializer) {
-        return kafkaConsumerFactory.fetchMessage(topic, partition, size, sorted, keyDeserializer, valDeserializer);
+    public List<ConsumerRecord<String, String>> fetchMessage(String topic, int partition, int size, Integer offset, BiFunction<byte[], String, String> keyDeserializer, BiFunction<byte[], String, String> valDeserializer) {
+        return kafkaConsumerFactory.fetchMessage(topic, partition, size, offset, keyDeserializer, valDeserializer);
     }
 }

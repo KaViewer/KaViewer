@@ -5,6 +5,7 @@ import com.koy.kaviewer.common.service.TopicService;
 import com.koy.kaviewer.web.core.RequestContextManagement;
 import com.koy.kaviewer.web.KaViewerWebApplication;
 import com.koy.kaviewer.web.domain.MessageRecord;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.common.errors.SerializationException;
 import org.springframework.stereotype.Service;
@@ -35,7 +36,7 @@ public class ConsumerBizService {
 
     private static final Map<String, BiFunction<byte[], String, String>> deserializers = Map.of("string", stringDeserializer, "byte", byteDeserializer);
 
-    public List<MessageRecord<String, String>> fetch(String topic, int partition, int size, String sorted, String key, String val) {
+    public List<MessageRecord<String, String>> fetch(String topic, int partition, int size, String offsetStr, String key, String val) {
 
         final TopicService topicService = KaViewerWebApplication.getBean(TopicService.class);
         final Set<String> topics = topicService.list(RequestContextManagement.getCluster());
@@ -44,11 +45,16 @@ public class ConsumerBizService {
             return List.of();
         }
 
+        Integer offset = null;
+        if (StringUtils.isNumeric(offsetStr)) {
+            offset = Integer.valueOf(offsetStr);
+        }
+
         final ConsumerService consumerService = KaViewerWebApplication.getBean(ConsumerService.class);
         final BiFunction<byte[], String, String> keyDeserializer = deserializers.getOrDefault(key, stringDeserializer);
         final BiFunction<byte[], String, String> valDeserializer = deserializers.getOrDefault(val, stringDeserializer);
 
-        final List<ConsumerRecord<String, String>> records = consumerService.fetchMessage(topic, partition, size, sorted, keyDeserializer, valDeserializer);
+        final List<ConsumerRecord<String, String>> records = consumerService.fetchMessage(topic, partition, size, offset, keyDeserializer, valDeserializer);
         return records.stream().map(rds ->
                 new MessageRecord<String, String>(
                         rds.topic(),

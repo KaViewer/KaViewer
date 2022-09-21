@@ -66,6 +66,7 @@ public class KafkaConsumerFactory {
     public List<TopicMetaVO> buildTopicsMeta() {
         return buildTopicsMeta(false);
     }
+
     public List<TopicMetaVO> buildTopicsMeta(boolean assign) {
         return exec((kafkaConsumer) -> {
 
@@ -83,13 +84,13 @@ public class KafkaConsumerFactory {
         });
     }
 
-    public List<ConsumerRecord<String, String>> fetchMessage(String topic, int partition, int size, String sorted,
+    public List<ConsumerRecord<String, String>> fetchMessage(String topic, int partition, int size, Integer offset,
                                                              BiFunction<byte[], String, String> keyDeserializer,
                                                              BiFunction<byte[], String, String> valDeserializer) {
 
         log.info("Receive fetchMessage params, topic:[{}], partition:[{}], size:[{}]", topic, partition, size);
         // max size is 200
-        if (size > 200) size = 200;
+        if (size > 1000) size = 500;
 
         int finalSize = size;
         return exec((kafkaConsumer -> {
@@ -112,10 +113,11 @@ public class KafkaConsumerFactory {
             });
             List<ConsumerRecord<byte[], byte[]>> records = new ArrayList<>(finalSize);
 
-            final var recordsOrigin = kafkaConsumer.poll(Duration.ofSeconds(30));
-
-            for (TopicPartition tp : topicPartitions) {
-                records.addAll(recordsOrigin.records(tp));
+            while (records.size() < finalSize) {
+                final var recordsOrigin = kafkaConsumer.poll(Duration.ofSeconds(30));
+                for (TopicPartition tp : topicPartitions) {
+                    records.addAll(recordsOrigin.records(tp));
+                }
             }
 
             return records
