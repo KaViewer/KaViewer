@@ -87,8 +87,9 @@ Please check the [KaViewer Helm Chart Usage](/k8s/README.md) doc for more detail
 
 ## Contributing
 
-Folk this project and build locally `mvn clean build`. Make your best changes and send a PR. :rocket:  
-Using the `Issue` trace is a plus.
+Folk this project and build locally.:dog:   
+Make your best changes and send a PR.:heavy_plus_sign:   
+Using the `Issue` trace is a plus.:dog:    
 
 ## License
 
