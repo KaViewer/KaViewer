@@ -33,6 +33,8 @@ Based on those function, there have two mode to suit different scenario.
 
 And support the custom toggle config to enable or disable those operations as well.
 
+**configurations**
+
 | Group            | Config Name                    | Config Value | Description                         |
 |------------------|--------------------------------|--------------|-------------------------------------|
 | Cluster          | kaviewer.toggle.cluster.create | Boolean      | Allow to add new cluster (true)     |
@@ -89,7 +91,7 @@ Please check the [KaViewer Helm Chart Usage](/k8s/README.md) doc for more detail
 
 Folk this project and build locally.:dog:   
 Make your best changes and send a PR.:heavy_plus_sign:   
-Using the `Issue` trace is a plus.:dog:    
+Using the `Issue` trace is a plus.:cat:    
 
 ## License
 
