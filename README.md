@@ -55,10 +55,13 @@ interface, then add the `META-INF/kaviewer.factories` to do the trick.
 ![kaviewer-auto](https://user-images.githubusercontent.com/33706142/188315278-89ee6d19-02a0-4333-92ca-56e5b02fbb30.gif)
 
 
-#### Build Run
+#### Build And Run
 Use `git clone` to clone the repository.  
 Go into the directory and run `mvn clean package -Dmaven.test.skip=true --file pom.xml` to build project.   
-Run `java -jar app/target/app-0.0.1.jar`.
+Run 
+  - `java -jar app/target/app-0.0.1.jar` LITE mode by default .
+  - `java -jar app-0.0.1.jar --kaviewer.mode=FULL` to enable FULL mode.
+
 
 #### Docker Run
 
