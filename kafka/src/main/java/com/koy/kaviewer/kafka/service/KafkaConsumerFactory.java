@@ -20,9 +20,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -98,7 +96,7 @@ public class KafkaConsumerFactory {
         // max size is 200
         if (size > 1000) size = 500;
 
-        int finalSize = size;
+        final int finalSize = size;
         return exec((kafkaConsumer -> {
             if (Objects.isNull(kafkaConsumer)){
                 log.info("kafkaConsumer is unavailable");
@@ -112,10 +110,14 @@ public class KafkaConsumerFactory {
                 topicPartitions = partitionInfos.stream()
                         .map(pt -> new TopicPartition(topic, pt.partition()))
                         .collect(Collectors.toSet());
+             // fetch single partition   
             } else {
                 topicPartitions = Set.of(new TopicPartition(topic, partition));
             }
+            
             kafkaConsumer.assign(topicPartitions);
+            
+            
             final Map<TopicPartition, Long> latestOffsets = kafkaConsumer.endOffsets(topicPartitions);
             int maxOffset = latestOffsets.values().stream().mapToInt(Long::intValue).max().orElse(0);
 
@@ -142,12 +144,8 @@ public class KafkaConsumerFactory {
             }
             List<ConsumerRecord<byte[], byte[]>> records = new ArrayList<>(finalSize);
 
-            // Without Offset : records.size() < finalSize
-            // OR
-            // With Offset: records.size() < finalSize && records.size() < maxOffset - offset
-            // e.g. offset = 180, maxOffset = 200, finalSize = 10, records.size() max is 10
-            // e.g. offset = 180, maxOffset = 200, finalSize = 50, records.size() max is 20
-            while ((Objects.isNull(offset) && records.size() < finalSize) || (Objects.nonNull(offset) && ((records.size() < finalSize) && (records.size() < (maxOffset - offset))))) {
+//            ((Objects.isNull(offset) && (records.size() < finalSize || (records.size() < maxOffset))) || (Objects.nonNull(offset) && ((records.size() < finalSize) && (records.size() < (maxOffset - offset)))))
+            while (conditionWithoutOffset(offset, records.size(), finalSize, maxOffset) || conditionWithOffset(offset, records.size(), finalSize, maxOffset)) {
                 final var recordsOrigin = kafkaConsumer.poll(Duration.ofSeconds(30));
                 for (TopicPartition tp : topicPartitions) {
                     records.addAll(recordsOrigin.records(tp));
@@ -177,6 +175,18 @@ public class KafkaConsumerFactory {
                     .collect(Collectors.toList());
 
         }));
+    }
+
+    // e.g. maxOffset = 1000, finalSize = 10, records.size() is 10
+    // e.g. maxOffset = 1, finalSize = 10, records.size() is 1
+    private boolean conditionWithoutOffset(Integer offset, int recordsSize, int finalSize, int maxOffset) {
+        return (Objects.isNull(offset) && (recordsSize < finalSize && (recordsSize < maxOffset)));
+    }
+
+    // e.g. offset = 1800, maxOffset = 2000, finalSize = 50, records.size() max is 50 [1800-1849]
+    // e.g. offset = 1800, maxOffset = 1840, finalSize = 50, records.size() max is 40 [1800-1839]
+    private boolean conditionWithOffset(Integer offset, int recordsSize, int finalSize, int maxOffset) {
+        return (Objects.nonNull(offset) && ((recordsSize < finalSize) && (recordsSize < (maxOffset - offset))));
     }
 }
 
