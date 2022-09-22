@@ -57,7 +57,7 @@ interface, then add the `META-INF/kaviewer.factories` to do the trick.
 
 #### Build Run
 Use `git clone` to clone the repository.  
-Go into the directory and run `mvn clean package` to build.   
+Go into the directory and run `mvn clean package -Dmaven.test.skip=true --file pom.xml` to build project.   
 Run `java -jar app/target/app-0.0.1.jar`.
 
 #### Docker Run
