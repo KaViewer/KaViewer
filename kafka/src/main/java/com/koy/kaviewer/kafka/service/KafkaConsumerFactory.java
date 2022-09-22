@@ -14,6 +14,8 @@ import org.springframework.stereotype.Repository;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -69,7 +71,7 @@ public class KafkaConsumerFactory {
 
     public List<TopicMetaVO> buildTopicsMeta(boolean assign) {
         return exec((kafkaConsumer) -> {
-            if (Objects.isNull(kafkaConsumer)){
+            if (Objects.isNull(kafkaConsumer)) {
                 log.info("kafkaConsumer is unavailable");
                 return List.of();
             }
@@ -98,26 +100,26 @@ public class KafkaConsumerFactory {
 
         final int finalSize = size;
         return exec((kafkaConsumer -> {
-            if (Objects.isNull(kafkaConsumer)){
+            if (Objects.isNull(kafkaConsumer)) {
                 log.info("kafkaConsumer is unavailable");
                 return List.of();
             }
 
             Set<TopicPartition> topicPartitions;
+            final boolean fetchAll = partition == -1;
             // fetch All
-            if (partition == -1) {
+            if (fetchAll) {
                 List<PartitionInfo> partitionInfos = kafkaConsumer.partitionsFor(topic, Duration.ofSeconds(30L));
                 topicPartitions = partitionInfos.stream()
                         .map(pt -> new TopicPartition(topic, pt.partition()))
                         .collect(Collectors.toSet());
-             // fetch single partition   
+                // fetch single partition
             } else {
                 topicPartitions = Set.of(new TopicPartition(topic, partition));
             }
-            
-            kafkaConsumer.assign(topicPartitions);
-            
-            
+
+
+
             final Map<TopicPartition, Long> latestOffsets = kafkaConsumer.endOffsets(topicPartitions);
             int maxOffset = latestOffsets.values().stream().mapToInt(Long::intValue).max().orElse(0);
 
@@ -129,32 +131,66 @@ public class KafkaConsumerFactory {
                 return List.of();
             }
 
+            final Map<TopicPartition, Long> topicPartitionLatestOffsetTable = new HashMap<>(topicPartitions.size());
+
+            kafkaConsumer.assign(topicPartitions);
+            final List<TopicPartition> availableTopicPartitions = new ArrayList<>(topicPartitions.size());
+
             for (TopicPartition topicPartition : topicPartitions) {
                 final long latestOffset = latestOffsets.get(topicPartition);
+                topicPartitionLatestOffsetTable.put(topicPartition, latestOffset);
                 if (Objects.nonNull(offset)) {
                     if (offset > latestOffset) {
                         // offset is larger, skip
+                        topicPartitionLatestOffsetTable.remove(topicPartition);
                         log.info("Offset:[{}] is larger than latestOffset:[{}], skip on partition:[{}]", offset, latestOffset, topicPartition.partition());
                     } else {
+                        availableTopicPartitions.add(topicPartition);
                         kafkaConsumer.seek(topicPartition, offset);
                     }
                 } else {
+                    availableTopicPartitions.add(topicPartition);
                     kafkaConsumer.seek(topicPartition, Math.max(0, latestOffset - finalSize));
                 }
             }
+
             List<ConsumerRecord<byte[], byte[]>> records = new ArrayList<>(finalSize);
 
-//            ((Objects.isNull(offset) && (records.size() < finalSize || (records.size() < maxOffset))) || (Objects.nonNull(offset) && ((records.size() < finalSize) && (records.size() < (maxOffset - offset)))))
-            while (conditionWithoutOffset(offset, records.size(), finalSize, maxOffset) || conditionWithOffset(offset, records.size(), finalSize, maxOffset)) {
+            boolean fetch = true;
+            while ((records.size() < finalSize * availableTopicPartitions.size()) && fetch) {
                 final var recordsOrigin = kafkaConsumer.poll(Duration.ofSeconds(30));
-                for (TopicPartition tp : topicPartitions) {
-                    records.addAll(recordsOrigin.records(tp));
+                for (TopicPartition tp : availableTopicPartitions) {
+                    final List<ConsumerRecord<byte[], byte[]>> recs = recordsOrigin.records(tp);
+                    if (recs.isEmpty()) {
+                        continue;
+                    }
+                    records.addAll(recs);
+                    final long currentFetchedLatestOffset = recs.get(recs.size() - 1).offset();
+                    var currentPartitionLatestOffset = topicPartitionLatestOffsetTable.get(tp);
+                    // fetch to the end of current partition
+                    if (currentFetchedLatestOffset >= (currentPartitionLatestOffset - 1)) {
+                        topicPartitionLatestOffsetTable.remove(tp);
+                    }
+
+                    if (topicPartitionLatestOffsetTable.isEmpty()) {
+                        fetch = false;
+                        break;
+                    }
                 }
             }
 
             log.info("Fetch records size:[{}]", records.size());
             // get marched records in size
-            records = records.stream().limit(finalSize).collect(Collectors.toList());
+            if (Objects.isNull(offset)) {
+                records = records.subList(Math.max(0, records.size() - finalSize), records.size());
+            }else {
+                records = records.subList(0, Math.min(finalSize, records.size()));
+            }
+
+//            records = records.stream().filter(rec -> Objects.isNull(offset) || (rec.offset() <= offset + finalSize))
+//                    .sorted(Comparator.comparingLong(r -> ((ConsumerRecord<byte[], byte[]>) r)
+//                                    .offset())
+//                            .reversed()).limit(finalSize).collect(Collectors.toList());
             log.info("Return records size:[{}]", records.size());
 
             return records
@@ -175,18 +211,6 @@ public class KafkaConsumerFactory {
                     .collect(Collectors.toList());
 
         }));
-    }
-
-    // e.g. maxOffset = 1000, finalSize = 10, records.size() is 10
-    // e.g. maxOffset = 1, finalSize = 10, records.size() is 1
-    private boolean conditionWithoutOffset(Integer offset, int recordsSize, int finalSize, int maxOffset) {
-        return (Objects.isNull(offset) && (recordsSize < finalSize && (recordsSize < maxOffset)));
-    }
-
-    // e.g. offset = 1800, maxOffset = 2000, finalSize = 50, records.size() max is 50 [1800-1849]
-    // e.g. offset = 1800, maxOffset = 1840, finalSize = 50, records.size() max is 40 [1800-1839]
-    private boolean conditionWithOffset(Integer offset, int recordsSize, int finalSize, int maxOffset) {
-        return (Objects.nonNull(offset) && ((recordsSize < finalSize) && (recordsSize < (maxOffset - offset))));
     }
 }
 
