@@ -46,6 +46,7 @@ Feature: Cluster Operations
     And header k-cluster = clusterMockName
     When method get
     Then status 200
+    Then print response
     And match response[*].value contains 'mockValue'
     And match response[*].topic contains topicMockName
 
