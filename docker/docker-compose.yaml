@@ -21,7 +21,7 @@ services:
       - zookeeper
 
   kaviewer:
-    image: kooooooy/kaviewer:0.0.1-beta
+    image: kooooooy/kaviewer:0.0.1-alpha
     ports:
       - 9394:9394
     environment:
