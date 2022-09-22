@@ -32,7 +32,7 @@ Based on those function, there have two mode to suit different scenario.
 
 And support the custom toggle config to enable or disable those operations as well.
 
-## Configurations
+#### Configurations
 
 | Group            | Config Name                    | Config Value | Description                               |
 |------------------|--------------------------------|--------------|-------------------------------------------|
