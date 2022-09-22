@@ -35,14 +35,14 @@ And support the custom toggle config to enable or disable those operations as we
 
 **configurations**
 
-| Group            | Config Name                    | Config Value | Description                         |
-|------------------|--------------------------------|--------------|-------------------------------------|
-| Cluster          | kaviewer.toggle.cluster.create | Boolean      | Allow to add new cluster (true)     |
-| Cluster          | kaviewer.toggle.cluster.delete | Boolean      | Allow to delete new cluster (true)  |
-| Topic            | kaviewer.toggle.topic.create   | Boolean      | Allow to create new topic (true)    |
-| Topic            | kaviewer.toggle.topic.delete   | Boolean      | Allow to delete new topic (true)    |
-| Consumer         | kaviewer.toggle.consumer.write | Boolean      | Allow to publish new message (true) |
-| Consumer         | kaviewer.toggle.consumer.read  | Boolean      | Allow to consume new message (true) |
+| Group            | Config Name                    | Config Value | Description                               |
+|------------------|--------------------------------|--------------|-------------------------------------------|
+| Cluster          | kaviewer.toggle.cluster.create | Boolean      | Allow to add new cluster (true/false)     |
+| Cluster          | kaviewer.toggle.cluster.delete | Boolean      | Allow to delete new cluster (true/false)  |
+| Topic            | kaviewer.toggle.topic.create   | Boolean      | Allow to create new topic (true/false)    |
+| Topic            | kaviewer.toggle.topic.delete   | Boolean      | Allow to delete new topic (true/false)    |
+| Consumer         | kaviewer.toggle.consumer.write | Boolean      | Allow to publish new message (true/false) |
+| Consumer         | kaviewer.toggle.consumer.read  | Boolean      | Allow to consume new message (true/false) |
 
 ### Persist API
 
