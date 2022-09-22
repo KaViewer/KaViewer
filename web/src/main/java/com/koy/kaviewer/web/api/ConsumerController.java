@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.concurrent.Callable;
 
 @Tag(name = "Consumer Operations", description = "Do operations on consumer.")
 @RestController
@@ -37,7 +38,7 @@ public class ConsumerController {
     public ResponseEntity<List<MessageRecord<String, String>>> fetch(
             @PathVariable(name = "topic") String topic,
             @PathVariable(name = "partition") Integer partition,
-            @RequestParam(name = "sorted", required = false, defaultValue = "desc") String sorted,
+            @RequestParam(name = "offset", required = false, defaultValue = "") String offset,
             @RequestParam(name = "limit", required = false, defaultValue = "100") Integer limit,
             @RequestParam(name = "keyDeserializer", required = false, defaultValue = "string") String keyDeserializer,
             @RequestParam(name = "valDeserializer", required = false, defaultValue = "string") String valDeserializer) {
@@ -45,7 +46,8 @@ public class ConsumerController {
         if (partition < -1 || limit < 0) {
             return ResponseEntity.badRequest().build();
         }
-        final List<MessageRecord<String, String>> records = consumerBizService.fetch(topic, partition, limit, sorted, keyDeserializer, valDeserializer);
+
+        final List<MessageRecord<String, String>> records = consumerBizService.fetch(topic, partition, limit, offset, keyDeserializer, valDeserializer);
         return ResponseEntity.ok(records);
     }
 }
