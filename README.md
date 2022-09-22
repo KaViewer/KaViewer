@@ -27,13 +27,12 @@ KaViewer natural support those operations:
 
 Based on those function, there have two mode to suit different scenario.
 
-- FULL Support all the operations above.
-- LITE (default)
-  Only Support view kafka message.
+- **FULL** mode, support all the operations above.
+- **LITE** mode (default), only support to view kafka message.
 
 And support the custom toggle config to enable or disable those operations as well.
 
-**configurations**
+## Configurations
 
 | Group            | Config Name                    | Config Value | Description                               |
 |------------------|--------------------------------|--------------|-------------------------------------------|
