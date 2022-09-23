@@ -1,0 +1,36 @@
+# https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-issue-forms
+name: 'KaViewer Issue Request'
+title: "[KaViewer]"
+description: Create an issue for KaViewer to make it better!
+#labels: [ "bug" ]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank your input to let KaViewer better !
+
+  - type: textarea
+    attributes:
+      label: Description
+      placeholder: Please let a description of your proposal.
+
+  - type: dropdown
+    attributes:
+      label: Type
+      multiple: false
+      options:
+        - 'Enhancement'
+        - 'Feature'
+        - 'Bug'
+    validations:
+      required: true
+
+  - type: checkboxes
+    attributes:
+      label: Do you wanna submit a awesome PR?
+      options:
+        - label: Yes, I do !
+
+  - type: markdown
+    attributes:
+      value: "Please make sure you've checked the following things before submitting your issue request. Thanks!"
