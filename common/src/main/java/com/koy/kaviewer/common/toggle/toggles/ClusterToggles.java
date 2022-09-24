@@ -17,11 +17,6 @@ public enum ClusterToggles implements Toggle<ClusterToggles> {
     private final Operations operation;
 
     @Override
-    public int lite() {
-        return 0;
-    }
-
-    @Override
     public ClusterToggles[] toggles() {
         return values();
     }

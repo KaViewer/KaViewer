@@ -16,11 +16,6 @@ public enum TopicToggles implements Toggle<TopicToggles> {
     private final Operations operation;
 
     @Override
-    public int lite() {
-        return 0;
-    }
-
-    @Override
     public TopicToggles[] toggles() {
         return values();
     }

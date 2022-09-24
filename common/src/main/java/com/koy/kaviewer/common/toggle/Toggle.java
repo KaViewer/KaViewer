@@ -12,7 +12,7 @@ public interface Toggle<T extends Toggle<T>> {
     Operations getOperation();
 
     default int lite() {
-        return 1;
+        return 0;
     }
 
     default int full() {
