@@ -12,12 +12,12 @@ public enum ConsumerToggles implements Toggle<ConsumerToggles> {
     PUBLISH_MESSAGE(1, Operations.WRITE),
     ;
 
-    private final int flag;
+    private final int offset;
     private final Operations operation;
 
     @Override
     public int lite() {
-        return READ_MESSAGE.offset();
+        return READ_MESSAGE.toggleMask();
     }
 
     @Override

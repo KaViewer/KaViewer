@@ -19,8 +19,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 public abstract class FeatureToggleConditionResolver implements ToggleResolver {
 
     public <T extends Toggle<T>> boolean enable(T toggle, Operations operations) {
-        final int offset = toggle.offsetFrom(operations);
-        return (offset & mergeModeMask(toggle, modeMask(toggle))) != 0;
+        final int toggleMask = toggle.toggleMaskFromOperation(operations);
+        return (toggleMask & mergeModeMask(toggle, modeMask(toggle))) != 0;
     }
 
     public <T extends Toggle<T>> int modeMask(T toggle) {
@@ -44,27 +44,21 @@ public abstract class FeatureToggleConditionResolver implements ToggleResolver {
         final KaViewerConfiguration config = KaViewerWebApplication.getKaViewerConfiguration();
         final Map<String, Boolean> configToggles = getConfigTogglesFromConfiguration(config);
 
-        AtomicInteger mask = new AtomicInteger(0);
+        AtomicInteger mask = new AtomicInteger(modeMask);
         configToggles.forEach((key, toEnable) ->
                 Arrays.stream(toggle.toggles()).filter(el -> el.getOperation().name().equalsIgnoreCase(key))
                         .findFirst()
                         .ifPresent(it -> {
-                            final int offset = it.offset();
+                            final int toggleMask = it.toggleMask();
+                            int tmp = mask.get();
                             if (toEnable) {
-                                var asIsEnable = (modeMask & offset) != 0;
-                                if (!asIsEnable) {
-                                    mask.addAndGet(+offset);
-                                }
+                                mask.set(tmp | toggleMask);
                             } else {
-                                var asIsDisable = (modeMask & offset) == 0;
-                                if (!asIsDisable) {
-                                    mask.addAndGet(-offset);
-                                }
+                                mask.set(tmp & ~toggleMask);
                             }
-
                         }));
 
-        return modeMask + mask.get();
+        return mask.get();
     }
 
     protected <T extends Toggle<T>> List<PermissionVO> doPermission(Class<T> clz, T toggle) {

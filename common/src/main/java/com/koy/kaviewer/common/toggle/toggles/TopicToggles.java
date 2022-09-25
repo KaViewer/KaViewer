@@ -12,7 +12,7 @@ public enum TopicToggles implements Toggle<TopicToggles> {
     DELETE_TOPIC(1, Operations.DELETE),
     ;
 
-    private final int flag;
+    private final int offset;
     private final Operations operation;
 
     @Override

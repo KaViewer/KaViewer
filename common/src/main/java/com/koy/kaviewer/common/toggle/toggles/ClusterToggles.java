@@ -13,7 +13,7 @@ public enum ClusterToggles implements Toggle<ClusterToggles> {
     READ_CLUSTER_META(2, Operations.READ),
     ;
 
-    private final int flag;
+    private final int offset;
     private final Operations operation;
 
     @Override
