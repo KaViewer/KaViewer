@@ -33,13 +33,13 @@ public class KaViewerWebApplication implements ApplicationContextAware {
         T target = null;
         try {
             if (StringUtils.isNotEmpty(cluster)) {
-                log.info("Do get bean on cluster :[{}]", cluster);
+                log.info("Start do get bean for cluster :[{}]", cluster);
                 target = KafkaApplicationHolder.getKafkaApplicationBean(cluster, clz);
             } else {
                 target = KaViewerWebApplication.parent.getBean(clz);
             }
         } catch (BeansException ignore) {
-            log.error("Do get bean in rest application context with clz:[{}]", clz.getSimpleName());
+            log.error("Error while getting bean in app application context with clz:[{}], try to get at rest ctx", clz.getSimpleName());
             target = KaViewerWebApplication.rest.getBean(clz);
         }
         return target;
