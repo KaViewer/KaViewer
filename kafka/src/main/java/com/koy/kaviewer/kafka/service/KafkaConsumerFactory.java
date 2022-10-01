@@ -2,7 +2,6 @@ package com.koy.kaviewer.kafka.service;
 
 import com.koy.kaviewer.common.entity.TopicMetaVO;
 
-import com.koy.kaviewer.common.entity.properties.ConsumerProperties;
 import com.koy.kaviewer.common.entity.properties.KafkaProperties;
 import com.koy.kaviewer.common.exception.KaViewerBizException;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Repository;
 
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +21,8 @@ import java.util.Set;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -32,6 +32,7 @@ import java.util.stream.Collectors;
 public class KafkaConsumerFactory {
 
     private BlockingQueue<KafkaConsumer<byte[], byte[]>> kafkaConsumers;
+    private final Lock kafkaConsumersLock = new ReentrantLock();
     private KafkaProperties kafkaProperties;
 
     final void createConsumer(KafkaProperties kafkaProperties) {
@@ -40,26 +41,51 @@ public class KafkaConsumerFactory {
         final Integer consumerWorkerSize = this.kafkaProperties.getConsumerWorkerSize();
         log.info("Config consumerWorkerSize is: [{}]", consumerWorkerSize);
         kafkaConsumers = new ArrayBlockingQueue<>(consumerWorkerSize);
+        doCreateConsumer();
+    }
 
-        // TODO lazy init consumers instead of create all size first
-        for (int i = 0; i < consumerWorkerSize; i++) {
-            final ConsumerProperties consumerProperties = kafkaProperties.getConsumerProperties();
-            final KafkaConsumer<byte[], byte[]> kafkaConsumer4Byte = new KafkaConsumer<>(consumerProperties);
-            kafkaConsumers.add(kafkaConsumer4Byte);
+    private void doCreateConsumer() {
+        kafkaConsumersLock.lock();
+        try {
+            if (kafkaConsumers.size() < kafkaProperties.getConsumerWorkerSize()) {
+                final KafkaConsumer<byte[], byte[]> kafkaConsumer = new KafkaConsumer<>(kafkaProperties.getConsumerProperties());
+                kafkaConsumers.add(kafkaConsumer);
+            }
+        } finally {
+            kafkaConsumersLock.unlock();
+        }
+    }
+
+    // TODO check and remove hanging a long time consumer
+    private void returnBackConsumer(KafkaConsumer<byte[], byte[]> kafkaConsumer) {
+        if (Objects.isNull(kafkaConsumer)) {
+            return;
+        }
+        kafkaConsumersLock.lock();
+        try {
+            if (kafkaConsumers.size() >= kafkaProperties.getConsumerWorkerSize()) {
+                kafkaConsumer.close();
+            } else {
+                kafkaConsumers.add(kafkaConsumer);
+            }
+        } finally {
+            kafkaConsumersLock.unlock();
         }
     }
 
     private <V> V exec(Function<KafkaConsumer<byte[], byte[]>, V> runnable) {
-        V result = null;
+        V result;
+        kafkaConsumersLock.lock();
         try {
+            doCreateConsumer();
             final KafkaConsumer<byte[], byte[]> consumer = kafkaConsumers.poll(30L, TimeUnit.SECONDS);
             result = runnable.apply(consumer);
-            if (Objects.nonNull(consumer)) {
-                kafkaConsumers.add(consumer);
-            }
+            returnBackConsumer(consumer);
         } catch (Exception e) {
             e.printStackTrace();
             throw KaViewerBizException.of(e);
+        } finally {
+            kafkaConsumersLock.unlock();
         }
 
         return result;
@@ -117,7 +143,6 @@ public class KafkaConsumerFactory {
             } else {
                 topicPartitions = Set.of(new TopicPartition(topic, partition));
             }
-
 
 
             final Map<TopicPartition, Long> latestOffsets = kafkaConsumer.endOffsets(topicPartitions);
@@ -183,7 +208,7 @@ public class KafkaConsumerFactory {
             // get marched records in size
             if (Objects.isNull(offset)) {
                 records = records.subList(Math.max(0, records.size() - finalSize), records.size());
-            }else {
+            } else {
                 records = records.subList(0, Math.min(finalSize, records.size()));
             }
 
