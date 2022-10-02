@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.ToString;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -18,7 +19,7 @@ public class KaViewerConfiguration {
     private KaViewerMode mode = KaViewerMode.LITE;
     private KaViewerAppConfiguration app;
     private KaViewerWebConfiguration web;
-    private KaViewerKafkaConfiguration kafka;
+    private List<KaViewerKafkaConfiguration> connections = List.of();
     private Map<String, Boolean> toggle = Map.of();
 
     public void renew(KaViewerConfiguration kaViewerConfiguration) {

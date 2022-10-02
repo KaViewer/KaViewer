@@ -20,6 +20,7 @@ import org.springframework.core.env.PropertySource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.util.CollectionUtils;
 import org.webjars.NotFoundException;
 
 import javax.annotation.PostConstruct;
@@ -29,6 +30,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -56,13 +58,19 @@ public class KaViewerEnvScanner {
             log.info("Current working in [{}] mode", kaViewerConfiguration.getMode());
 
             final List<KafkaProperties> persistKafkaProperties = Optional.ofNullable(persistKafkaPropertiesHandler.load()).orElseGet(ArrayList::new);
+            final var persistedClusters = persistKafkaProperties.stream().map(KafkaProperties::getClusterName).collect(Collectors.toSet());
 
-            final KaViewerKafkaConfiguration kaViewerKafkaConfiguration = kaViewerConfiguration.getKafka();
+            final var kaViewerKafkaConfiguration = kaViewerConfiguration.getConnections();
 
-            if (Objects.nonNull(kaViewerKafkaConfiguration) && kaViewerKafkaConfiguration.valid()) {
-                final KafkaProperties setupKafkaProperties = kafkaPropertiesConvert.convert(kaViewerKafkaConfiguration);
-                // TODO distinct properties between persist and setup config
-                persistKafkaProperties.add(setupKafkaProperties);
+            if (!CollectionUtils.isEmpty(kaViewerKafkaConfiguration)) {
+                kaViewerKafkaConfiguration.stream().filter(KaViewerKafkaConfiguration::valid)
+                        .filter(it -> !persistedClusters.contains(it.getCluster()))
+                        .forEach(it -> {
+                            final KafkaProperties kafkaProperties = kafkaPropertiesConvert.convert(it);
+                            if (!persistKafkaProperties.contains(kafkaProperties)) {
+                                persistKafkaProperties.add(kafkaProperties);
+                            }
+                        });
             }
             bindSetUpKafka(persistKafkaProperties);
 
