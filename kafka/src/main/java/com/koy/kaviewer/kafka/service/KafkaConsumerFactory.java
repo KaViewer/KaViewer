@@ -212,10 +212,6 @@ public class KafkaConsumerFactory {
                 records = records.subList(0, Math.min(finalSize, records.size()));
             }
 
-//            records = records.stream().filter(rec -> Objects.isNull(offset) || (rec.offset() <= offset + finalSize))
-//                    .sorted(Comparator.comparingLong(r -> ((ConsumerRecord<byte[], byte[]>) r)
-//                                    .offset())
-//                            .reversed()).limit(finalSize).collect(Collectors.toList());
             log.info("Return records size:[{}]", records.size());
 
             return records
