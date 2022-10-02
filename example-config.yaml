@@ -10,6 +10,6 @@ kaviewer:
 #      read: false
 #    cluster:
 #      create: true
-#  kafka:
+#  connections:
 #    cluster: newCluster
 #    bootstrapServers: localhost:9092
