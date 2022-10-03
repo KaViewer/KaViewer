@@ -31,7 +31,7 @@ jobs:
         run: docker-compose -f docker/docker-compose-bdd.yaml up -d
 
       - name: Run BDD test
-        run: mvn test -DargLine="-Dkarate.env=e2e"
+        run: mvn test -DargLine="-Dkarate.env=e2e" -DskipTests=false --file pom.xml
 
       - name: Upload BDD test report
         uses: actions/upload-artifact@v3
