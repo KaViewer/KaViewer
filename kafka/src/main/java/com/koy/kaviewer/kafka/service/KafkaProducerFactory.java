@@ -9,6 +9,7 @@ import org.apache.kafka.common.header.Header;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.PreDestroy;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
@@ -17,20 +18,30 @@ import java.util.Objects;
 @Repository
 public class KafkaProducerFactory {
 
-    @Autowired
-    private KafkaClientWrapper kafkaClientWrapper;
+    private final KafkaClientWrapper kafkaClientWrapper;
     private KafkaProducer<byte[], byte[]> kafkaProducer4Byte;
-    private ProducerProperties producerProperties;
-    private KafkaProperties kafkaProperties;
+
+    public KafkaProducerFactory(KafkaClientWrapper kafkaClientWrapper) {
+        this.kafkaClientWrapper = kafkaClientWrapper;
+    }
+
+    @PreDestroy
+    public void destroy() {
+        try {
+            if (Objects.nonNull(kafkaProducer4Byte)) {
+                kafkaProducer4Byte.close();
+            }
+        } catch (Exception ignore) {
+        }
+    }
 
     private synchronized KafkaProducer<byte[], byte[]> createProducer() {
         if (Objects.nonNull(kafkaProducer4Byte)) {
             return this.kafkaProducer4Byte;
         }
-        this.kafkaProperties = kafkaClientWrapper.getKafkaProperties();
-        this.producerProperties = this.kafkaProperties.getProducerProperties();
+        var kafkaProperties = kafkaClientWrapper.getKafkaProperties();
 
-        kafkaProducer4Byte = new KafkaProducer<>(producerProperties);
+        kafkaProducer4Byte = new KafkaProducer<>(kafkaProperties.getProducerProperties());
 
         return this.kafkaProducer4Byte;
     }

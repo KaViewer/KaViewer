@@ -10,7 +10,9 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.PartitionInfo;
 import org.apache.kafka.common.TopicPartition;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.CollectionUtils;
 
+import javax.annotation.PreDestroy;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,6 +36,16 @@ public class KafkaConsumerFactory {
     private BlockingQueue<KafkaConsumer<byte[], byte[]>> kafkaConsumers;
     private final Lock kafkaConsumersLock = new ReentrantLock();
     private KafkaProperties kafkaProperties;
+
+    @PreDestroy
+    public void destroy() {
+        try {
+            if (!CollectionUtils.isEmpty(kafkaConsumers)) {
+                kafkaConsumers.forEach(KafkaConsumer::close);
+            }
+        } catch (Exception ignore) {
+        }
+    }
 
     final void createConsumer(KafkaProperties kafkaProperties) {
         this.kafkaProperties = kafkaProperties;
