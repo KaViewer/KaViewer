@@ -1,12 +1,9 @@
 package com.koy.kaviewer.kafka.service;
 
-import com.koy.kaviewer.common.entity.properties.KafkaProperties;
-import com.koy.kaviewer.common.entity.properties.ProducerProperties;
 import com.koy.kaviewer.kafka.client.KafkaClientWrapper;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.header.Header;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PreDestroy;
