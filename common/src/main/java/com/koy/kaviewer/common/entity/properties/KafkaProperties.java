@@ -16,6 +16,7 @@ import java.util.Properties;
 @EqualsAndHashCode(callSuper = false)
 @Data
 @ToString
+// TODO consider to use org.springframework.boot.autoconfigure.kafka.KafkaProperties instead
 public class KafkaProperties extends Properties implements Cloneable {
     private Integer consumerWorkerSize = 3;
     private String encoding = "UTF8";

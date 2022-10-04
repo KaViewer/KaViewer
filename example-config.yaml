@@ -1,15 +1,16 @@
 #Env
 #kaviewer.config.filepath=/kaviewer/example-config.yaml
-#kaviewer_mode=LITE
 kaviewer:
   mode: FULL
   toggle:
     topic:
       delete: true
-#    consumer:
-#      read: false
-#    cluster:
-#      create: true
-#  connections:
-#    cluster: newCluster
-#    bootstrapServers: localhost:9092
+    consumer:
+      read: false
+    cluster:
+      create: true
+  connections:
+    - cluster: newCluster
+      bootstrapServers: localhost:9092
+    - cluster: newCluster2
+      bootstrapServers: kafka_service:9093
