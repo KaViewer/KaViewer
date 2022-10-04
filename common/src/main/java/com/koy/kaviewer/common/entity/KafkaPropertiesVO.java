@@ -12,5 +12,7 @@ public class KafkaPropertiesVO {
     private String zookeeperPort = "2181";
     private String bootstrapServers;
     private String jaasConfig;
+    private String saslMechanism;
+    private String securityProtocol;
 }
 

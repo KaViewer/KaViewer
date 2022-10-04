@@ -13,6 +13,8 @@ public class KaViewerKafkaConfiguration {
     String zookeeperServer;
     String bootstrapServers;
     String jaasConfig;
+    String saslMechanism;
+    String securityProtocol;
 
     public boolean valid() {
         return !StringUtils.isAnyEmpty(cluster, bootstrapServers);

@@ -25,8 +25,8 @@ public class KafkaProperties extends Properties implements Cloneable {
     private String zookeeperPort = "2181";
     private String bootstrapServers;
     private String jaasConfig;
-    private String SASLMechanism = "PLAIN";
-    private Security security = new Security();
+    private String saslMechanism = "PLAIN";
+    private String securityProtocol = BrokerSecurityType.SASL_SSL.name();
     private String clientId;
     private final ConsumerProperties consumer = new ConsumerProperties(this);
     private final ProducerProperties producer = new ProducerProperties(this);
@@ -40,14 +40,6 @@ public class KafkaProperties extends Properties implements Cloneable {
         return clone;
     }
 
-    static class Security {
-        private final String type = BrokerSecurityType.SASL_SSL.name();
-
-        public void config(KafkaProperties kafkaProperties) {
-            kafkaProperties.setProperty(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, type);
-        }
-    }
-
     public KafkaProperties buildProperties() {
         if (!isValid()) {
             throw KaViewerBizException.of(ErrorMsg.NO_CLUSTER_META);
@@ -55,11 +47,10 @@ public class KafkaProperties extends Properties implements Cloneable {
         this.clientId = "KaViewer::" + clusterName;
         setProperty(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, this.bootstrapServers);
         setProperty(AdminClientConfig.CLIENT_ID_CONFIG, this.clientId);
-        final String jaasConfig = getJaasConfig();
-        if (StringUtils.isNotEmpty(jaasConfig)) {
-            setProperty(SaslConfigs.SASL_JAAS_CONFIG, jaasConfig);
-            setProperty(SaslConfigs.SASL_MECHANISM, SASLMechanism);
-            security.config(this);
+        if (StringUtils.isNotEmpty(this.jaasConfig)) {
+            setProperty(SaslConfigs.SASL_JAAS_CONFIG, this.jaasConfig);
+            setProperty(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, this.securityProtocol);
+            setProperty(SaslConfigs.SASL_MECHANISM, this.saslMechanism);
         }
         return this;
     }
