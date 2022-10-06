@@ -194,7 +194,15 @@ public class KafkaConsumerFactory {
             List<ConsumerRecord<byte[], byte[]>> records = new ArrayList<>(finalSize);
 
             boolean fetch = true;
+            final var startTime = System.currentTimeMillis();
+            // default timeout is 300s
+            final var timeout = 300_000L;
             while ((records.size() < finalSize * availableTopicPartitions.size()) && fetch) {
+
+                if (System.currentTimeMillis() - startTime > timeout) {
+                    log.info("Fetch message timeout, topic:[{}], partition:[{}], startTime:[{}]", topic, partition, startTime);
+                    break;
+                }
                 final var recordsOrigin = kafkaConsumer.poll(Duration.ofSeconds(30));
                 for (TopicPartition tp : availableTopicPartitions) {
                     final List<ConsumerRecord<byte[], byte[]>> recs = recordsOrigin.records(tp);
