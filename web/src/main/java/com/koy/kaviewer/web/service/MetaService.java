@@ -18,6 +18,8 @@ public class MetaService {
         kafkaPropertiesVO.setBootstrapServers(kafkaProperties.getBootstrapServers());
         kafkaPropertiesVO.setClusterName(kafkaProperties.getClusterName());
         kafkaPropertiesVO.setJaasConfig(kafkaProperties.getJaasConfig());
+        kafkaPropertiesVO.setSaslMechanism(kafkaProperties.getSaslMechanism());
+        kafkaPropertiesVO.setSecurityProtocol(kafkaProperties.getSecurityProtocol());
         return kafkaPropertiesVO;
 
     }
