@@ -4,7 +4,7 @@ kaviewer:
   mode: FULL
   toggle:
     topic:
-      delete: true
+      delete: false
     consumer:
       read: false
     cluster:
@@ -13,4 +13,7 @@ kaviewer:
     - cluster: newCluster
       bootstrapServers: localhost:9092
     - cluster: newCluster2
-      bootstrapServers: kafka_service:9093
+      bootstrapServers: connection:9092
+      jaasConfig: org.apache.kafka.common.security.plain.PlainLoginModule ...;
+      securityProtocol: SASL_SSL
+      saslMechanism: PLAIN
