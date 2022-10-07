@@ -28,7 +28,7 @@ public class KaViewerConfiguration {
 
     // topic.create = true  -> create=true
     public Map<String, Boolean> filter(String key) {
-        return toggle.entrySet().stream().filter(it -> {
+        return getToggle().entrySet().stream().filter(it -> {
             final String k = it.getKey();
             return k.toLowerCase(Locale.ROOT).startsWith(key.toLowerCase(Locale.ROOT));
 
@@ -38,5 +38,25 @@ public class KaViewerConfiguration {
                         Map.Entry::getValue,
                         (t1, t2) -> t2)
         );
+    }
+
+    public KaViewerAppConfiguration getApp() {
+        return INSTANCE.app;
+    }
+
+    public KaViewerWebConfiguration getWeb() {
+        return INSTANCE.web;
+    }
+
+    public List<KaViewerKafkaConfiguration> getConnections() {
+        return INSTANCE.connections;
+    }
+
+    public Map<String, Boolean> getToggle() {
+        return INSTANCE.toggle;
+    }
+
+    public KaViewerMode getMode() {
+        return INSTANCE.mode;
     }
 }
