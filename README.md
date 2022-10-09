@@ -17,13 +17,15 @@ let you can view and operate kafka with permission control, more details see [Ar
 
 ## Feature
 
+### Functions
+
+- Add/Delete New Kafka Cluster/Broker (Not delete the real instance). ✅
+- Add/Delete Topic. ✅
+- Publish/Consumer Messages. ✅
+
+
 ### Permission Control
 
-KaViewer natural support those operations:
-
-- Add/Delete New Kafka Cluster/Broker (Not delete the real instance).
-- Add/Delete Topic.
-- Publish/Consumer Messages.
 
 Based on those functions,KaViewer provide two common mode to suit the two different scenario.
 
