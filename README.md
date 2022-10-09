@@ -25,12 +25,12 @@ KaViewer natural support those operations:
 - Add/Delete Topic.
 - Publish/Consumer Messages.
 
-Based on those function, there have two mode to suit different scenario.
+Based on those functions,KaViewer provide two common mode to suit the two different scenario.
 
 - **FULL** mode, support all the operations above.
 - **LITE** mode (default), only support to view kafka message.
 
-And support the custom toggle config to enable or disable those operations as well.
+And KaViewer support the custom toggles config to enable or disable those operations based on the two mode above as well.
 
 #### Configurations
 
@@ -44,9 +44,10 @@ And support the custom toggle config to enable or disable those operations as we
 | Consumer         | kaviewer.toggle.consumer.read  | Boolean      | Allow to consume new message (true/false) |
 
 ### Persist API
+By default, KaViewer won't persist the registered connections when it shut down.  
 
-The exposed API interface `Persistent` let you do the enhancement to persist KaViewer data. It is similar to SpringBoot
-autoconfiguration mechanism. You can import `kaviewer-runner.jar` as dependency and implement the `Persistent`
+KaViewer provides the exposed API interface `Persistent` , which you can do the enhancement to persist KaViewer data. 
+It is similar to SpringBoot autoconfiguration mechanism. You can import `kaviewer-runner.jar` as dependency and implement the `Persistent`
 interface, then add the `META-INF/kaviewer.factories` to do the trick.
 
 ## Usage
