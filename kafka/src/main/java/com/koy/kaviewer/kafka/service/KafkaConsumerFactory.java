@@ -207,6 +207,7 @@ public class KafkaConsumerFactory {
                 for (TopicPartition tp : availableTopicPartitions) {
                     final List<ConsumerRecord<byte[], byte[]>> recs = recordsOrigin.records(tp);
                     if (recs.isEmpty()) {
+                        log.warn("No records found on topic:[{}], partition:[{}]", topic, tp.partition());
                         continue;
                     }
                     records.addAll(recs);
