@@ -2,7 +2,6 @@ package com.koy.kaviewer.web.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @AllArgsConstructor
