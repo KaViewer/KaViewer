@@ -8,6 +8,8 @@ import com.koy.kaviewer.common.toggle.Toggle;
 import com.koy.kaviewer.common.toggle.ToggleResolver;
 import com.koy.kaviewer.web.KaViewerWebApplication;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -17,6 +19,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @RequiredArgsConstructor
 public abstract class FeatureToggleConditionResolver implements ToggleResolver {
+
+//    @Lazy
+//    @Autowired
+//    KaViewerConfiguration kaViewerConfiguration;
 
     public <T extends Toggle<T>> boolean enable(T toggle, Operations operations) {
         final int toggleMask = toggle.toggleMaskFromOperation(operations);
