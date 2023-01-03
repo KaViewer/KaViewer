@@ -2,6 +2,7 @@ package com.koy.kaviewer.common.entity.properties;
 
 import lombok.Data;
 
+import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.function.Predicate;
 
@@ -19,7 +20,7 @@ public class PropertiesResources<T> {
 //        CRD
         ;
 
-        private Predicate<String> from;
+        private final Predicate<String> from;
 
         public Predicate<String> getFrom() {
             return from;
@@ -33,10 +34,8 @@ public class PropertiesResources<T> {
             this.from = from;
         }
 
-        public static final EnumSet<ResourcesType> types = EnumSet.allOf(ResourcesType.class);
-
         public static ResourcesType from(String source) {
-            return types.stream().filter(it -> it.from.test(source)).findFirst().orElseGet(() -> null);
+            return Arrays.stream(values()).filter(it -> it.from.test(source)).findFirst().orElseGet(() -> null);
         }
     }
 }

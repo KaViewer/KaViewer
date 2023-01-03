@@ -25,7 +25,7 @@ public class ProducerProperties extends Properties {
 
     }
 
-    public String getClientId(String dot, int idx) {
+    private String getClientId(String dot, int idx) {
         this.clientId = dot + "::" + CLIENT_ID_PREFIX + this.kafkaProperties.getClusterName() + "-" + idx;
         return clientId;
     }
