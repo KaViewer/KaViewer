@@ -15,7 +15,7 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <java.version>11</java.version>
-        <guava.version>32.0.1-jre</guava.version>
+        <guava.version>32.1.2-jre</guava.version>
         <shell.version>2.0.0.RELEASE</shell.version>
         <lang3.version>3.12.0</lang3.version>
         <jackson.version>2.15.2</jackson.version>
