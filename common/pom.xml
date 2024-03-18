@@ -18,7 +18,7 @@
         <guava.version>33.0.0-jre</guava.version>
         <shell.version>2.0.0.RELEASE</shell.version>
         <lang3.version>3.14.0</lang3.version>
-        <jackson.version>2.16.2</jackson.version>
+        <jackson.version>2.17.0</jackson.version>
     </properties>
 
     <dependencies>
