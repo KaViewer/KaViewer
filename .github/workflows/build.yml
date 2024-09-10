@@ -28,7 +28,7 @@ jobs:
         run: mkdir -p docker/app/target/ && mv app/target/*.jar docker/app/target/
 
       - name: Run Docker Env for BDD
-        run: docker-compose -f docker/docker-compose-bdd.yaml up -d
+        run: docker compose -f docker/docker-compose-bdd.yaml up -d
 
       - name: Run BDD test
         run: mvn test -DargLine="-Dkarate.env=e2e" -DskipTests=false --file pom.xml
