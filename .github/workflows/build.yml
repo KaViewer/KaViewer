@@ -33,6 +33,14 @@ jobs:
       - name: Run BDD test
         run: mvn test -DargLine="-Dkarate.env=e2e" -DskipTests=false --file pom.xml
 
+      - name: Copy test report
+        run: cp /home/runner/work/KaViewer/KaViewer/app/target/karate-reports/karate-summary-json.txt /home/runner/work/KaViewer/KaViewer/app/target/karate-reports/karate-summary.json
+
+      - name: Upload coverage reports to Codecov with GitHub Action
+        uses: codecov/codecov-action@v3
+        with:
+          files: /home/runner/work/KaViewer/KaViewer/app/target/karate-reports/karate-summary.json
+
       - name: Upload BDD test report
         uses: actions/upload-artifact@v3
         with:
